@@ -1,0 +1,3557 @@
+1
+00:00:01,550 --> 00:00:03,920
+The following content is
+provided under a Creative
+
+2
+00:00:03,920 --> 00:00:05,310
+Commons license.
+
+3
+00:00:05,310 --> 00:00:07,520
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:07,520 --> 00:00:11,610
+continue to offer high quality
+educational resources for free.
+
+5
+00:00:11,610 --> 00:00:14,180
+To make a donation or to
+view additional materials
+
+6
+00:00:14,180 --> 00:00:18,140
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:18,140 --> 00:00:19,026
+at ocw.mit.edu.
+
+8
+00:00:23,260 --> 00:00:26,230
+GILBERT STRANG: Well, so
+three things to mention.
+
+9
+00:00:26,230 --> 00:00:33,520
+One was you remember last time
+I made a list of six or seven
+
+10
+00:00:33,520 --> 00:00:38,080
+different situations where
+Ax equal b and problems
+
+11
+00:00:38,080 --> 00:00:39,850
+that could arise?
+
+12
+00:00:39,850 --> 00:00:44,980
+The last one was when A was just
+way too big to fit into core.
+
+13
+00:00:44,980 --> 00:00:48,220
+But in the middle
+were other methods.
+
+14
+00:00:48,220 --> 00:00:52,030
+So other issues,
+like the columns
+
+15
+00:00:52,030 --> 00:00:58,900
+being nearly dependent when
+Gram-Schmidt will come up.
+
+16
+00:00:58,900 --> 00:01:01,390
+First, I want to say
+that I know there
+
+17
+00:01:01,390 --> 00:01:03,310
+are typos in the two pages.
+
+18
+00:01:03,310 --> 00:01:08,710
+I thought you might just like to
+see the very first draft of two
+
+19
+00:01:08,710 --> 00:01:10,000
+pages of the book.
+
+20
+00:01:12,910 --> 00:01:14,710
+People sometimes
+ask me, how long
+
+21
+00:01:14,710 --> 00:01:17,020
+does the book take to write?
+
+22
+00:01:17,020 --> 00:01:22,930
+So I started when 18.065
+started a year ago.
+
+23
+00:01:22,930 --> 00:01:27,790
+So I'm into the second year,
+and it usually takes two years.
+
+24
+00:01:27,790 --> 00:01:32,450
+And the system is
+I write by hand so.
+
+25
+00:01:32,450 --> 00:01:38,030
+I wrote those opening pages that
+you saw, two pages, by hand.
+
+26
+00:01:38,030 --> 00:01:41,210
+Then I scan them
+to Mumbai, where
+
+27
+00:01:41,210 --> 00:01:46,160
+my best friend in the world
+types them with typos.
+
+28
+00:01:46,160 --> 00:01:49,370
+No problem, because I'm
+going to make so many changes
+
+29
+00:01:49,370 --> 00:01:52,430
+that a few typos are nothing.
+
+30
+00:01:52,430 --> 00:01:57,360
+Anyway, so he scans
+them back to me typed.
+
+31
+00:01:57,360 --> 00:02:00,270
+And then I start making changes.
+
+32
+00:02:00,270 --> 00:02:03,440
+If I'm lucky I'd have the
+chance to talk about it in here.
+
+33
+00:02:03,440 --> 00:02:06,060
+Then I realize
+better things to do.
+
+34
+00:02:06,060 --> 00:02:09,600
+Then I scan back to him and back
+to me and back to him and back
+
+35
+00:02:09,600 --> 00:02:10,330
+to me.
+
+36
+00:02:10,330 --> 00:02:15,540
+So that's where the
+two years disappear.
+
+37
+00:02:15,540 --> 00:02:18,300
+Anyway, I'm quite happy
+with those two pages,
+
+38
+00:02:18,300 --> 00:02:21,300
+until I start improving them.
+
+39
+00:02:21,300 --> 00:02:27,165
+And one other topic from the
+past that came out in class.
+
+40
+00:02:27,165 --> 00:02:30,420
+It wasn't in the notes yet.
+
+41
+00:02:30,420 --> 00:02:37,260
+Do you remember the day that
+we minimized different norms?
+
+42
+00:02:37,260 --> 00:02:45,450
+L1 or L2 or max, L infinity
+norm with the condition
+
+43
+00:02:45,450 --> 00:02:50,220
+of solving with a constraint
+that this equation was
+
+44
+00:02:50,220 --> 00:02:51,000
+satisfied.
+
+45
+00:02:51,000 --> 00:02:54,240
+I'm in 2D to be able
+to draw a picture.
+
+46
+00:02:54,240 --> 00:02:56,520
+And the constraint is one line.
+
+47
+00:02:56,520 --> 00:02:59,580
+And that's about what
+the line looks like.
+
+48
+00:02:59,580 --> 00:03:04,470
+So I'm going to
+draw here again--
+
+49
+00:03:04,470 --> 00:03:11,640
+what I'm doing is putting some
+numbers in to that insight
+
+50
+00:03:11,640 --> 00:03:16,235
+I drew about a week ago.
+
+51
+00:03:16,235 --> 00:03:17,110
+Do you remember that?
+
+52
+00:03:17,110 --> 00:03:23,020
+Because I thought that really
+illustrates how L1 and L2 and L
+
+53
+00:03:23,020 --> 00:03:24,280
+infinity are different.
+
+54
+00:03:24,280 --> 00:03:27,610
+Let me draw the L2 one here.
+
+55
+00:03:27,610 --> 00:03:30,590
+So where's the
+point on this line--
+
+56
+00:03:30,590 --> 00:03:34,060
+so x has to lie on this line.
+
+57
+00:03:34,060 --> 00:03:37,780
+And where is the point
+that has the smallest
+
+58
+00:03:37,780 --> 00:03:41,860
+sum of squares norm,
+standard L2 norm?
+
+59
+00:03:41,860 --> 00:03:44,290
+So geometrically
+where is that point?
+
+60
+00:03:44,290 --> 00:03:49,510
+Well, what does the set
+of points with norm 1
+
+61
+00:03:49,510 --> 00:03:52,460
+look like for L2?
+
+62
+00:03:52,460 --> 00:03:54,260
+It's a circle, right.
+
+63
+00:03:54,260 --> 00:03:57,860
+So we just blow that
+circle up or shrink it down
+
+64
+00:03:57,860 --> 00:04:00,290
+until it touches this thing.
+
+65
+00:04:00,290 --> 00:04:03,500
+And where it touches,
+it'll touch where
+
+66
+00:04:03,500 --> 00:04:07,260
+the radius is perpendicular.
+
+67
+00:04:07,260 --> 00:04:16,350
+So there's our best point
+in L2, because if we picked
+
+68
+00:04:16,350 --> 00:04:21,269
+another point, the norm
+would have to be bigger
+
+69
+00:04:21,269 --> 00:04:22,860
+to go through that point.
+
+70
+00:04:22,860 --> 00:04:24,960
+So that's clearly the first one.
+
+71
+00:04:24,960 --> 00:04:27,060
+And actually, we
+can probably see
+
+72
+00:04:27,060 --> 00:04:31,950
+what it is, because if we
+know those are perpendicular,
+
+73
+00:04:31,950 --> 00:04:33,990
+I know the slope
+of this line. so I
+
+74
+00:04:33,990 --> 00:04:39,750
+think that the slope of this
+line is something like 3/4,
+
+75
+00:04:39,750 --> 00:04:44,320
+probably coming from
+there, or maybe 4/3.
+
+76
+00:04:47,720 --> 00:04:48,902
+We'll figure it out.
+
+77
+00:04:48,902 --> 00:04:49,610
+I think it's 4/3.
+
+78
+00:04:52,130 --> 00:04:53,840
+I'll find that point.
+
+79
+00:04:53,840 --> 00:04:57,640
+Then the most interesting
+one was the L1 norm,
+
+80
+00:04:57,640 --> 00:05:02,644
+because what was the shape
+of the unit ball for L1?
+
+81
+00:05:02,644 --> 00:05:03,505
+AUDIENCE: A diamond.
+
+82
+00:05:03,505 --> 00:05:04,880
+GILBERT STRANG:
+A diamond, right.
+
+83
+00:05:04,880 --> 00:05:05,580
+A diamond.
+
+84
+00:05:05,580 --> 00:05:10,350
+So the diamond that first
+touches the line is here.
+
+85
+00:05:12,970 --> 00:05:15,370
+That's the winning point.
+
+86
+00:05:15,370 --> 00:05:19,120
+And if the line is
+3x1 plus 4x2 equal 1,
+
+87
+00:05:19,120 --> 00:05:22,000
+then I know that that point is--
+
+88
+00:05:22,000 --> 00:05:27,550
+x1 will be 0 and x2 will be 1/4.
+
+89
+00:05:27,550 --> 00:05:29,335
+So that's the
+winning point in L1.
+
+90
+00:05:32,450 --> 00:05:37,440
+And I think I calculated
+this right that the winning
+
+91
+00:05:37,440 --> 00:05:41,430
+point in L2 I think will be--
+
+92
+00:05:41,430 --> 00:05:45,240
+let's see, this goes up to--
+
+93
+00:05:45,240 --> 00:05:47,190
+I'm moving down the line.
+
+94
+00:05:47,190 --> 00:05:53,400
+I think this would
+have 3/25, 4/25.
+
+95
+00:05:53,400 --> 00:05:55,470
+I won't stop to derive that.
+
+96
+00:05:55,470 --> 00:05:59,730
+But at least-- yeah, the
+slope is looking like 4/3.
+
+97
+00:05:59,730 --> 00:06:04,560
+It goes up 4 when it crosses 3.
+
+98
+00:06:04,560 --> 00:06:07,110
+And the 4 and the
+3 came from there.
+
+99
+00:06:07,110 --> 00:06:12,030
+And, of course, you notice that
+I've scaled it to fit the line.
+
+100
+00:06:12,030 --> 00:06:20,730
+3 times 3/25 is 9/25
+plus 16/25, 25/25 is 1.
+
+101
+00:06:20,730 --> 00:06:23,280
+And finally, what
+about L infinity?
+
+102
+00:06:23,280 --> 00:06:24,560
+What was the picture there?
+
+103
+00:06:24,560 --> 00:06:31,050
+What's the unit ball look
+like in 2D for the max norm?
+
+104
+00:06:31,050 --> 00:06:31,550
+It's a--
+
+105
+00:06:31,550 --> 00:06:32,450
+AUDIENCE: Square.
+
+106
+00:06:32,450 --> 00:06:34,190
+GILBERT STRANG: Square, right.
+
+107
+00:06:34,190 --> 00:06:37,250
+So the square will hit there.
+
+108
+00:06:37,250 --> 00:06:40,610
+These two on the square are--
+
+109
+00:06:40,610 --> 00:06:45,350
+this is a 45 degree
+line now on that square.
+
+110
+00:06:45,350 --> 00:06:47,600
+It hits it at that sharp point.
+
+111
+00:06:47,600 --> 00:06:50,510
+And so the x1 and x2 are equal.
+
+112
+00:06:50,510 --> 00:06:53,510
+And I think they're probably--
+
+113
+00:06:53,510 --> 00:06:59,390
+let's see, if they're
+equal, if we made them 1/7,
+
+114
+00:06:59,390 --> 00:07:02,900
+then I'd have 3/7
+plus 4/7 equals 7/7.
+
+115
+00:07:02,900 --> 00:07:06,260
+Yeah, I think we
+make some 1/7, 1/7.
+
+116
+00:07:09,220 --> 00:07:13,300
+So that would be the
+x infinity point.
+
+117
+00:07:13,300 --> 00:07:15,700
+3/7 plus 4/7 give 1.
+
+118
+00:07:15,700 --> 00:07:18,970
+So why do I mention this?
+
+119
+00:07:18,970 --> 00:07:21,820
+First, because when I did it
+before I just drew pictures
+
+120
+00:07:21,820 --> 00:07:25,960
+without really
+solving the problem.
+
+121
+00:07:25,960 --> 00:07:30,181
+And secondly, because in
+thinking ahead about projects,
+
+122
+00:07:30,181 --> 00:07:33,880
+this is the kind of
+project that I would
+
+123
+00:07:33,880 --> 00:07:35,470
+think is quite interesting.
+
+124
+00:07:35,470 --> 00:07:38,650
+Obviously, as this is p equal 1.
+
+125
+00:07:38,650 --> 00:07:40,780
+This is p equal 2.
+
+126
+00:07:40,780 --> 00:07:42,400
+This is p equal infinity.
+
+127
+00:07:42,400 --> 00:07:46,030
+And I guess it's pretty
+clear from the pictures
+
+128
+00:07:46,030 --> 00:07:50,750
+that as p increases, this
+point starts up here.
+
+129
+00:07:50,750 --> 00:07:54,670
+And moves down the
+line and ends up here.
+
+130
+00:07:54,670 --> 00:07:59,770
+And I've no idea like what the
+solution is for a different p
+
+131
+00:07:59,770 --> 00:08:01,180
+and how it moves.
+
+132
+00:08:01,180 --> 00:08:09,940
+And to make it more of a
+project, what happens in 3D?
+
+133
+00:08:09,940 --> 00:08:11,260
+What happens in 3D?
+
+134
+00:08:11,260 --> 00:08:17,020
+In 3D, if I have one equation
+in 3D, then I have a plane.
+
+135
+00:08:17,020 --> 00:08:21,610
+And this would become a
+diamond, a 3D diamond.
+
+136
+00:08:21,610 --> 00:08:23,560
+This would be a 3D sphere.
+
+137
+00:08:23,560 --> 00:08:26,050
+This would be a 3D cube.
+
+138
+00:08:26,050 --> 00:08:30,110
+They would expand
+to hit that plane.
+
+139
+00:08:30,110 --> 00:08:35,190
+And I don't know how many
+zeros you get in that case.
+
+140
+00:08:35,190 --> 00:08:38,299
+So that would be the
+case of one equation.
+
+141
+00:08:38,299 --> 00:08:45,630
+So there would be a plane that
+these diamond, sphere, and cube
+
+142
+00:08:45,630 --> 00:08:47,790
+expand until they hit it.
+
+143
+00:08:47,790 --> 00:08:51,580
+Or you could have two
+constraints, two equations.
+
+144
+00:08:51,580 --> 00:08:54,480
+So if we had two equations
+and three unknowns,
+
+145
+00:08:54,480 --> 00:08:56,840
+that would be a line again.
+
+146
+00:08:56,840 --> 00:09:01,250
+But how many zeros would we
+get in these different cases?
+
+147
+00:09:01,250 --> 00:09:06,100
+How sparse is L1 going to be?
+
+148
+00:09:06,100 --> 00:09:08,480
+That's like a recapture
+of what we did.
+
+149
+00:09:11,280 --> 00:09:14,420
+It's nice occasionally
+to have pictures
+
+150
+00:09:14,420 --> 00:09:20,390
+showing where the solution is.
+
+151
+00:09:20,390 --> 00:09:28,280
+Now, I'm coming to the topic of
+the day, which is Gram-Schmidt.
+
+152
+00:09:28,280 --> 00:09:33,710
+And so Gram-Schmidt, number
+one, is the standard way
+
+153
+00:09:33,710 --> 00:09:41,580
+that would be taught in 18.06.
+
+154
+00:09:41,580 --> 00:09:44,530
+So what's Gram-Schmidt about?
+
+155
+00:09:44,530 --> 00:09:49,240
+I'll just put down here
+general facts of Gram-Schmidt.
+
+156
+00:09:49,240 --> 00:09:53,780
+We start with a matrix
+A. It's got n columns.
+
+157
+00:09:58,770 --> 00:10:00,900
+But they're not orthogonal.
+
+158
+00:10:00,900 --> 00:10:04,560
+And, in fact, they may
+be badly conditioned.
+
+159
+00:10:04,560 --> 00:10:08,320
+Columns might be nearly
+dependent on the others.
+
+160
+00:10:08,320 --> 00:10:11,020
+I'm going to assume the
+columns are independent,
+
+161
+00:10:11,020 --> 00:10:13,540
+but they might be
+barely independent.
+
+162
+00:10:17,320 --> 00:10:20,410
+So those lines then would
+be sort of like pointing
+
+163
+00:10:20,410 --> 00:10:22,450
+very nearly parallel.
+
+164
+00:10:22,450 --> 00:10:25,390
+But Gram-Schmidt
+opens up the picture
+
+165
+00:10:25,390 --> 00:10:33,850
+to get a matrix Q, an orthogonal
+matrix with columns Q1 to Qn,
+
+166
+00:10:33,850 --> 00:10:36,050
+which our ortho-normal.
+
+167
+00:10:36,050 --> 00:10:40,550
+So it gets a
+perfect basis of Qs.
+
+168
+00:10:40,550 --> 00:10:44,650
+And so that's what
+Gram-Schmidt does.
+
+169
+00:10:44,650 --> 00:10:47,740
+And these are different ways
+to do it, different ways
+
+170
+00:10:47,740 --> 00:10:51,910
+to organize the computation.
+
+171
+00:10:51,910 --> 00:10:55,150
+I really only put
+the standard way in.
+
+172
+00:10:55,150 --> 00:10:57,150
+What is this mysterious R?
+
+173
+00:11:01,470 --> 00:11:07,530
+So the Qs are
+combinations of the As.
+
+174
+00:11:07,530 --> 00:11:11,850
+So there's some matrix to tell
+me what those combinations are.
+
+175
+00:11:11,850 --> 00:11:16,980
+Or if I go back go backwards
+and say, well, the As
+
+176
+00:11:16,980 --> 00:11:20,670
+are combinations of the Qs,
+that's what I'm about to do.
+
+177
+00:11:20,670 --> 00:11:24,330
+If I say each A is
+a combination of Qs,
+
+178
+00:11:24,330 --> 00:11:28,410
+that means that my
+A matrix is my Q
+
+179
+00:11:28,410 --> 00:11:31,410
+matrix times some
+R matrix, which
+
+180
+00:11:31,410 --> 00:11:35,130
+tells me the combinations.
+
+181
+00:11:35,130 --> 00:11:37,680
+When I multiply
+by R on the right,
+
+182
+00:11:37,680 --> 00:11:40,830
+I'm taking combinations
+of the columns of Q
+
+183
+00:11:40,830 --> 00:11:43,170
+and getting the columns of A.
+
+184
+00:11:43,170 --> 00:11:48,300
+So just like LU, you go
+forward with the algorithm
+
+185
+00:11:48,300 --> 00:11:53,730
+to reach U. Here, we go forward
+where the algorithm to reach Q.
+
+186
+00:11:53,730 --> 00:12:00,000
+But then when we want to put
+it in one simple equation,
+
+187
+00:12:00,000 --> 00:12:03,300
+it turns out to be
+better to go backwards
+
+188
+00:12:03,300 --> 00:12:08,340
+and say how is the original
+A related to the final Q,
+
+189
+00:12:08,340 --> 00:12:12,020
+there has to be some R.
+
+190
+00:12:12,020 --> 00:12:15,050
+OK, I always feel when I
+talk about Gram-Schmidt--
+
+191
+00:12:15,050 --> 00:12:18,050
+I usually end with
+that A equal QR.
+
+192
+00:12:18,050 --> 00:12:21,350
+And, of course, the Matlab
+command is exactly QR.
+
+193
+00:12:21,350 --> 00:12:30,830
+So in Matlab, the command would
+be QR of A, instead of LU of A.
+
+194
+00:12:30,830 --> 00:12:35,750
+So it would give you Q and R.
+That's what Matlab will output.
+
+195
+00:12:35,750 --> 00:12:41,510
+Now, as I say, Q is the
+saying we're constructing.
+
+196
+00:12:41,510 --> 00:12:48,960
+R is the combinations that
+we need to get what we want.
+
+197
+00:12:48,960 --> 00:12:53,720
+And so it comes at the
+end, what the heck was R.
+
+198
+00:12:53,720 --> 00:12:57,050
+But actually, R is
+really a simple idea.
+
+199
+00:12:57,050 --> 00:13:00,570
+So I want to show that at the
+beginning instead of the end.
+
+200
+00:13:00,570 --> 00:13:07,460
+OK, so I'm going to move
+Q over here, as Q inverse.
+
+201
+00:13:07,460 --> 00:13:10,289
+But what is Q inverse?
+
+202
+00:13:10,289 --> 00:13:11,572
+AUDIENCE: Q transpose.
+
+203
+00:13:11,572 --> 00:13:13,030
+GILBERT STRANG: Q
+transpose, right,
+
+204
+00:13:13,030 --> 00:13:15,590
+because I've created
+an orthogonal matrix.
+
+205
+00:13:15,590 --> 00:13:21,382
+So this mysterious
+R is Q transpose A.
+
+206
+00:13:21,382 --> 00:13:29,450
+And let me just sort of make
+it grow out into matrices.
+
+207
+00:13:29,450 --> 00:13:34,590
+That has the Qs along the
+rows, Q transpose, of course.
+
+208
+00:13:34,590 --> 00:13:39,260
+Qn transpose, Q1 transpose.
+
+209
+00:13:39,260 --> 00:13:41,780
+I'm transposing the
+matrix above it.
+
+210
+00:13:41,780 --> 00:13:44,060
+So these columns become rows.
+
+211
+00:13:44,060 --> 00:13:46,540
+Times the As, A1 to An.
+
+212
+00:13:51,900 --> 00:13:56,790
+So what is a typical entry in R?
+
+213
+00:13:56,790 --> 00:14:00,750
+That's really why I want to say
+nothing mysterious about this.
+
+214
+00:14:00,750 --> 00:14:02,930
+You can see what
+you end up with.
+
+215
+00:14:02,930 --> 00:14:04,500
+It will be right in
+front of us here.
+
+216
+00:14:07,290 --> 00:14:14,270
+What is the entry in
+row i, column j of R?
+
+217
+00:14:14,270 --> 00:14:21,370
+OK, this says that
+all those entries in R
+
+218
+00:14:21,370 --> 00:14:27,140
+are Qi transpose times Aj.
+
+219
+00:14:27,140 --> 00:14:29,740
+That's the old way
+to multiply matrices.
+
+220
+00:14:29,740 --> 00:14:36,140
+And it's the best way for
+this, a row times a column.
+
+221
+00:14:36,140 --> 00:14:40,960
+In other words, the Rs are
+just the inner products,
+
+222
+00:14:40,960 --> 00:14:46,530
+the dot products of the Qs with
+the As, of the Qs with the As.
+
+223
+00:14:46,530 --> 00:14:50,380
+That's sort of like
+nothing mysterious about R.
+
+224
+00:14:50,380 --> 00:14:53,200
+Because Q is an
+orthogonal matrix,
+
+225
+00:14:53,200 --> 00:14:58,260
+we were able to put
+it over here, get
+
+226
+00:14:58,260 --> 00:15:02,640
+a nice expression for R,
+and see what it really is.
+
+227
+00:15:02,640 --> 00:15:09,270
+So you can do R at the
+end or on the root.
+
+228
+00:15:09,270 --> 00:15:13,740
+But that's just the inner
+product of the Qs with the A's.
+
+229
+00:15:13,740 --> 00:15:16,980
+Now, what's Gram-Schmidt?
+
+230
+00:15:16,980 --> 00:15:20,310
+I'm sort of thinking
+you've seen the basic ideas
+
+231
+00:15:20,310 --> 00:15:23,340
+of Gram-Schmidt,
+but let's review.
+
+232
+00:15:23,340 --> 00:15:32,230
+So I start with a.
+
+233
+00:15:32,230 --> 00:15:35,950
+So what does
+Gram-Schmidt begin with?
+
+234
+00:15:35,950 --> 00:15:37,000
+a1.
+
+235
+00:15:37,000 --> 00:15:38,410
+It takes that first column.
+
+236
+00:15:38,410 --> 00:15:47,170
+So these a's are not
+orthogonal generally.
+
+237
+00:15:47,170 --> 00:15:50,070
+But the first direction is OK.
+
+238
+00:15:50,070 --> 00:15:52,290
+I have no complaints
+about the first direction,
+
+239
+00:15:52,290 --> 00:15:58,150
+except that a1 might
+not be a unit vector.
+
+240
+00:15:58,150 --> 00:16:05,980
+So q1 will just be a1 over its
+norm to have a unit vector.
+
+241
+00:16:05,980 --> 00:16:10,100
+The whole idea of
+Gram-Schmidt is in q2.
+
+242
+00:16:10,100 --> 00:16:12,490
+So what is q2?
+
+243
+00:16:12,490 --> 00:16:15,040
+The whole idea is coming here.
+
+244
+00:16:15,040 --> 00:16:16,930
+It's the only thing
+you need to know.
+
+245
+00:16:16,930 --> 00:16:18,760
+And the picture shows it.
+
+246
+00:16:18,760 --> 00:16:20,560
+So q2, I start with a2.
+
+247
+00:16:24,640 --> 00:16:28,240
+But it's not orthogonal to a1.
+
+248
+00:16:28,240 --> 00:16:29,020
+So what do I do?
+
+249
+00:16:31,800 --> 00:16:37,690
+I figure out the component
+of a2 in the a1 direction
+
+250
+00:16:37,690 --> 00:16:39,190
+and I remove it.
+
+251
+00:16:39,190 --> 00:16:42,605
+So I take that vector away
+and I'm left with this vector.
+
+252
+00:16:42,605 --> 00:16:43,480
+So there is a vector.
+
+253
+00:16:43,480 --> 00:16:44,440
+I'll call that A2.
+
+254
+00:16:47,270 --> 00:16:57,010
+So A2 is the original little a2
+with the a1 direction removed.
+
+255
+00:16:59,910 --> 00:17:03,610
+So what what's the formula
+for what I just did?
+
+256
+00:17:03,610 --> 00:17:08,230
+This is the whole, the key
+step that Gram-Schmidt repeats
+
+257
+00:17:08,230 --> 00:17:09,910
+over and over and over again.
+
+258
+00:17:09,910 --> 00:17:12,670
+It's truly boring.
+
+259
+00:17:12,670 --> 00:17:18,010
+So it subtracts-- well,
+remember that this
+
+260
+00:17:18,010 --> 00:17:20,530
+is in the same direction as Q1.
+
+261
+00:17:20,530 --> 00:17:26,960
+And it's better to work with Q1,
+because we've found that guy.
+
+262
+00:17:26,960 --> 00:17:28,130
+We've got it.
+
+263
+00:17:28,130 --> 00:17:30,710
+And we know it's a unit vector.
+
+264
+00:17:30,710 --> 00:17:35,180
+So here's my linear
+algebra question.
+
+265
+00:17:35,180 --> 00:17:40,630
+What's the component of a2
+that I want to subtract off?
+
+266
+00:17:40,630 --> 00:17:43,880
+It's the component in
+the direction of q1.
+
+267
+00:17:43,880 --> 00:17:48,230
+It's this in the
+direction of q1.
+
+268
+00:17:48,230 --> 00:17:51,520
+And let me just
+remember, so obviously,
+
+269
+00:17:51,520 --> 00:17:54,560
+that angle is coming into it.
+
+270
+00:17:54,560 --> 00:18:02,010
+So that will be a2
+transpose q1 times q1.
+
+271
+00:18:02,010 --> 00:18:04,460
+That's it.
+
+272
+00:18:04,460 --> 00:18:06,310
+That's the component
+that we remove.
+
+273
+00:18:12,060 --> 00:18:18,220
+And maybe I'd prefer to
+write it as q1 transpose a2.
+
+274
+00:18:18,220 --> 00:18:19,560
+I don't know.
+
+275
+00:18:19,560 --> 00:18:21,060
+It doesn't matter of course.
+
+276
+00:18:21,060 --> 00:18:23,320
+The two dot products
+are the same.
+
+277
+00:18:23,320 --> 00:18:27,420
+Maybe I will just--
+
+278
+00:18:27,420 --> 00:18:30,480
+yeah-- well, maybe not.
+
+279
+00:18:30,480 --> 00:18:30,980
+Fine.
+
+280
+00:18:35,790 --> 00:18:39,700
+Now what is that vector
+supposed to achieve?
+
+281
+00:18:39,700 --> 00:18:44,170
+It's supposed to be this vector.
+
+282
+00:18:44,170 --> 00:18:45,850
+This vector I'm
+really going to call
+
+283
+00:18:45,850 --> 00:18:52,390
+A2, because it's in the
+right direction for Q2,
+
+284
+00:18:52,390 --> 00:18:55,060
+but it is not yet?
+
+285
+00:18:55,060 --> 00:18:56,350
+AUDIENCE: Normal.
+
+286
+00:18:56,350 --> 00:18:57,710
+GILBERT STRANG: Normal.
+
+287
+00:18:57,710 --> 00:19:00,550
+So what is Q2 then?
+
+288
+00:19:00,550 --> 00:19:03,860
+So I'm saying this guy
+got the direction right.
+
+289
+00:19:03,860 --> 00:19:06,280
+They're saying subtract
+it off this vector.
+
+290
+00:19:06,280 --> 00:19:07,600
+Got that direction right.
+
+291
+00:19:07,600 --> 00:19:09,190
+Got it as A2.
+
+292
+00:19:09,190 --> 00:19:12,850
+What is Q2 now that
+I want to finish?
+
+293
+00:19:12,850 --> 00:19:13,860
+I've got the direction.
+
+294
+00:19:13,860 --> 00:19:18,060
+All I want to do is get
+it to be a unit vector.
+
+295
+00:19:18,060 --> 00:19:21,720
+So I just take A2 over its norm.
+
+296
+00:19:26,870 --> 00:19:31,640
+That double step is the
+whole thing in Gram-Schmidt,
+
+297
+00:19:31,640 --> 00:19:33,760
+the whole thing.
+
+298
+00:19:33,760 --> 00:19:40,220
+Subtract off the components
+in the directions already set.
+
+299
+00:19:40,220 --> 00:19:43,340
+Then you get something in a
+totally new direction, called
+
+300
+00:19:43,340 --> 00:19:48,290
+A, capital A. And then
+you divide by its length
+
+301
+00:19:48,290 --> 00:19:49,720
+to make it a unit vector.
+
+302
+00:19:49,720 --> 00:19:53,570
+And that gives you the new Q.
+
+303
+00:19:53,570 --> 00:19:56,620
+Just to show that
+we've got a point, what
+
+304
+00:19:56,620 --> 00:20:01,860
+about the next
+step, aiming for Q3.
+
+305
+00:20:01,860 --> 00:20:04,890
+So tell me what A3 should be?
+
+306
+00:20:04,890 --> 00:20:07,580
+A3, I'm going to
+start with this.
+
+307
+00:20:07,580 --> 00:20:11,920
+And I'm going to
+subtract off some stuff.
+
+308
+00:20:11,920 --> 00:20:14,460
+What am I going to subtract off?
+
+309
+00:20:14,460 --> 00:20:15,930
+AUDIENCE: The transpose.
+
+310
+00:20:15,930 --> 00:20:20,220
+GILBERT STRANG: The component,
+a3 transpose, right.
+
+311
+00:20:20,220 --> 00:20:24,180
+Times q1 q1.
+
+312
+00:20:24,180 --> 00:20:30,190
+And I didn't yet check so that
+this came out orthogonal to q1,
+
+313
+00:20:30,190 --> 00:20:32,260
+but I'll come back to that.
+
+314
+00:20:32,260 --> 00:20:37,910
+Now, have I done everything
+I should do here with a3?
+
+315
+00:20:37,910 --> 00:20:40,350
+No, I've got one
+more step to take.
+
+316
+00:20:40,350 --> 00:20:43,360
+And I should take the
+two steps separately.
+
+317
+00:20:43,360 --> 00:20:45,360
+It's called modified
+Gram-Schmidt.
+
+318
+00:20:45,360 --> 00:20:51,500
+And what I want to do is
+subtract off the q2 component.
+
+319
+00:20:51,500 --> 00:20:55,340
+So what multiple
+of q2 do I need?
+
+320
+00:20:55,340 --> 00:20:59,240
+Because q2 has been set
+by the time I get to a3,
+
+321
+00:20:59,240 --> 00:21:03,120
+so what goes here?
+
+322
+00:21:03,120 --> 00:21:04,960
+AUDIENCE: a3 transpose
+
+323
+00:21:04,960 --> 00:21:07,230
+GILBERT STRANG: a3 transpose--
+
+324
+00:21:07,230 --> 00:21:07,930
+AUDIENCE: q2
+
+325
+00:21:07,930 --> 00:21:08,722
+GILBERT STRANG: q2.
+
+326
+00:21:08,722 --> 00:21:09,290
+Thanks.
+
+327
+00:21:09,290 --> 00:21:09,790
+Thanks.
+
+328
+00:21:12,980 --> 00:21:16,370
+If you look at a code,
+say a Matlab code
+
+329
+00:21:16,370 --> 00:21:23,060
+to do Gram-Schmidt-- oh,
+what's the final q3 then?
+
+330
+00:21:23,060 --> 00:21:24,252
+AUDIENCE: Normalize it.
+
+331
+00:21:24,252 --> 00:21:25,460
+GILBERT STRANG: Normalize it.
+
+332
+00:21:25,460 --> 00:21:29,570
+So you take A3, which is
+in the right direction,
+
+333
+00:21:29,570 --> 00:21:33,050
+and you divide by its
+length to get a unit vector.
+
+334
+00:21:36,760 --> 00:21:41,170
+Let me just come back and
+check that I did it right,
+
+335
+00:21:41,170 --> 00:21:42,790
+that I got the right direction.
+
+336
+00:21:42,790 --> 00:21:44,870
+So what do I mean by
+the right direction?
+
+337
+00:21:44,870 --> 00:21:49,360
+What should I check
+about that guy?
+
+338
+00:21:49,360 --> 00:21:54,515
+I should check that it's
+inner product with q1 is?
+
+339
+00:21:59,030 --> 00:22:02,420
+If this is the right
+direction to go,
+
+340
+00:22:02,420 --> 00:22:05,930
+that way, then I should check--
+
+341
+00:22:05,930 --> 00:22:07,550
+I have to check--
+
+342
+00:22:07,550 --> 00:22:10,250
+hopefully, I've got
+the formula right--
+
+343
+00:22:10,250 --> 00:22:14,840
+that it's dot product,
+inner product with q1 is--
+
+344
+00:22:14,840 --> 00:22:15,530
+AUDIENCE: 0.
+
+345
+00:22:15,530 --> 00:22:16,280
+GILBERT STRANG: 0.
+
+346
+00:22:16,280 --> 00:22:18,110
+Thank you.
+
+347
+00:22:18,110 --> 00:22:20,090
+So is it obvious that it is?
+
+348
+00:22:20,090 --> 00:22:24,453
+Take the inner product of the
+dot product of that with q1,
+
+349
+00:22:24,453 --> 00:22:25,120
+what do you get?
+
+350
+00:22:28,020 --> 00:22:32,370
+You get the same number
+q1 a2 transpose q1.
+
+351
+00:22:32,370 --> 00:22:33,780
+You get that number.
+
+352
+00:22:33,780 --> 00:22:39,690
+And over here, you're
+getting q1 transpose with q1.
+
+353
+00:22:39,690 --> 00:22:42,365
+So do you see what I'm doing?
+
+354
+00:22:42,365 --> 00:22:45,750
+Probably it looks like it
+would have been better.
+
+355
+00:22:45,750 --> 00:22:51,940
+I'm checking that q1
+transpose a2 is 0.
+
+356
+00:22:54,660 --> 00:22:57,650
+Yeah, it is.
+
+357
+00:22:57,650 --> 00:23:02,930
+q1 transpose a2 here, q1
+transpose a2, or a2 transpose
+
+358
+00:23:02,930 --> 00:23:04,690
+q1, I don't mind.
+
+359
+00:23:04,690 --> 00:23:08,840
+And I have another
+q1 transpose q1 here.
+
+360
+00:23:08,840 --> 00:23:10,550
+And what is that?
+
+361
+00:23:10,550 --> 00:23:12,680
+What is q1 transpose q1?
+
+362
+00:23:12,680 --> 00:23:13,450
+It is?
+
+363
+00:23:13,450 --> 00:23:13,950
+AUDIENCE: 1.
+
+364
+00:23:13,950 --> 00:23:15,200
+GILBERT STRANG: 1.
+
+365
+00:23:15,200 --> 00:23:16,010
+So check.
+
+366
+00:23:22,130 --> 00:23:25,460
+OK, that's Gram-Schmidt,
+standard Gram-Schmidt,
+
+367
+00:23:25,460 --> 00:23:29,885
+which you have met before.
+
+368
+00:23:32,760 --> 00:23:37,350
+Now, I'm ready for a
+better Gram-Schmidt.
+
+369
+00:23:37,350 --> 00:23:42,250
+You could say a better
+Gram-Schmidt, because here--
+
+370
+00:23:42,250 --> 00:23:45,480
+so what's it going
+to be the difference?
+
+371
+00:23:45,480 --> 00:23:50,010
+Here, I took the a's in
+their original order.
+
+372
+00:23:52,830 --> 00:23:57,390
+Now, suppose I did
+that with elimination.
+
+373
+00:23:57,390 --> 00:24:00,330
+Elimination, usually we
+write as acting on the row.
+
+374
+00:24:00,330 --> 00:24:04,820
+So thinking about elimination,
+I'm thinking I'm the rows.
+
+375
+00:24:04,820 --> 00:24:10,340
+What would be the danger in
+taking the rows in order, doing
+
+376
+00:24:10,340 --> 00:24:17,140
+no row exchanges, just figure
+out the pivot each time,
+
+377
+00:24:17,140 --> 00:24:20,420
+and kill the rest of the
+column and then move on?
+
+378
+00:24:20,420 --> 00:24:23,350
+So taking the rows in
+the order they came,
+
+379
+00:24:23,350 --> 00:24:26,140
+whatever it might
+be, what's the risk?
+
+380
+00:24:26,140 --> 00:24:30,770
+And why would
+Matlab not do that?
+
+381
+00:24:30,770 --> 00:24:34,550
+Because something can be
+very small and totally
+
+382
+00:24:34,550 --> 00:24:37,100
+blow up your calculations.
+
+383
+00:24:37,100 --> 00:24:39,770
+And that's that pivot number.
+
+384
+00:24:39,770 --> 00:24:45,620
+Sort of the question is,
+if a2 is very near a1--
+
+385
+00:24:48,490 --> 00:24:50,510
+so let me draw a new picture.
+
+386
+00:24:50,510 --> 00:24:52,150
+So here's the risk.
+
+387
+00:24:52,150 --> 00:24:55,110
+So a1 was whatever it was.
+
+388
+00:24:55,110 --> 00:25:00,510
+If a2 is really close
+to the same direction,
+
+389
+00:25:00,510 --> 00:25:03,500
+then I'm subtracting
+off almost all of it,
+
+390
+00:25:03,500 --> 00:25:08,780
+and I've got some tiny little
+bit for the new direction.
+
+391
+00:25:08,780 --> 00:25:12,020
+That's like the
+pivot in elimination.
+
+392
+00:25:12,020 --> 00:25:16,670
+It's the number that
+sort of measures what's
+
+393
+00:25:16,670 --> 00:25:20,030
+new, what the new
+row in elimination
+
+394
+00:25:20,030 --> 00:25:26,960
+or the new column in
+Gram-Schmidt gives you.
+
+395
+00:25:26,960 --> 00:25:28,850
+And if that's too small--
+
+396
+00:25:28,850 --> 00:25:31,070
+I mean, like in
+elimination, as I say,
+
+397
+00:25:31,070 --> 00:25:35,210
+we would never use
+an elimination code
+
+398
+00:25:35,210 --> 00:25:39,170
+on a general matrix that didn't
+check the size of the pivot
+
+399
+00:25:39,170 --> 00:25:42,380
+and exchange rows
+when necessary.
+
+400
+00:25:42,380 --> 00:25:45,810
+Well, similarly,
+with Gram-Schmidt, it
+
+401
+00:25:45,810 --> 00:25:48,780
+can take the columns in order.
+
+402
+00:25:48,780 --> 00:25:52,770
+That's the standard Gram-Schmidt
+taking the columns in order.
+
+403
+00:25:52,770 --> 00:25:57,960
+But only if it checks each
+time that the little bit--
+
+404
+00:26:02,340 --> 00:26:06,600
+well, that the new part,
+what would be the new part,
+
+405
+00:26:06,600 --> 00:26:15,910
+is big enough to be able to--
+we have to divide by the thing.
+
+406
+00:26:15,910 --> 00:26:19,180
+And if that A2 is
+tiny is a tiny vector.
+
+407
+00:26:19,180 --> 00:26:23,380
+This is dividing
+by A2 and onwards
+
+408
+00:26:23,380 --> 00:26:29,330
+is building in round-off error
+that we can't remove again.
+
+409
+00:26:29,330 --> 00:26:31,150
+We're stuck with it.
+
+410
+00:26:31,150 --> 00:26:40,320
+So that's the column exchange,
+column pivoting idea in sort
+
+411
+00:26:40,320 --> 00:26:45,870
+of a more professional
+Gram-Schmidt.
+
+412
+00:26:45,870 --> 00:26:50,340
+And to do it--
+
+413
+00:26:50,340 --> 00:26:56,100
+so I have to be able to
+compare this little bit,
+
+414
+00:26:56,100 --> 00:26:58,650
+if it is little, with what?
+
+415
+00:26:58,650 --> 00:27:02,210
+What am I going to compare with?
+
+416
+00:27:02,210 --> 00:27:04,720
+In elimination, I looked
+down the rest of the column
+
+417
+00:27:04,720 --> 00:27:05,560
+for a bigger number.
+
+418
+00:27:08,980 --> 00:27:15,400
+I guess what I have to do is
+I have to find this component,
+
+419
+00:27:15,400 --> 00:27:20,860
+not just from a2, but from
+all the remaining a's.
+
+420
+00:27:20,860 --> 00:27:23,330
+And I'll pick the biggest.
+
+421
+00:27:23,330 --> 00:27:26,630
+So there, in that
+sentence, I said
+
+422
+00:27:26,630 --> 00:27:29,780
+the main idea of
+column exchangers
+
+423
+00:27:29,780 --> 00:27:36,850
+is once you get q1 set, which
+certainly q1 was the easiest
+
+424
+00:27:36,850 --> 00:27:41,920
+one in the world,
+but maybe even for q1
+
+425
+00:27:41,920 --> 00:27:44,980
+I guess it could even happen.
+
+426
+00:27:44,980 --> 00:27:47,410
+That would be like
+starting with a zero
+
+427
+00:27:47,410 --> 00:27:51,040
+up in the upper left corner
+for elimination, like what
+
+428
+00:27:51,040 --> 00:27:54,290
+a way to start the day.
+
+429
+00:27:54,290 --> 00:28:01,180
+Here, if my matrix A
+had a tiny little a1,
+
+430
+00:28:01,180 --> 00:28:04,000
+then I should look
+for a bigger one
+
+431
+00:28:04,000 --> 00:28:07,780
+to get the very first q chosen.
+
+432
+00:28:07,780 --> 00:28:12,640
+Let's suppose-- give ourselves
+a reasonable chance here--
+
+433
+00:28:12,640 --> 00:28:19,840
+let's suppose a1 was a decent
+size, so as I've drawn.
+
+434
+00:28:24,450 --> 00:28:28,380
+The next step might not
+be, if I use a2, as I say,
+
+435
+00:28:28,380 --> 00:28:31,810
+it could be same
+direction as a1 virtually,
+
+436
+00:28:31,810 --> 00:28:35,280
+and then I'm just working
+with that little piece.
+
+437
+00:28:35,280 --> 00:28:39,460
+So what do I have
+to do differently?
+
+438
+00:28:39,460 --> 00:28:44,220
+I have to be able to compare
+this little piece with all
+
+439
+00:28:44,220 --> 00:28:49,020
+the other potential
+possibilities.
+
+440
+00:28:49,020 --> 00:28:51,930
+So let me just write
+down what you have
+
+441
+00:28:51,930 --> 00:28:55,180
+to do in a different order.
+
+442
+00:28:55,180 --> 00:28:59,730
+So this is now with column
+pivoting, column exchange,
+
+443
+00:28:59,730 --> 00:29:06,880
+column pivoting allowed,
+or it's possible.
+
+444
+00:29:06,880 --> 00:29:17,500
+So to make it possible, I
+have to find not only A2,
+
+445
+00:29:17,500 --> 00:29:25,480
+the piece of little a2, I
+have to find a2, the piece.
+
+446
+00:29:25,480 --> 00:29:27,160
+I'm just going to copy that.
+
+447
+00:29:27,160 --> 00:29:34,840
+I have to take my second column,
+subtract off the q1 part.
+
+448
+00:29:34,840 --> 00:29:37,330
+And that could be small.
+
+449
+00:29:37,330 --> 00:29:39,790
+So I have to compare it with--
+
+450
+00:29:39,790 --> 00:29:43,000
+oh, I haven't
+written this page up.
+
+451
+00:29:43,000 --> 00:29:47,080
+So I haven't got a
+notation in mind yet.
+
+452
+00:29:47,080 --> 00:29:48,520
+I won't give it a name.
+
+453
+00:29:48,520 --> 00:29:58,050
+I have to also compute at
+this step before deciding q2--
+
+454
+00:29:58,050 --> 00:30:07,290
+now I'm describing how to
+decide q2, the second vector.
+
+455
+00:30:09,930 --> 00:30:13,530
+And I'm saying that
+the way to decide q2
+
+456
+00:30:13,530 --> 00:30:20,370
+is not only to take a piece of
+a2 but also the piece of a3.
+
+457
+00:30:20,370 --> 00:30:22,050
+Look at this piece.
+
+458
+00:30:24,870 --> 00:30:26,245
+And look at all
+the other pieces.
+
+459
+00:30:37,910 --> 00:30:39,420
+And now, what will be my policy?
+
+460
+00:30:43,290 --> 00:30:46,980
+Standard Gram-Schmidt
+accepted this one,
+
+461
+00:30:46,980 --> 00:30:49,060
+and didn't look at these.
+
+462
+00:30:49,060 --> 00:30:51,850
+But, now, I'm going
+to look at them all.
+
+463
+00:30:51,850 --> 00:30:54,500
+And I'm going to
+take the largest.
+
+464
+00:30:54,500 --> 00:30:56,590
+I'm going to take the largest.
+
+465
+00:30:56,590 --> 00:31:00,130
+And that will be
+the A2 that I want.
+
+466
+00:31:00,130 --> 00:31:03,360
+So it might not be this one.
+
+467
+00:31:03,360 --> 00:31:08,310
+If this guy is largest, then
+I'm taking column 3 first.
+
+468
+00:31:08,310 --> 00:31:11,220
+And that will be my A2.
+
+469
+00:31:11,220 --> 00:31:12,720
+And then I'll say fine.
+
+470
+00:31:12,720 --> 00:31:17,170
+And then q2 will be
+that A2 over its norm.
+
+471
+00:31:19,860 --> 00:31:21,680
+You see the difference?
+
+472
+00:31:21,680 --> 00:31:23,832
+It's not exciting.
+
+473
+00:31:23,832 --> 00:31:25,290
+And you might think,
+wait a minute,
+
+474
+00:31:25,290 --> 00:31:27,810
+this is a heck of
+a lot more work.
+
+475
+00:31:27,810 --> 00:31:30,850
+But it isn't.
+
+476
+00:31:30,850 --> 00:31:33,430
+It isn't actually more
+work, because these
+
+477
+00:31:33,430 --> 00:31:34,870
+are all the things--
+
+478
+00:31:34,870 --> 00:31:37,930
+these ones that look like
+we're paying a price,
+
+479
+00:31:37,930 --> 00:31:41,260
+we're computing all
+these alternatives--
+
+480
+00:31:41,260 --> 00:31:44,530
+but we had to do that
+eventually anyway.
+
+481
+00:31:44,530 --> 00:31:45,670
+Do you see that?
+
+482
+00:31:45,670 --> 00:31:46,750
+Let me just say it again.
+
+483
+00:31:49,610 --> 00:31:59,310
+The standard way took all the
+components, like for here.
+
+484
+00:31:59,310 --> 00:32:03,760
+The standard way waited
+until you got to column 3
+
+485
+00:32:03,760 --> 00:32:07,180
+and then subtracted
+off both pieces,
+
+486
+00:32:07,180 --> 00:32:11,590
+waited until you got to column
+4, subtracted off three pieces.
+
+487
+00:32:11,590 --> 00:32:14,880
+This way, you're subtracting
+off the first piece
+
+488
+00:32:14,880 --> 00:32:17,140
+as soon as you know
+what it should be.
+
+489
+00:32:17,140 --> 00:32:21,700
+As soon as you know
+q1, you remove it
+
+490
+00:32:21,700 --> 00:32:24,220
+from all the remaining vectors.
+
+491
+00:32:24,220 --> 00:32:26,050
+And you look to see
+what's the biggest.
+
+492
+00:32:26,050 --> 00:32:27,950
+You pick the biggest one.
+
+493
+00:32:27,950 --> 00:32:30,220
+I said maybe it's this guy.
+
+494
+00:32:30,220 --> 00:32:31,590
+So you move that one.
+
+495
+00:32:31,590 --> 00:32:34,420
+Or some permutation
+matrix is going to move it
+
+496
+00:32:34,420 --> 00:32:36,220
+to the second column.
+
+497
+00:32:36,220 --> 00:32:38,615
+See, it started in
+the third column,
+
+498
+00:32:38,615 --> 00:32:40,240
+but I'm going to move
+it to the second,
+
+499
+00:32:40,240 --> 00:32:42,220
+because it's the biggest.
+
+500
+00:32:42,220 --> 00:32:45,520
+Then I do the right thing.
+
+501
+00:32:45,520 --> 00:32:47,560
+I find q2.
+
+502
+00:32:47,560 --> 00:32:59,230
+And now I go on toward q3.
+
+503
+00:32:59,230 --> 00:33:00,460
+And how will I find q3?
+
+504
+00:33:04,170 --> 00:33:07,200
+I'd want to pick the
+biggest column to work with.
+
+505
+00:33:07,200 --> 00:33:11,230
+So I subtract off
+the q2 components.
+
+506
+00:33:11,230 --> 00:33:13,770
+This is like easy to
+say, but I had never
+
+507
+00:33:13,770 --> 00:33:15,940
+like figured it out before.
+
+508
+00:33:15,940 --> 00:33:17,440
+So let me just say it again.
+
+509
+00:33:17,440 --> 00:33:21,260
+And then I'll leave
+that with you.
+
+510
+00:33:21,260 --> 00:33:22,350
+How do I get q3?
+
+511
+00:33:25,370 --> 00:33:28,220
+I've fixed two columns.
+
+512
+00:33:28,220 --> 00:33:33,590
+They happened to be,
+maybe not necessarily
+
+513
+00:33:33,590 --> 00:33:36,530
+the first two, but two
+columns, two q's are set,
+
+514
+00:33:36,530 --> 00:33:39,170
+and I'm looking
+for the next one.
+
+515
+00:33:39,170 --> 00:33:43,190
+I go on and I look at all the
+remaining columns, all of which
+
+516
+00:33:43,190 --> 00:33:49,230
+have had subtracted off
+their q1 and q2 parts.
+
+517
+00:33:49,230 --> 00:33:52,950
+So I've orthogonalized
+with respect to q1 and q2.
+
+518
+00:33:52,950 --> 00:33:55,080
+I look at all the
+remaining things
+
+519
+00:33:55,080 --> 00:34:00,140
+that I have to work with
+and pick the biggest.
+
+520
+00:34:00,140 --> 00:34:03,450
+Just like picking the biggest
+number to go into the pivot.
+
+521
+00:34:03,450 --> 00:34:08,330
+OK, I don't think I
+can say it anymore
+
+522
+00:34:08,330 --> 00:34:12,469
+without just repeating myself.
+
+523
+00:34:12,469 --> 00:34:16,650
+And I bring it here to
+class, because I had not
+
+524
+00:34:16,650 --> 00:34:21,440
+sort of appreciated the
+point that no extra work was
+
+525
+00:34:21,440 --> 00:34:22,489
+involved.
+
+526
+00:34:22,489 --> 00:34:29,810
+You just did these subtractions
+for all the remaining columns
+
+527
+00:34:29,810 --> 00:34:35,060
+of A before you started
+on the next job.
+
+528
+00:34:35,060 --> 00:34:36,860
+Is that OK?
+
+529
+00:34:36,860 --> 00:34:40,480
+Eventually the notes
+will describe that.
+
+530
+00:34:40,480 --> 00:34:41,770
+Maybe they even do.
+
+531
+00:34:41,770 --> 00:34:43,190
+Yeah, I think they even do.
+
+532
+00:34:43,190 --> 00:34:45,920
+I wrote it but I
+didn't understand it.
+
+533
+00:34:45,920 --> 00:34:49,130
+Now, little improvement.
+
+534
+00:34:49,130 --> 00:34:50,961
+So yes?
+
+535
+00:34:50,961 --> 00:34:52,650
+AUDIENCE: So are we
+permuting every time
+
+536
+00:34:52,650 --> 00:34:53,730
+to get the biggest pivot?
+
+537
+00:34:53,730 --> 00:34:54,409
+GILBERT STRANG: Yeah.
+
+538
+00:34:54,409 --> 00:34:54,989
+Yeah.
+
+539
+00:34:54,989 --> 00:34:56,489
+Only we don't call them pivots.
+
+540
+00:34:56,489 --> 00:34:57,600
+Or maybe we should.
+
+541
+00:34:57,600 --> 00:35:00,600
+I don't know what word is
+used to get the biggest
+
+542
+00:35:00,600 --> 00:35:02,950
+column remaining or something.
+
+543
+00:35:02,950 --> 00:35:05,370
+Yeah, yeah, each time.
+
+544
+00:35:08,430 --> 00:35:11,070
+You know, if the columns
+were in a stupid order,
+
+545
+00:35:11,070 --> 00:35:13,320
+this puts them in
+the right order.
+
+546
+00:35:13,320 --> 00:35:19,345
+OK, finally, come these
+weird names, Krylov, Russian.
+
+547
+00:35:19,345 --> 00:35:22,380
+Arnoldi, actually, I
+don't know what he is.
+
+548
+00:35:22,380 --> 00:35:23,940
+And I shouldn't
+admit that on tape.
+
+549
+00:35:27,560 --> 00:35:31,920
+So what's the idea there?
+
+550
+00:35:31,920 --> 00:35:34,850
+So again, we're
+solving Ax equal b.
+
+551
+00:35:34,850 --> 00:35:37,680
+So this is going to be Krylov.
+
+552
+00:35:37,680 --> 00:35:40,400
+What was his idea?
+
+553
+00:35:40,400 --> 00:35:42,300
+Well, I want to
+solve Ax equal b.
+
+554
+00:35:44,920 --> 00:35:49,980
+A is a big matrix, pretty big.
+
+555
+00:35:49,980 --> 00:35:51,810
+Of course, I don't
+plan to invert it.
+
+556
+00:35:51,810 --> 00:35:53,130
+That would be insane.
+
+557
+00:35:55,660 --> 00:36:00,640
+What I can do with a the matrix
+A, especially if it's sparse--
+
+558
+00:36:00,640 --> 00:36:07,330
+so a large sparse A would be
+a good candidate for Krylov.
+
+559
+00:36:12,770 --> 00:36:17,920
+So what is it that you could
+do cheap and fast with a large,
+
+560
+00:36:17,920 --> 00:36:23,144
+I mean really large, but
+really sparse matrix A?
+
+561
+00:36:23,144 --> 00:36:24,500
+AUDIENCE: Matrix times a vector.
+
+562
+00:36:24,500 --> 00:36:27,600
+GILBERT STRANG: You can do
+a matrix times a vector.
+
+563
+00:36:27,600 --> 00:36:28,710
+And here's our matrix.
+
+564
+00:36:28,710 --> 00:36:31,740
+And there is our vector.
+
+565
+00:36:31,740 --> 00:36:35,640
+So we could start
+with a vector b.
+
+566
+00:36:35,640 --> 00:36:38,850
+We can multiply A times b.
+
+567
+00:36:38,850 --> 00:36:42,930
+We can multiply A
+times A times b.
+
+568
+00:36:42,930 --> 00:36:44,430
+And, of course, I
+write it that way.
+
+569
+00:36:44,430 --> 00:36:50,320
+I never-- I mean, like if you
+multiply A times A first, then
+
+570
+00:36:50,320 --> 00:36:59,590
+like you turn in
+your Matlab account,
+
+571
+00:36:59,590 --> 00:37:02,510
+because you just have
+to do it that way.
+
+572
+00:37:02,510 --> 00:37:05,840
+And then you keep going, which
+of course is A squared b,
+
+573
+00:37:05,840 --> 00:37:07,730
+but you didn't form A squared.
+
+574
+00:37:07,730 --> 00:37:09,380
+And then on up to--
+
+575
+00:37:09,380 --> 00:37:16,010
+in the end, you get to some
+A to say k, k minus 1 b.
+
+576
+00:37:16,010 --> 00:37:20,210
+But, of course, that's
+computed as A times
+
+577
+00:37:20,210 --> 00:37:23,360
+the previous one, which was
+A times the previous one.
+
+578
+00:37:23,360 --> 00:37:29,050
+So there is a bunch
+of vectors, which
+
+579
+00:37:29,050 --> 00:37:30,400
+are likely to be independent.
+
+580
+00:37:33,050 --> 00:37:35,330
+So they span a space.
+
+581
+00:37:35,330 --> 00:37:38,520
+And it's called
+the Krylov space.
+
+582
+00:37:38,520 --> 00:37:39,730
+So these span.
+
+583
+00:37:39,730 --> 00:37:42,230
+They're combinations.
+
+584
+00:37:42,230 --> 00:37:48,650
+Combinations give--
+oh, I don't like
+
+585
+00:37:48,650 --> 00:37:50,930
+that letter k, because
+that's also Krylov,
+
+586
+00:37:50,930 --> 00:37:54,300
+so what shall I say? j.
+
+587
+00:37:54,300 --> 00:37:56,300
+So I have j vectors.
+
+588
+00:37:56,300 --> 00:38:00,780
+The original b, Ab, A
+squared b, up to that.
+
+589
+00:38:00,780 --> 00:38:12,890
+So combinations give the
+Krylov space, say, we'll
+
+590
+00:38:12,890 --> 00:38:17,450
+name it after Krylov and
+we need a subscript j
+
+591
+00:38:17,450 --> 00:38:22,750
+to show how big it
+is, its dimension.
+
+592
+00:38:22,750 --> 00:38:27,640
+So that will be the idea.
+
+593
+00:38:27,640 --> 00:38:30,610
+Well, let me complete the idea.
+
+594
+00:38:30,610 --> 00:38:32,760
+The idea will be--
+
+595
+00:38:32,760 --> 00:38:33,980
+there are combinations.
+
+596
+00:38:33,980 --> 00:38:41,890
+So that's a space, a subspace,
+pretty big if j is big.
+
+597
+00:38:41,890 --> 00:38:48,046
+And I'm going to look for the
+best solution in that space.
+
+598
+00:38:48,046 --> 00:38:53,780
+So I'm not going to solve
+of Ax equals b exactly.
+
+599
+00:38:53,780 --> 00:38:57,140
+I'm going to find the
+best solution, the closest
+
+600
+00:38:57,140 --> 00:39:01,790
+solution, the least squares
+solution in this Krylov space.
+
+601
+00:39:01,790 --> 00:39:04,190
+I'm going to let
+j be pretty big.
+
+602
+00:39:04,190 --> 00:39:08,550
+So this space has got
+plenty of vectors in it.
+
+603
+00:39:08,550 --> 00:39:10,240
+I have a basis for this space.
+
+604
+00:39:14,230 --> 00:39:19,910
+And some combination of these
+basis vectors will be my xj.
+
+605
+00:39:19,910 --> 00:39:34,300
+So, again, xj will be the best
+vector, or the closest vector
+
+606
+00:39:34,300 --> 00:39:39,830
+in this Krylov space, j,
+It will be the best vector
+
+607
+00:39:39,830 --> 00:39:43,070
+in that space, the closest one.
+
+608
+00:39:43,070 --> 00:39:45,710
+So I know what the space is.
+
+609
+00:39:45,710 --> 00:39:48,830
+I've reduced the
+dimension down to j.
+
+610
+00:39:48,830 --> 00:39:51,650
+And I can find this best vector.
+
+611
+00:39:54,570 --> 00:39:55,960
+There's just one catch.
+
+612
+00:39:55,960 --> 00:40:00,960
+And it's the same
+catch that Gram-Schmidt
+
+613
+00:40:00,960 --> 00:40:07,900
+were aiming to help to remove.
+
+614
+00:40:07,900 --> 00:40:10,570
+That is this basis that I'm--
+
+615
+00:40:10,570 --> 00:40:15,130
+right now, I'm working with
+all combinations of these guys.
+
+616
+00:40:15,130 --> 00:40:20,510
+And those could be
+very, very dependent.
+
+617
+00:40:20,510 --> 00:40:22,500
+That might be a terrible basis.
+
+618
+00:40:22,500 --> 00:40:26,090
+Anytime you want to
+do big computations,
+
+619
+00:40:26,090 --> 00:40:28,020
+what kind of a
+basis do you want?
+
+620
+00:40:30,942 --> 00:40:31,920
+Yes?
+
+621
+00:40:31,920 --> 00:40:37,300
+So what sort of a basis
+is good to project onto
+
+622
+00:40:37,300 --> 00:40:41,720
+to find the best solution
+within that subspace?
+
+623
+00:40:41,720 --> 00:40:45,920
+So we're sort of
+finding a projection.
+
+624
+00:40:45,920 --> 00:40:50,040
+And you've got vectors
+that span the space.
+
+625
+00:40:50,040 --> 00:40:55,300
+So you know what
+you're projecting onto.
+
+626
+00:40:55,300 --> 00:41:01,210
+But those vectors, they
+might be nearly dependent.
+
+627
+00:41:01,210 --> 00:41:05,170
+They might all be pointing
+almost the same direction.
+
+628
+00:41:05,170 --> 00:41:08,710
+In which case, your
+calculations are terrible.
+
+629
+00:41:08,710 --> 00:41:10,950
+So what do you do?
+
+630
+00:41:10,950 --> 00:41:15,910
+Orth-- Orthogonalize.
+
+631
+00:41:15,910 --> 00:41:18,250
+And that's where
+Arnoldi comes in.
+
+632
+00:41:18,250 --> 00:41:21,280
+And there's also a
+Hungarian guy named Lanczos.
+
+633
+00:41:26,210 --> 00:41:30,160
+So that's what they
+contribute is how
+
+634
+00:41:30,160 --> 00:41:33,750
+to orthogonalize that basis.
+
+635
+00:41:33,750 --> 00:41:38,900
+And then, once you've done that,
+you have an orthogonal basis.
+
+636
+00:41:38,900 --> 00:41:40,750
+And, of course, an
+orthogonal basis
+
+637
+00:41:40,750 --> 00:41:44,860
+is perfect to do a projection.
+
+638
+00:41:47,570 --> 00:41:49,550
+Everybody has to know that.
+
+639
+00:41:49,550 --> 00:41:51,890
+Why is a orthogonal
+basis so great?
+
+640
+00:41:51,890 --> 00:41:53,510
+Ortho-normal even.
+
+641
+00:41:53,510 --> 00:41:55,040
+Let's just remember.
+
+642
+00:41:55,040 --> 00:41:56,740
+Suppose I have a vector x.
+
+643
+00:42:00,146 --> 00:42:01,280
+It's unknown here.
+
+644
+00:42:01,280 --> 00:42:03,590
+But suppose I have it.
+
+645
+00:42:03,590 --> 00:42:06,470
+And I want to write
+it as a combination
+
+646
+00:42:06,470 --> 00:42:08,750
+of these ortho-normal guys.
+
+647
+00:42:14,110 --> 00:42:14,750
+say, n.
+
+648
+00:42:18,310 --> 00:42:21,940
+What is it about all
+ortho-normal q's that
+
+649
+00:42:21,940 --> 00:42:25,420
+makes this easy to
+do, which it would not
+
+650
+00:42:25,420 --> 00:42:28,390
+be with an arbitrary basis?
+
+651
+00:42:28,390 --> 00:42:33,010
+So this is really
+Q times c, right?
+
+652
+00:42:33,010 --> 00:42:36,590
+Q times this vector of C's.
+
+653
+00:42:36,590 --> 00:42:41,270
+The q's are in the columns of
+Q. The c's were multiplying
+
+654
+00:42:41,270 --> 00:42:44,040
+a matrix by a vector.
+
+655
+00:42:44,040 --> 00:42:45,750
+It's a combination
+of the columns.
+
+656
+00:42:45,750 --> 00:42:47,540
+That's what we get.
+
+657
+00:42:47,540 --> 00:42:54,200
+And when the q's are
+orthogonal, what's the answer?
+
+658
+00:42:54,200 --> 00:42:57,990
+We can get the
+answer straight away.
+
+659
+00:42:57,990 --> 00:43:03,870
+So here, we're trying to find
+the coefficients with respect
+
+660
+00:43:03,870 --> 00:43:10,470
+to the basis vectors
+Q of a given vector x.
+
+661
+00:43:10,470 --> 00:43:13,770
+And what's the answer
+to that question?
+
+662
+00:43:13,770 --> 00:43:18,900
+The point is, usually, to
+find the coefficients, c would
+
+663
+00:43:18,900 --> 00:43:21,300
+have to be Q inverse x.
+
+664
+00:43:21,300 --> 00:43:24,510
+We'd have to solve that
+system of equations.
+
+665
+00:43:24,510 --> 00:43:27,240
+We do have to solve that
+system of equations.
+
+666
+00:43:27,240 --> 00:43:32,735
+But where's the payoff
+from ortho-normal basis?
+
+667
+00:43:32,735 --> 00:43:33,610
+AUDIENCE: Q inverse--
+
+668
+00:43:33,610 --> 00:43:36,910
+GILBERT STRANG: Q
+inverse is Q transpose.
+
+669
+00:43:36,910 --> 00:43:38,590
+That's the payoff.
+
+670
+00:43:38,590 --> 00:43:45,410
+So it's just telling
+me that to find c1--
+
+671
+00:43:45,410 --> 00:43:47,280
+how do I find c1?
+
+672
+00:43:47,280 --> 00:43:52,010
+This says take the first
+q1, transpose with x.
+
+673
+00:43:52,010 --> 00:43:53,720
+I'll say the same thing here.
+
+674
+00:43:53,720 --> 00:43:58,090
+Take the first vector with x.
+
+675
+00:43:58,090 --> 00:44:01,780
+That will be about
+cq, q1, transpose q1.
+
+676
+00:44:01,780 --> 00:44:05,990
+I'm just taking the dot product
+of everything there with q1.
+
+677
+00:44:05,990 --> 00:44:11,510
+And then a c2, q1
+transpose, q2 and so on.
+
+678
+00:44:11,510 --> 00:44:12,836
+But what's good?
+
+679
+00:44:12,836 --> 00:44:14,460
+AUDIENCE: You have zeros.
+
+680
+00:44:14,460 --> 00:44:15,710
+GILBERT STRANG: Tell me again.
+
+681
+00:44:15,710 --> 00:44:17,240
+AUDIENCE: The other
+ones are zeros.
+
+682
+00:44:17,240 --> 00:44:18,698
+GILBERT STRANG:
+These are all zero.
+
+683
+00:44:22,650 --> 00:44:25,530
+And the q1 transpose q1 is?
+
+684
+00:44:25,530 --> 00:44:26,140
+AUDIENCE: 1.
+
+685
+00:44:26,140 --> 00:44:26,890
+GILBERT STRANG: 1.
+
+686
+00:44:26,890 --> 00:44:28,170
+So it's perfect.
+
+687
+00:44:28,170 --> 00:44:30,450
+c1 is q1 transpose x.
+
+688
+00:44:30,450 --> 00:44:35,160
+And that's exactly
+what that tells us.
+
+689
+00:44:35,160 --> 00:44:37,470
+The first component
+is the first row
+
+690
+00:44:37,470 --> 00:44:46,760
+of q transpose, which
+is q1 transpose with x.
+
+691
+00:44:46,760 --> 00:44:48,420
+So that's the idea.
+
+692
+00:44:48,420 --> 00:44:52,260
+So that's the idea here.
+
+693
+00:44:52,260 --> 00:44:56,790
+That's the reason for
+Arnoldi and Lanczos
+
+694
+00:44:56,790 --> 00:45:01,140
+being famous is that they
+figured out a good way
+
+695
+00:45:01,140 --> 00:45:04,070
+to orthogonalize that basis.
+
+696
+00:45:10,680 --> 00:45:13,500
+Do we want to see what they did?
+
+697
+00:45:13,500 --> 00:45:16,910
+Or those would be in the notes.
+
+698
+00:45:16,910 --> 00:45:20,070
+Well, how do you do it?
+
+699
+00:45:20,070 --> 00:45:21,420
+So this is the basis.
+
+700
+00:45:21,420 --> 00:45:24,630
+This is our not good basis.
+
+701
+00:45:24,630 --> 00:45:28,712
+And then our good basis
+is going to be q's.
+
+702
+00:45:31,880 --> 00:45:34,740
+So I'll take b to
+be-- q1 will be what?
+
+703
+00:45:34,740 --> 00:45:36,725
+What would be the
+right choice for q1?
+
+704
+00:45:39,230 --> 00:45:42,520
+Well, I'll take that first
+vector and normalize it.
+
+705
+00:45:46,240 --> 00:45:48,010
+We're just doing Gram-Schmidt.
+
+706
+00:45:48,010 --> 00:45:50,950
+What would q2 be?
+
+707
+00:45:50,950 --> 00:45:56,730
+How would I find q2 following
+the Gram-Schmidt idea?
+
+708
+00:45:56,730 --> 00:45:58,950
+I take Ab.
+
+709
+00:45:58,950 --> 00:46:05,140
+I subtract off its component
+in this q1 direction
+
+710
+00:46:05,140 --> 00:46:07,120
+and I normalize.
+
+711
+00:46:07,120 --> 00:46:10,510
+And all the Arnoldi
+Lanczos algorithm
+
+712
+00:46:10,510 --> 00:46:16,000
+is is that same
+Gram-Schmidt idea applied
+
+713
+00:46:16,000 --> 00:46:19,480
+to these Krylov vectors.
+
+714
+00:46:19,480 --> 00:46:24,430
+So Arnoldi-Lanczos-- Arnoldi
+is for any matrix and Lanczos
+
+715
+00:46:24,430 --> 00:46:28,120
+is for a symmetric matrix where
+you get some special benefit.
+
+716
+00:46:30,920 --> 00:46:34,260
+So what they did,
+you could say now,
+
+717
+00:46:34,260 --> 00:46:40,350
+they just wrote
+down Gram-Schmidt,
+
+718
+00:46:40,350 --> 00:46:42,960
+in fact, probably the
+standard Gram-Schmidt,
+
+719
+00:46:42,960 --> 00:46:45,570
+because this is a
+case where we really
+
+720
+00:46:45,570 --> 00:46:47,910
+don't want to exchange columns.
+
+721
+00:46:47,910 --> 00:46:53,460
+I don't want suddenly to
+be pushed into this one.
+
+722
+00:46:53,460 --> 00:46:55,740
+I'd rather take them in
+order, because it just
+
+723
+00:46:55,740 --> 00:46:56,760
+turns out right.
+
+724
+00:46:56,760 --> 00:46:58,650
+And this is in the notes.
+
+725
+00:46:58,650 --> 00:47:01,150
+So let me tell
+you where this is.
+
+726
+00:47:01,150 --> 00:47:02,990
+It will be Section II.1.
+
+727
+00:47:05,560 --> 00:47:08,500
+So Part 2 of the book,
+which is where we are,
+
+728
+00:47:08,500 --> 00:47:10,690
+and the first section.
+
+729
+00:47:10,690 --> 00:47:15,010
+So what all together is
+in this first section when
+
+730
+00:47:15,010 --> 00:47:17,470
+you look at it?
+
+731
+00:47:17,470 --> 00:47:21,160
+That section is standard
+numerical linear algebra,
+
+732
+00:47:21,160 --> 00:47:28,270
+what any course in
+MIT offers, 18.3--
+
+733
+00:47:28,270 --> 00:47:36,910
+I'm not sure of the number, 330
+maybe, which is, of all things
+
+734
+00:47:36,910 --> 00:47:38,610
+like this.
+
+735
+00:47:38,610 --> 00:47:41,600
+Krylov would be there,
+Arnoldi, Lanczos.
+
+736
+00:47:41,600 --> 00:47:44,480
+Of course, Gram and
+Schmidt would be there.
+
+737
+00:47:44,480 --> 00:47:48,960
+That's five people who've
+thought of the same thing.
+
+738
+00:47:48,960 --> 00:47:53,190
+And so that Section
+II.1 summarizes
+
+739
+00:47:53,190 --> 00:47:56,370
+what's in really good,
+well, a lot of textbooks.
+
+740
+00:47:56,370 --> 00:48:04,560
+And let me mention a favorite,
+a book by Trefethen and Bau.
+
+741
+00:48:08,800 --> 00:48:10,150
+Or the "Bible."
+
+742
+00:48:10,150 --> 00:48:12,130
+So this is maybe a
+moment to tell you
+
+743
+00:48:12,130 --> 00:48:17,680
+about two books on classical
+numerical linear algebra, what
+
+744
+00:48:17,680 --> 00:48:21,050
+do you do for matrices
+of order 1,000,
+
+745
+00:48:21,050 --> 00:48:22,856
+not for matrices
+of order millions.
+
+746
+00:48:26,030 --> 00:48:28,210
+That you have to rethink.
+
+747
+00:48:28,210 --> 00:48:31,810
+So Trefethen-Bau isn't called
+numerical linear algebra.
+
+748
+00:48:31,810 --> 00:48:35,860
+And do you know the
+authors of the Bible
+
+749
+00:48:35,860 --> 00:48:38,890
+of numerical linear algebra?
+
+750
+00:48:42,820 --> 00:48:45,190
+So that's a textbook.
+
+751
+00:48:45,190 --> 00:48:48,730
+And what I'm going to
+write down now finally
+
+752
+00:48:48,730 --> 00:48:54,880
+is 750 pages it's grown
+to in its fourth edition.
+
+753
+00:48:54,880 --> 00:48:58,870
+It's the Bible for all
+numerical linear algebra people.
+
+754
+00:48:58,870 --> 00:49:03,440
+And it's written by
+Golub and VanLoan.
+
+755
+00:49:08,760 --> 00:49:13,190
+So Gene Golub was
+a remarkable guy.
+
+756
+00:49:13,190 --> 00:49:18,050
+He probably didn't write more
+than about 11 pages of this.
+
+757
+00:49:18,050 --> 00:49:20,300
+Charlie wrote most of it.
+
+758
+00:49:20,300 --> 00:49:25,770
+But Golub was an
+amazing person who
+
+759
+00:49:25,770 --> 00:49:29,400
+traveled the world
+and connected people
+
+760
+00:49:29,400 --> 00:49:32,900
+and left behind
+papers to be written
+
+761
+00:49:32,900 --> 00:49:35,520
+and books to be written.
+
+762
+00:49:35,520 --> 00:49:40,530
+And so this Golub-VanLoan
+is now in the fourth volume.
+
+763
+00:49:40,530 --> 00:49:47,230
+And it has so much good stuff
+and references that it's
+
+764
+00:49:47,230 --> 00:49:49,690
+like the good reference.
+
+765
+00:49:49,690 --> 00:49:52,000
+And this is the
+good textbook if you
+
+766
+00:49:52,000 --> 00:49:56,695
+were going to teach a course
+on numerical linear algebra.
+
+767
+00:49:56,695 --> 00:50:02,350
+So I think that I've come
+to the point to finish.
+
+768
+00:50:02,350 --> 00:50:06,880
+So I really have finished
+along with the extra attraction
+
+769
+00:50:06,880 --> 00:50:12,860
+of this different problem,
+I finished with Ax equal b.
+
+770
+00:50:12,860 --> 00:50:18,040
+And, well, at least,
+I now move onto what
+
+771
+00:50:18,040 --> 00:50:21,158
+to do with really,
+really large matrices.

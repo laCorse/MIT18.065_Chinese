@@ -1,0 +1,3560 @@
+1
+00:00:01,550 --> 00:00:03,920
+The following content is
+provided under a Creative
+
+2
+00:00:03,920 --> 00:00:05,310
+Commons license.
+
+3
+00:00:05,310 --> 00:00:07,520
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:07,520 --> 00:00:11,610
+continue to offer high-quality
+educational resources for free.
+
+5
+00:00:11,610 --> 00:00:14,180
+To make a donation or to
+view additional materials
+
+6
+00:00:14,180 --> 00:00:18,140
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:18,140 --> 00:00:19,026
+at ocw.mit.edu.
+
+8
+00:00:24,235 --> 00:00:28,470
+GILBERT STRANG: OK,
+let me make a start.
+
+9
+00:00:28,470 --> 00:00:33,390
+On the left, you see
+the topic for today.
+
+10
+00:00:33,390 --> 00:00:34,470
+We're doing pretty well.
+
+11
+00:00:34,470 --> 00:00:40,200
+This completes my review of the
+highlights of linear algebra,
+
+12
+00:00:40,200 --> 00:00:41,550
+so that's five lectures.
+
+13
+00:00:44,550 --> 00:00:47,550
+I'll follow up on
+those five points,
+
+14
+00:00:47,550 --> 00:00:51,510
+because the neat part is
+it really ties together
+
+15
+00:00:51,510 --> 00:00:52,860
+the whole subject.
+
+16
+00:00:52,860 --> 00:00:59,485
+Eigenvalues, energy, A transpose
+A, determinants, pivots--
+
+17
+00:01:02,010 --> 00:01:03,760
+they all come together.
+
+18
+00:01:03,760 --> 00:01:08,280
+Each one gives a test for
+positive and definite matrices.
+
+19
+00:01:08,280 --> 00:01:10,470
+That's where I'm going.
+
+20
+00:01:10,470 --> 00:01:16,770
+Claire is hoping to come in
+for a little bit of the class
+
+21
+00:01:16,770 --> 00:01:23,080
+to ask if anybody has
+started on the homework.
+
+22
+00:01:23,080 --> 00:01:31,110
+And got Julia rolling, and got
+a yes from the auto grader.
+
+23
+00:01:31,110 --> 00:01:37,190
+Is anybody like-- no.
+
+24
+00:01:37,190 --> 00:01:40,760
+You're taking a chance, right?
+
+25
+00:01:40,760 --> 00:01:45,110
+Julia, in principle, works,
+but in practice, it's
+
+26
+00:01:45,110 --> 00:01:47,960
+always an adventure
+the first time.
+
+27
+00:01:47,960 --> 00:01:52,160
+So we chose this
+lab on convolution,
+
+28
+00:01:52,160 --> 00:01:55,580
+because it was the
+first lab last year,
+
+29
+00:01:55,580 --> 00:02:00,020
+and it doesn't ask
+for much math at all.
+
+30
+00:02:00,020 --> 00:02:02,300
+Really, you're just
+creating a matrix
+
+31
+00:02:02,300 --> 00:02:04,770
+and getting the auto
+grader to say, yes,
+
+32
+00:02:04,770 --> 00:02:05,865
+that's the right matrix.
+
+33
+00:02:10,288 --> 00:02:12,190
+And we'll see that matrix.
+
+34
+00:02:12,190 --> 00:02:15,620
+We'll see this
+idea of convolution
+
+35
+00:02:15,620 --> 00:02:18,440
+at the right time, which
+is not that far off.
+
+36
+00:02:18,440 --> 00:02:24,170
+It's signal processing,
+and it's early in part
+
+37
+00:02:24,170 --> 00:02:25,100
+three of the book.
+
+38
+00:02:27,880 --> 00:02:30,990
+If Claire comes in,
+she'll answer questions.
+
+39
+00:02:30,990 --> 00:02:36,440
+Otherwise, I guess it would
+be emailing questions to--
+
+40
+00:02:36,440 --> 00:02:40,070
+I realize that the deadline
+is not on top of you,
+
+41
+00:02:40,070 --> 00:02:44,360
+and you've got a whole
+weekend to make Julia fly.
+
+42
+00:02:48,170 --> 00:02:51,260
+I'll start on the math then.
+
+43
+00:02:51,260 --> 00:02:55,070
+We had symmetric-- eigenvalues
+of matrices, and especially
+
+44
+00:02:55,070 --> 00:02:58,730
+symmetric matrices, and
+those have real eigenvalues,
+
+45
+00:02:58,730 --> 00:03:01,730
+and I'll quickly show why.
+
+46
+00:03:01,730 --> 00:03:05,780
+And orthogonal eigenvectors,
+and I'll quickly show why.
+
+47
+00:03:05,780 --> 00:03:10,850
+But I want to move
+to the new idea--
+
+48
+00:03:10,850 --> 00:03:13,580
+positive definite matrices.
+
+49
+00:03:13,580 --> 00:03:17,120
+These are the best of
+the symmetric matrices.
+
+50
+00:03:17,120 --> 00:03:21,320
+They are symmetric matrices
+that have positive eigenvalues.
+
+51
+00:03:21,320 --> 00:03:25,250
+That's the easy way to remember
+positive definite matrices.
+
+52
+00:03:25,250 --> 00:03:28,610
+They have positive eigenvalues,
+but it's certainly not
+
+53
+00:03:28,610 --> 00:03:30,200
+the easy way to test.
+
+54
+00:03:30,200 --> 00:03:34,160
+If I give you a matrix like
+that, that's only two by two.
+
+55
+00:03:34,160 --> 00:03:36,680
+We could actually
+find the eigenvalues,
+
+56
+00:03:36,680 --> 00:03:41,600
+but we would like to have other
+tests, easier tests, which
+
+57
+00:03:41,600 --> 00:03:47,420
+would be equivalent to
+positive eigenvalues.
+
+58
+00:03:47,420 --> 00:03:50,830
+Every one of those five tests--
+any one of those five tests
+
+59
+00:03:50,830 --> 00:03:53,810
+is all you need.
+
+60
+00:03:53,810 --> 00:03:57,950
+Let me start with that
+example and ask you to look,
+
+61
+00:03:57,950 --> 00:04:01,665
+and then I'm going to discuss
+those five separate points.
+
+62
+00:04:04,610 --> 00:04:08,680
+My question is,
+is that matrix s?
+
+63
+00:04:08,680 --> 00:04:10,610
+It's obviously symmetric.
+
+64
+00:04:10,610 --> 00:04:14,690
+Is it positive,
+definite, or not?
+
+65
+00:04:14,690 --> 00:04:16,399
+You could compute
+its eigenvalues
+
+66
+00:04:16,399 --> 00:04:17,779
+since it's two by two.
+
+67
+00:04:17,779 --> 00:04:20,130
+It's energy-- I'll come
+back to that, because that's
+
+68
+00:04:20,130 --> 00:04:21,529
+the most important one.
+
+69
+00:04:21,529 --> 00:04:24,320
+Number two is
+really fundamental.
+
+70
+00:04:24,320 --> 00:04:26,870
+Number three would ask
+you to factor that.
+
+71
+00:04:26,870 --> 00:04:30,020
+Well, you don't want
+to take time with that.
+
+72
+00:04:30,020 --> 00:04:31,610
+Well, what do you think?
+
+73
+00:04:31,610 --> 00:04:33,410
+Is it positive,
+definite, or not?
+
+74
+00:04:33,410 --> 00:04:39,110
+I see an expert in the
+front row saying no.
+
+75
+00:04:39,110 --> 00:04:40,610
+Why is it no?
+
+76
+00:04:40,610 --> 00:04:41,690
+The answer is no.
+
+77
+00:04:41,690 --> 00:04:43,790
+That's not a positive
+definite matrix.
+
+78
+00:04:43,790 --> 00:04:46,170
+Where does it let us down?
+
+79
+00:04:46,170 --> 00:04:48,170
+It's got all positive
+numbers, but that's not
+
+80
+00:04:48,170 --> 00:04:49,580
+what we're asking.
+
+81
+00:04:49,580 --> 00:04:51,560
+We're asking
+positive eigenvalues,
+
+82
+00:04:51,560 --> 00:04:53,670
+positive determinants,
+positive pivots.
+
+83
+00:04:56,630 --> 00:04:59,270
+How does it let us down?
+
+84
+00:04:59,270 --> 00:05:02,510
+Which is the easy test
+to see that it fails?
+
+85
+00:05:02,510 --> 00:05:03,803
+AUDIENCE: Maybe determinant?
+
+86
+00:05:03,803 --> 00:05:04,970
+GILBERT STRANG: Determinant.
+
+87
+00:05:04,970 --> 00:05:12,120
+The determinant is 15
+minus 16, so negative.
+
+88
+00:05:12,120 --> 00:05:17,520
+So how is the determinant
+connected to the eigenvalues?
+
+89
+00:05:17,520 --> 00:05:18,320
+Everybody?
+
+90
+00:05:18,320 --> 00:05:18,820
+Yep.
+
+91
+00:05:18,820 --> 00:05:19,280
+AUDIENCE: [INAUDIBLE]
+
+92
+00:05:19,280 --> 00:05:20,700
+GILBERT STRANG:
+It's the product.
+
+93
+00:05:20,700 --> 00:05:24,880
+So the two eigenvalues of
+s, they're real, of course,
+
+94
+00:05:24,880 --> 00:05:28,600
+and they multiply to give the
+determinant, which is minus 1.
+
+95
+00:05:28,600 --> 00:05:31,670
+So one of them is negative,
+and one of them is positive.
+
+96
+00:05:31,670 --> 00:05:35,300
+This matrix is an
+indefinite matrix--
+
+97
+00:05:35,300 --> 00:05:36,650
+indefinite.
+
+98
+00:05:36,650 --> 00:05:41,000
+So how could I make
+it positive definite?
+
+99
+00:05:41,000 --> 00:05:42,080
+OK.
+
+100
+00:05:42,080 --> 00:05:44,000
+We can just play
+with an example,
+
+101
+00:05:44,000 --> 00:05:48,840
+and then we see these
+things happening.
+
+102
+00:05:48,840 --> 00:05:50,540
+Let's see.
+
+103
+00:05:50,540 --> 00:05:55,850
+OK, what shall I put in
+place of the 5, for example?
+
+104
+00:05:55,850 --> 00:06:00,500
+I could lower the 4, or I
+can up the 5, or up the 3.
+
+105
+00:06:00,500 --> 00:06:02,450
+I can make the diagonal entries.
+
+106
+00:06:02,450 --> 00:06:05,180
+If I add stuff to
+the main diagonal,
+
+107
+00:06:05,180 --> 00:06:08,870
+I'm making it more positive.
+
+108
+00:06:08,870 --> 00:06:12,230
+So that's the
+straightforward way.
+
+109
+00:06:12,230 --> 00:06:15,420
+So what number in
+there would be safe?
+
+110
+00:06:15,420 --> 00:06:16,130
+AUDIENCE: 6.
+
+111
+00:06:16,130 --> 00:06:17,400
+GILBERT STRANG: 6.
+
+112
+00:06:17,400 --> 00:06:17,900
+OK.
+
+113
+00:06:17,900 --> 00:06:19,880
+6 would be safe.
+
+114
+00:06:19,880 --> 00:06:23,300
+If I go up from 5 to
+6, I've gotta de--
+
+115
+00:06:23,300 --> 00:06:26,540
+so when I say here
+"leading determinants,"
+
+116
+00:06:26,540 --> 00:06:29,240
+what does that mean?
+
+117
+00:06:29,240 --> 00:06:31,520
+That word leading
+means something.
+
+118
+00:06:31,520 --> 00:06:34,910
+It means that I take
+that 1 by 1 determinant--
+
+119
+00:06:34,910 --> 00:06:36,920
+it would have to pass that.
+
+120
+00:06:36,920 --> 00:06:39,360
+Just the determinant
+itself would not do it.
+
+121
+00:06:39,360 --> 00:06:41,480
+Let me give you an example.
+
+122
+00:06:41,480 --> 00:06:48,470
+No for-- let me take
+minus 3 and minus 6.
+
+123
+00:06:48,470 --> 00:06:50,510
+That would have the
+same determinant.
+
+124
+00:06:55,010 --> 00:06:57,890
+The determinant would
+still be 18 minus 16--
+
+125
+00:06:57,890 --> 00:06:58,730
+2.
+
+126
+00:06:58,730 --> 00:07:04,550
+But it fails the
+test on the 1 by 1.
+
+127
+00:07:04,550 --> 00:07:05,550
+And this passes.
+
+128
+00:07:05,550 --> 00:07:09,280
+This passes the 1 by 1
+test and 2 by 2 tests.
+
+129
+00:07:09,280 --> 00:07:11,890
+So that's what this means here.
+
+130
+00:07:11,890 --> 00:07:15,480
+Leading determinants
+are from the upper left.
+
+131
+00:07:15,480 --> 00:07:17,460
+You have to check n
+things because you've
+
+132
+00:07:17,460 --> 00:07:19,260
+got n eigenvalues.
+
+133
+00:07:19,260 --> 00:07:22,620
+And those are the n tests.
+
+134
+00:07:22,620 --> 00:07:25,710
+And have you noticed the
+connection to pivots?
+
+135
+00:07:25,710 --> 00:07:30,900
+So let's just remember
+that small item.
+
+136
+00:07:30,900 --> 00:07:35,340
+What would be the pivots
+because we didn't take
+
+137
+00:07:35,340 --> 00:07:37,660
+a long time on elimination?
+
+138
+00:07:37,660 --> 00:07:43,380
+So what would be the pivots
+for that matrix, 3-4-4-6?
+
+139
+00:07:43,380 --> 00:07:45,870
+Well, what's the first pivot?
+
+140
+00:07:45,870 --> 00:07:50,250
+3, sitting there-- the 1-1
+entry would be the first pivot.
+
+141
+00:07:50,250 --> 00:07:56,520
+So the pivots would be 3,
+and what's the second pivot?
+
+142
+00:07:56,520 --> 00:07:59,070
+Well, maybe to
+see it clearly you
+
+143
+00:07:59,070 --> 00:08:01,950
+want me to take that
+elimination step.
+
+144
+00:08:01,950 --> 00:08:05,280
+Why don't I do it just
+so you'll see it here?
+
+145
+00:08:05,280 --> 00:08:09,870
+So elimination would subtract
+some multiple of row 1
+
+146
+00:08:09,870 --> 00:08:11,290
+from row 2.
+
+147
+00:08:11,290 --> 00:08:13,740
+I would leave 1 one alone.
+
+148
+00:08:13,740 --> 00:08:16,530
+I would subtract some
+multiple to get a 0 there.
+
+149
+00:08:16,530 --> 00:08:18,270
+And what's the multiple?
+
+150
+00:08:18,270 --> 00:08:20,550
+What's the multiplier?
+
+151
+00:08:20,550 --> 00:08:21,570
+AUDIENCE: In that much--
+
+152
+00:08:21,570 --> 00:08:22,940
+GILBERT STRANG: 4/3.
+
+153
+00:08:22,940 --> 00:08:29,940
+4/3 times row 1, away from
+row 2, would produce that 0.
+
+154
+00:08:29,940 --> 00:08:35,190
+But 4/3 times the 4,
+that would be 16/3.
+
+155
+00:08:35,190 --> 00:08:38,250
+And we're subtracting
+it from 18/3.
+
+156
+00:08:38,250 --> 00:08:39,990
+I think we've got 2/3 left.
+
+157
+00:08:43,960 --> 00:08:48,880
+So the pivots, which is
+this, in elimination,
+
+158
+00:08:48,880 --> 00:08:50,710
+are the 3 and the 2/3.
+
+159
+00:08:50,710 --> 00:08:52,210
+And of course, they're positive.
+
+160
+00:08:52,210 --> 00:08:55,300
+And actually, you see
+the immediate connection.
+
+161
+00:08:55,300 --> 00:09:01,750
+This pivot is the 2 by 2
+determinant divided by the 1
+
+162
+00:09:01,750 --> 00:09:04,690
+by 1 determinant.
+
+163
+00:09:04,690 --> 00:09:07,000
+The 2 by 2 determinant,
+we figured out--
+
+164
+00:09:07,000 --> 00:09:10,460
+18 minus 16 was 2.
+
+165
+00:09:10,460 --> 00:09:13,510
+The 1 by 1 determinant is 3.
+
+166
+00:09:13,510 --> 00:09:18,970
+And sure enough, that
+second pivot is 2/3.
+
+167
+00:09:18,970 --> 00:09:32,200
+This is not-- so by example,
+I'm illustrating what these
+
+168
+00:09:32,200 --> 00:09:33,970
+different tests--
+
+169
+00:09:33,970 --> 00:09:37,030
+and again, each test
+is all you need.
+
+170
+00:09:37,030 --> 00:09:39,790
+If it passes one test,
+it passes them all.
+
+171
+00:09:39,790 --> 00:09:42,370
+And we haven't found
+the eigenvalues.
+
+172
+00:09:42,370 --> 00:09:44,200
+Let me do the energy.
+
+173
+00:09:44,200 --> 00:09:46,110
+Can I do energy here?
+
+174
+00:09:46,110 --> 00:09:46,610
+OK.
+
+175
+00:09:46,610 --> 00:09:48,190
+So what's this--
+
+176
+00:09:48,190 --> 00:09:54,620
+I am saying that this is
+really the great test.
+
+177
+00:09:54,620 --> 00:09:59,860
+That, for me, is the definition
+of a positive definite matrix.
+
+178
+00:09:59,860 --> 00:10:03,610
+And the word "energy"
+comes in because it's
+
+179
+00:10:03,610 --> 00:10:08,090
+quadratic, [INAUDIBLE] kinetic
+energy or potential energy.
+
+180
+00:10:08,090 --> 00:10:13,060
+So that's the energy in the
+vector x for this matrix.
+
+181
+00:10:13,060 --> 00:10:15,640
+So let me compute
+it, x transpose Sx.
+
+182
+00:10:15,640 --> 00:10:23,170
+So let me put in S
+here, the original S.
+
+183
+00:10:23,170 --> 00:10:28,580
+And let me put in of any
+vector x, so, say xy or x1.
+
+184
+00:10:28,580 --> 00:10:30,625
+Maybe-- do you like x--
+
+185
+00:10:30,625 --> 00:10:32,620
+xy is easier.
+
+186
+00:10:32,620 --> 00:10:36,130
+So that's our
+vector x transposed.
+
+187
+00:10:36,130 --> 00:10:41,500
+This is our matrix S.
+And here's our vector x.
+
+188
+00:10:41,500 --> 00:10:45,100
+So it's a function of x and y.
+
+189
+00:10:45,100 --> 00:10:48,400
+It's a pure quadratic function.
+
+190
+00:10:48,400 --> 00:10:51,730
+Do you know what I get
+when I multiply that out?
+
+191
+00:10:51,730 --> 00:10:55,590
+I get a very simple,
+important type of function.
+
+192
+00:10:55,590 --> 00:10:58,880
+Shall we multiply it out?
+
+193
+00:10:58,880 --> 00:10:59,380
+Let's see.
+
+194
+00:10:59,380 --> 00:11:05,380
+Shall I multiply that by that
+first, so I get 3x plus 4y?
+
+195
+00:11:05,380 --> 00:11:11,890
+And 4x plus 6y is what I'm
+getting from these two.
+
+196
+00:11:11,890 --> 00:11:16,100
+And now I'm hitting
+that with the xy.
+
+197
+00:11:16,100 --> 00:11:18,950
+And now I'm going
+to see the energy.
+
+198
+00:11:18,950 --> 00:11:20,870
+And you'll see the pattern.
+
+199
+00:11:20,870 --> 00:11:22,670
+That's always what
+math is about.
+
+200
+00:11:22,670 --> 00:11:23,990
+What's the pattern?
+
+201
+00:11:23,990 --> 00:11:27,920
+So I've x times 3x, 3x squared.
+
+202
+00:11:27,920 --> 00:11:29,960
+And I have y times 6y.
+
+203
+00:11:29,960 --> 00:11:32,510
+That's 6y squared.
+
+204
+00:11:32,510 --> 00:11:34,700
+And I have x times 4y.
+
+205
+00:11:34,700 --> 00:11:36,860
+That's for 4xy.
+
+206
+00:11:36,860 --> 00:11:38,690
+And I have y times 4x.
+
+207
+00:11:38,690 --> 00:11:39,920
+That's 4 more xy.
+
+208
+00:11:44,060 --> 00:11:45,920
+So I've got all those terms.
+
+209
+00:11:45,920 --> 00:11:50,720
+Every term, every
+number in the matrix
+
+210
+00:11:50,720 --> 00:11:54,620
+gives me a piece of the energy.
+
+211
+00:11:54,620 --> 00:11:58,730
+And you see that the diagonal
+numbers, 3 and 6, those
+
+212
+00:11:58,730 --> 00:12:03,830
+give me the diagonal pieces,
+3x squared and 6y squared.
+
+213
+00:12:03,830 --> 00:12:05,760
+And then the cross--
+
+214
+00:12:05,760 --> 00:12:08,540
+or I maybe call them
+the cross terms.
+
+215
+00:12:08,540 --> 00:12:13,160
+Those give me 4xy and
+4xy, so, really, 8xy.
+
+216
+00:12:13,160 --> 00:12:16,040
+So you could call
+this thing 8xy.
+
+217
+00:12:20,190 --> 00:12:22,470
+So that's my function.
+
+218
+00:12:22,470 --> 00:12:23,730
+That's my quadratic.
+
+219
+00:12:23,730 --> 00:12:25,680
+That's my energy.
+
+220
+00:12:25,680 --> 00:12:31,120
+And I believe that
+is greater than 0.
+
+221
+00:12:31,120 --> 00:12:33,130
+Let me graph the thing.
+
+222
+00:12:33,130 --> 00:12:34,510
+Let me graph that energy.
+
+223
+00:12:38,560 --> 00:12:39,160
+OK.
+
+224
+00:12:39,160 --> 00:12:42,670
+So here's a graph of my
+function, f of x and y.
+
+225
+00:12:45,340 --> 00:12:48,460
+Here is x, and here's y.
+
+226
+00:12:48,460 --> 00:12:52,400
+And of course, that's
+on the graph, 0-0.
+
+227
+00:12:52,400 --> 00:12:57,000
+At x equals 0, y equals 0,
+the function is clearly 0.
+
+228
+00:12:57,000 --> 00:12:59,710
+Everybody's got his eye-- let
+me write that function again
+
+229
+00:12:59,710 --> 00:13:00,420
+here--
+
+230
+00:13:00,420 --> 00:13:04,975
+3x squared, 6y squared, 8xy.
+
+231
+00:13:09,460 --> 00:13:11,650
+Actually, you can see--
+
+232
+00:13:11,650 --> 00:13:15,700
+this is how I think
+about that function.
+
+233
+00:13:15,700 --> 00:13:20,020
+So 3x squared is obviously
+carrying me upwards.
+
+234
+00:13:20,020 --> 00:13:21,950
+It will never go negative.
+
+235
+00:13:21,950 --> 00:13:24,760
+6y squared will
+never go negative.
+
+236
+00:13:24,760 --> 00:13:28,030
+8xy can go negative, right?
+
+237
+00:13:28,030 --> 00:13:31,930
+If x and y have opposite
+signs, that'll go negative.
+
+238
+00:13:31,930 --> 00:13:38,260
+But the question is, do
+these positive pieces
+
+239
+00:13:38,260 --> 00:13:45,065
+overwhelm it and make the
+graph go up like a bowl?
+
+240
+00:13:49,890 --> 00:13:53,610
+And the answer is yes, for
+a positive definite matrix.
+
+241
+00:13:53,610 --> 00:13:57,120
+So this is a graph of a
+positive definite matrix,
+
+242
+00:13:57,120 --> 00:14:02,160
+of positive energy, the energy
+of a positive definite matrix.
+
+243
+00:14:02,160 --> 00:14:08,410
+So this is the energy x
+transpose Sx that I'm graphing.
+
+244
+00:14:08,410 --> 00:14:11,460
+And there it is.
+
+245
+00:14:11,460 --> 00:14:13,680
+This is important.
+
+246
+00:14:13,680 --> 00:14:14,590
+This is important.
+
+247
+00:14:14,590 --> 00:14:18,930
+This is the kind of function
+we like, x transpose Sx,
+
+248
+00:14:18,930 --> 00:14:25,960
+where S is positive definite, so
+the function goes up like that.
+
+249
+00:14:25,960 --> 00:14:28,650
+This is what deep
+learning is about.
+
+250
+00:14:28,650 --> 00:14:32,730
+This could be a loss
+function that you minimize.
+
+251
+00:14:32,730 --> 00:14:36,870
+It could depend on
+100,000 variables or more.
+
+252
+00:14:36,870 --> 00:14:43,890
+And it could come from the
+error in the difference
+
+253
+00:14:43,890 --> 00:14:53,070
+between training data and
+the number you get it.
+
+254
+00:14:53,070 --> 00:14:57,080
+The loss would be some
+expression like that.
+
+255
+00:14:57,080 --> 00:15:02,250
+Well, I'll make sense of
+those words as soon as I can.
+
+256
+00:15:02,250 --> 00:15:11,500
+What I want to say is deep
+learning, neural nets, machine
+
+257
+00:15:11,500 --> 00:15:14,530
+learning, the big computation--
+
+258
+00:15:14,530 --> 00:15:17,260
+is to minimize an energy--
+
+259
+00:15:17,260 --> 00:15:18,850
+is to minimize an energy.
+
+260
+00:15:18,850 --> 00:15:20,800
+Now of course, I
+made the minimum
+
+261
+00:15:20,800 --> 00:15:25,420
+easy to find because
+I have pure squares.
+
+262
+00:15:25,420 --> 00:15:28,630
+Well, that doesn't happen
+in practice, of course.
+
+263
+00:15:28,630 --> 00:15:35,110
+In practice, we have linear
+terms, x transpose b,
+
+264
+00:15:35,110 --> 00:15:38,080
+or nonlinear.
+
+265
+00:15:38,080 --> 00:15:42,430
+Yeah, the loss function doesn't
+have to be a [INAUDIBLE] cross
+
+266
+00:15:42,430 --> 00:15:44,330
+entropy, all kinds of things.
+
+267
+00:15:44,330 --> 00:15:48,490
+There is a whole dictionary
+of possible loss functions.
+
+268
+00:15:48,490 --> 00:15:51,710
+But but this is the model.
+
+269
+00:15:51,710 --> 00:15:53,030
+This is the model.
+
+270
+00:15:53,030 --> 00:15:55,210
+And I'll make it
+the perfect model
+
+271
+00:15:55,210 --> 00:16:01,020
+by just focusing on that part.
+
+272
+00:16:01,020 --> 00:16:09,200
+Well, by the way, what would
+happen if that was in there?
+
+273
+00:16:09,200 --> 00:16:12,410
+I shouldn't have X'd
+it out so quickly
+
+274
+00:16:12,410 --> 00:16:14,030
+since I just put it up there.
+
+275
+00:16:14,030 --> 00:16:16,580
+Let me put it back up.
+
+276
+00:16:16,580 --> 00:16:18,940
+I thought better of it.
+
+277
+00:16:18,940 --> 00:16:20,260
+OK.
+
+278
+00:16:20,260 --> 00:16:27,350
+This is a kind of least squares
+problem with some data, b.
+
+279
+00:16:27,350 --> 00:16:28,970
+Minimize that.
+
+280
+00:16:28,970 --> 00:16:31,250
+So what would be the
+graph of this guy?
+
+281
+00:16:31,250 --> 00:16:37,460
+Can I just draw the same sort
+of picture for that function?
+
+282
+00:16:37,460 --> 00:16:40,720
+Will it be a bowl?
+
+283
+00:16:40,720 --> 00:16:42,820
+Yes.
+
+284
+00:16:42,820 --> 00:16:44,980
+If I have this
+term, all that does
+
+285
+00:16:44,980 --> 00:16:51,600
+is move it off center
+here, at x equals 0.
+
+286
+00:16:51,600 --> 00:16:52,640
+Well, I still get 0.
+
+287
+00:16:52,640 --> 00:16:53,140
+Sorry.
+
+288
+00:16:53,140 --> 00:16:54,520
+I still go through that point.
+
+289
+00:16:54,520 --> 00:16:57,540
+If this is the 0 vector,
+I'm still getting 0.
+
+290
+00:16:57,540 --> 00:16:59,100
+But this, we'll bring it below.
+
+291
+00:16:59,100 --> 00:17:02,130
+That would produce
+a bowl like that.
+
+292
+00:17:02,130 --> 00:17:05,460
+Actually, it would
+just be the same bowl.
+
+293
+00:17:05,460 --> 00:17:08,040
+The bowl would just be shifted.
+
+294
+00:17:08,040 --> 00:17:12,599
+I could write that to
+show how that happens.
+
+295
+00:17:12,599 --> 00:17:17,040
+So this is now below 0.
+
+296
+00:17:17,040 --> 00:17:22,290
+That's the solution
+we're after that tells us
+
+297
+00:17:22,290 --> 00:17:25,680
+the weights in the
+neural network.
+
+298
+00:17:25,680 --> 00:17:28,380
+I'm just using these
+words, but we'll soon
+
+299
+00:17:28,380 --> 00:17:31,350
+have a meaning to them.
+
+300
+00:17:31,350 --> 00:17:34,040
+I want to find that
+minimum, in other words.
+
+301
+00:17:34,040 --> 00:17:36,930
+And I want to find it for much
+more complicated functions
+
+302
+00:17:36,930 --> 00:17:37,740
+than that.
+
+303
+00:17:37,740 --> 00:17:40,410
+Of course, if I
+minimize the quadratic,
+
+304
+00:17:40,410 --> 00:17:42,660
+that means setting
+derivatives to 0.
+
+305
+00:17:42,660 --> 00:17:44,790
+I just have linear equations.
+
+306
+00:17:44,790 --> 00:17:49,160
+Probably, I could write
+everything down for that thing.
+
+307
+00:17:49,160 --> 00:17:51,930
+So let's put in some
+nonlinear stuff,
+
+308
+00:17:51,930 --> 00:17:55,790
+which way to wiggles the
+bowl, makes it not so easy.
+
+309
+00:17:59,880 --> 00:18:02,020
+Can I look a month ahead?
+
+310
+00:18:02,020 --> 00:18:03,190
+How do you find--
+
+311
+00:18:03,190 --> 00:18:05,890
+so this is a big
+part of mathematics--
+
+312
+00:18:05,890 --> 00:18:10,190
+applied math,
+optimization, minimization
+
+313
+00:18:10,190 --> 00:18:15,470
+of a complicated function
+of 100,000 variables.
+
+314
+00:18:15,470 --> 00:18:17,180
+That's the biggest computation.
+
+315
+00:18:17,180 --> 00:18:20,180
+That's the reason machine
+learning on big problems
+
+316
+00:18:20,180 --> 00:18:24,980
+takes a week on a
+GPU or multiple GPUs,
+
+317
+00:18:24,980 --> 00:18:28,340
+because you have
+so many unknowns.
+
+318
+00:18:28,340 --> 00:18:32,240
+More than 100,000
+would be quite normal.
+
+319
+00:18:32,240 --> 00:18:35,960
+In general, let's just have
+the pleasure of looking ahead
+
+320
+00:18:35,960 --> 00:18:40,130
+for one minute, and then
+I'll come back to real life
+
+321
+00:18:40,130 --> 00:18:42,560
+here, linear algebra.
+
+322
+00:18:42,560 --> 00:18:51,050
+I can't resist thinking aloud,
+how do you find the minimum?
+
+323
+00:18:51,050 --> 00:18:58,110
+By the way, these functions,
+both of them, are convex.
+
+324
+00:18:58,110 --> 00:18:59,100
+So that is convex.
+
+325
+00:19:04,940 --> 00:19:09,290
+So I want to connect
+convex functions, f--
+
+326
+00:19:09,290 --> 00:19:11,350
+and what does convex mean?
+
+327
+00:19:11,350 --> 00:19:17,460
+It means, well, that
+the graph is like that.
+
+328
+00:19:17,460 --> 00:19:19,660
+[LAUGHTER]
+
+329
+00:19:19,660 --> 00:19:22,660
+Not perfect, it could--
+
+330
+00:19:22,660 --> 00:19:27,280
+but if it's a
+quadratic, then convex
+
+331
+00:19:27,280 --> 00:19:32,410
+means positive
+definite, or maybe
+
+332
+00:19:32,410 --> 00:19:35,810
+in the extreme,
+positive semidefinite.
+
+333
+00:19:35,810 --> 00:19:39,070
+I'll have to mention that.
+
+334
+00:19:39,070 --> 00:19:42,250
+But convex means it goes up.
+
+335
+00:19:42,250 --> 00:19:43,630
+But it could have wiggles.
+
+336
+00:19:43,630 --> 00:19:47,020
+It doesn't have to be
+just perfect squares
+
+337
+00:19:47,020 --> 00:19:49,720
+in linear terms,
+but general things.
+
+338
+00:19:49,720 --> 00:19:55,060
+And for deep learning,
+it will include non--
+
+339
+00:19:55,060 --> 00:19:58,750
+it will go far
+beyond quadratics.
+
+340
+00:19:58,750 --> 00:20:00,580
+Well, it may not be convex.
+
+341
+00:20:00,580 --> 00:20:02,530
+I guess that's also true.
+
+342
+00:20:02,530 --> 00:20:04,120
+Yeah.
+
+343
+00:20:04,120 --> 00:20:08,230
+So deep learning has
+got serious problems
+
+344
+00:20:08,230 --> 00:20:10,570
+because those
+functions, they may
+
+345
+00:20:10,570 --> 00:20:16,150
+look like this but then over
+here they could go nonxconvex.
+
+346
+00:20:16,150 --> 00:20:18,520
+They could dip
+down a little more.
+
+347
+00:20:18,520 --> 00:20:21,580
+And you're looking for this
+point or for this point.
+
+348
+00:20:24,820 --> 00:20:30,520
+Still, I'm determined to tell
+you how to find it or a start
+
+349
+00:20:30,520 --> 00:20:31,780
+on how you find it.
+
+350
+00:20:31,780 --> 00:20:32,980
+So you're at some point.
+
+351
+00:20:35,950 --> 00:20:41,810
+Start there, somewhere
+on the surface.
+
+352
+00:20:41,810 --> 00:20:45,900
+Some x, some vector
+x is your start, x0--
+
+353
+00:20:49,890 --> 00:20:51,030
+starting point.
+
+354
+00:20:51,030 --> 00:20:58,020
+And we're going to just take a
+step, hopefully down the bowl.
+
+355
+00:20:58,020 --> 00:21:00,900
+Well of course, it would
+be fantastic to get there
+
+356
+00:21:00,900 --> 00:21:04,950
+in one step, but that's
+not going to happen.
+
+357
+00:21:04,950 --> 00:21:09,570
+That would be solving a big
+linear system, very expensive,
+
+358
+00:21:09,570 --> 00:21:11,190
+and a big nonlinear system.
+
+359
+00:21:11,190 --> 00:21:13,320
+So really, that's what
+we're trying to solve--
+
+360
+00:21:13,320 --> 00:21:15,300
+a big nonlinear system.
+
+361
+00:21:15,300 --> 00:21:19,050
+And I should be on this
+picture because here we
+
+362
+00:21:19,050 --> 00:21:20,790
+can see where the minimum is.
+
+363
+00:21:20,790 --> 00:21:22,980
+But they just shift.
+
+364
+00:21:22,980 --> 00:21:27,420
+So what would you do if
+you had a starting point
+
+365
+00:21:27,420 --> 00:21:32,240
+and you wanted to go
+look for the minimum?
+
+366
+00:21:32,240 --> 00:21:34,730
+What's the natural idea?
+
+367
+00:21:34,730 --> 00:21:37,010
+Compute derivatives.
+
+368
+00:21:37,010 --> 00:21:38,810
+You've got calculus
+on your side.
+
+369
+00:21:38,810 --> 00:21:42,300
+Compute the first derivatives.
+
+370
+00:21:42,300 --> 00:21:46,550
+So the first derivatives
+with respect to x--
+
+371
+00:21:46,550 --> 00:21:50,210
+so I would compute the
+derivative with respect
+
+372
+00:21:50,210 --> 00:21:53,990
+to x, and the derivative
+of f with respect to y,
+
+373
+00:21:53,990 --> 00:21:56,990
+and 100,000 more.
+
+374
+00:21:56,990 --> 00:21:59,750
+And that takes a little while.
+
+375
+00:21:59,750 --> 00:22:01,760
+And now I've got
+the derivatives.
+
+376
+00:22:01,760 --> 00:22:02,955
+What do I do?
+
+377
+00:22:02,955 --> 00:22:03,830
+AUDIENCE: [INAUDIBLE]
+
+378
+00:22:03,830 --> 00:22:05,600
+GILBERT STRANG: I
+go-- that tells me
+
+379
+00:22:05,600 --> 00:22:07,170
+the steepest direction.
+
+380
+00:22:07,170 --> 00:22:09,500
+That tells me, at
+that point, which
+
+381
+00:22:09,500 --> 00:22:12,930
+way is the fastest way down.
+
+382
+00:22:12,930 --> 00:22:14,090
+So I would follow--
+
+383
+00:22:14,090 --> 00:22:15,890
+I would do a gradient descent.
+
+384
+00:22:15,890 --> 00:22:17,720
+I would follow that gradient.
+
+385
+00:22:17,720 --> 00:22:21,920
+This is called the gradient,
+all the first derivatives.
+
+386
+00:22:21,920 --> 00:22:24,528
+It's called the gradient of f--
+
+387
+00:22:24,528 --> 00:22:25,070
+the gradient.
+
+388
+00:22:29,950 --> 00:22:32,030
+Gradient vector-- it's
+a vector, of course,
+
+389
+00:22:32,030 --> 00:22:35,440
+because f is a function
+of lots of variables.
+
+390
+00:22:35,440 --> 00:22:39,970
+I would start down
+in that direction.
+
+391
+00:22:39,970 --> 00:22:45,230
+And how far to go, that's
+the million dollar question
+
+392
+00:22:45,230 --> 00:22:48,480
+in deep learning.
+
+393
+00:22:48,480 --> 00:22:52,210
+Is it going to hit 0?
+
+394
+00:22:52,210 --> 00:22:52,870
+Nope.
+
+395
+00:22:52,870 --> 00:22:54,400
+It's not.
+
+396
+00:22:54,400 --> 00:22:55,120
+It's not.
+
+397
+00:22:58,060 --> 00:23:02,040
+So basically, you
+go down until it--
+
+398
+00:23:04,720 --> 00:23:09,430
+so you're traveling here in
+the x, along the gradient.
+
+399
+00:23:09,430 --> 00:23:13,330
+And you're not going to hit 0.
+
+400
+00:23:13,330 --> 00:23:17,200
+You're all going here
+in some direction.
+
+401
+00:23:17,200 --> 00:23:21,940
+So you keep going down
+this thing until it--
+
+402
+00:23:21,940 --> 00:23:26,290
+oh, I'm not Rembrandt here.
+
+403
+00:23:26,290 --> 00:23:31,830
+Your path down-- think of
+yourself on a mountain.
+
+404
+00:23:31,830 --> 00:23:34,460
+You're trying to go down hill.
+
+405
+00:23:34,460 --> 00:23:36,960
+So you take-- as
+fast as you can.
+
+406
+00:23:36,960 --> 00:23:40,190
+So you take the steepest
+route down until--
+
+407
+00:23:40,190 --> 00:23:42,830
+but you have blinkers.
+
+408
+00:23:42,830 --> 00:23:47,330
+Once you decide on a direction,
+you go in that direction.
+
+409
+00:23:47,330 --> 00:23:50,900
+Of course-- so what will happen?
+
+410
+00:23:50,900 --> 00:23:52,610
+You'll go down for
+a while and then
+
+411
+00:23:52,610 --> 00:23:57,980
+it will turn up again when
+you get to, maybe, close
+
+412
+00:23:57,980 --> 00:23:59,940
+to the bottom or maybe not.
+
+413
+00:23:59,940 --> 00:24:02,270
+You're not going to hit here.
+
+414
+00:24:02,270 --> 00:24:04,760
+And it's going to
+miss that and come up.
+
+415
+00:24:04,760 --> 00:24:08,250
+Maybe I should draw it
+over here, whatever.
+
+416
+00:24:08,250 --> 00:24:16,540
+So it's called a line search,
+to decide how far to go there.
+
+417
+00:24:16,540 --> 00:24:17,655
+And then say, OK stop.
+
+418
+00:24:20,440 --> 00:24:24,190
+And you can invest a lot
+of time or a little time
+
+419
+00:24:24,190 --> 00:24:27,880
+to decide on that
+first stopping point.
+
+420
+00:24:27,880 --> 00:24:31,220
+And now just tell me,
+what do you do next?
+
+421
+00:24:31,220 --> 00:24:34,070
+So now you're here.
+
+422
+00:24:34,070 --> 00:24:36,580
+What now?
+
+423
+00:24:36,580 --> 00:24:39,520
+Recalculate the gradient.
+
+424
+00:24:39,520 --> 00:24:43,840
+Find the steepest way
+down from that point,
+
+425
+00:24:43,840 --> 00:24:47,830
+follow it until it turns
+up or approximately,
+
+426
+00:24:47,830 --> 00:24:49,160
+then you're at a new point.
+
+427
+00:24:49,160 --> 00:24:51,330
+So this is gradient descent.
+
+428
+00:24:51,330 --> 00:24:54,550
+That's gradient descent,
+the big algorithm
+
+429
+00:24:54,550 --> 00:25:00,110
+of deep learning of neural
+nets, of machine learning--
+
+430
+00:25:00,110 --> 00:25:02,440
+of optimization, you could say.
+
+431
+00:25:02,440 --> 00:25:06,150
+Notice that we didn't
+compute second derivatives.
+
+432
+00:25:06,150 --> 00:25:08,680
+If we computed
+second derivatives,
+
+433
+00:25:08,680 --> 00:25:12,640
+we could have a fancier
+formula that could
+
+434
+00:25:12,640 --> 00:25:17,410
+account for the curve here.
+
+435
+00:25:17,410 --> 00:25:19,390
+But to compute
+second derivatives
+
+436
+00:25:19,390 --> 00:25:22,380
+when you've got hundreds
+and thousands of variables
+
+437
+00:25:22,380 --> 00:25:24,620
+is not a lot of fun.
+
+438
+00:25:24,620 --> 00:25:30,010
+So most effectively,
+machine learning
+
+439
+00:25:30,010 --> 00:25:33,910
+is limited to first
+derivatives, the gradient.
+
+440
+00:25:37,150 --> 00:25:37,940
+OK.
+
+441
+00:25:37,940 --> 00:25:40,580
+So that's the general idea.
+
+442
+00:25:40,580 --> 00:25:48,850
+But there are lots and
+lots of decisions and--
+
+443
+00:25:48,850 --> 00:25:52,930
+why doesn't that-- how
+well does that work,
+
+444
+00:25:52,930 --> 00:25:56,200
+maybe, is a good
+question to ask.
+
+445
+00:25:56,200 --> 00:26:04,860
+Does this work pretty well or
+do we have to add more ideas?
+
+446
+00:26:04,860 --> 00:26:09,020
+Well, it doesn't
+always work well.
+
+447
+00:26:09,020 --> 00:26:13,370
+Let me tell you
+what the trouble is.
+
+448
+00:26:13,370 --> 00:26:20,380
+I'm way off-- this is
+March or something.
+
+449
+00:26:20,380 --> 00:26:23,840
+But anyway, I'll
+finish this sentence.
+
+450
+00:26:23,840 --> 00:26:30,590
+So what's the problem with
+this gradient descent idea?
+
+451
+00:26:30,590 --> 00:26:33,680
+It turns out, if you're
+going down a narrow valley--
+
+452
+00:26:33,680 --> 00:26:37,400
+I don't know, if you can sort
+of imagine a narrow valley
+
+453
+00:26:37,400 --> 00:26:38,900
+toward the bottom.
+
+454
+00:26:38,900 --> 00:26:42,980
+So here's the bottom.
+
+455
+00:26:42,980 --> 00:26:44,880
+Here's your starting point.
+
+456
+00:26:44,880 --> 00:26:50,510
+And this is-- you have to
+have think of this as a bowl.
+
+457
+00:26:50,510 --> 00:26:54,050
+So the bowl is--
+
+458
+00:26:54,050 --> 00:26:56,540
+or the two eigenvalues,
+you could say--
+
+459
+00:26:56,540 --> 00:26:58,700
+are 1 and a very small number.
+
+460
+00:26:58,700 --> 00:27:01,610
+The bowl is long and thin.
+
+461
+00:27:01,610 --> 00:27:02,750
+Are you with me?
+
+462
+00:27:02,750 --> 00:27:05,240
+Imagine a long, thin bowl.
+
+463
+00:27:05,240 --> 00:27:08,230
+Then what happens for that case?
+
+464
+00:27:08,230 --> 00:27:11,120
+You take the steepest descent.
+
+465
+00:27:11,120 --> 00:27:14,210
+But you cross the valley,
+and very soon, you're
+
+466
+00:27:14,210 --> 00:27:15,800
+climbing again.
+
+467
+00:27:15,800 --> 00:27:18,890
+So you take very,
+very small steps,
+
+468
+00:27:18,890 --> 00:27:24,200
+just staggering back
+and forth across this
+
+469
+00:27:24,200 --> 00:27:29,920
+and getting slowly, but too
+slowly, toward the bottom.
+
+470
+00:27:29,920 --> 00:27:35,740
+So that's why things
+have got to be improved.
+
+471
+00:27:35,740 --> 00:27:41,320
+If you have a very small
+eigenvalue and a very large
+
+472
+00:27:41,320 --> 00:27:48,160
+eigenvalue, those tell you the
+shape of the bowl, of course.
+
+473
+00:27:48,160 --> 00:27:53,440
+And many cases will
+be like that-- have
+
+474
+00:27:53,440 --> 00:27:55,510
+a small and a large eigenvalue.
+
+475
+00:27:55,510 --> 00:27:57,640
+And then you're
+spending all your time.
+
+476
+00:27:57,640 --> 00:28:01,870
+You're quickly going up the
+other side, down, up, down, up,
+
+477
+00:28:01,870 --> 00:28:02,590
+down.
+
+478
+00:28:02,590 --> 00:28:06,450
+And you need a new idea.
+
+479
+00:28:06,450 --> 00:28:10,420
+OK, so that's really--
+
+480
+00:28:10,420 --> 00:28:13,520
+so this is one major reason
+why positive definite
+
+481
+00:28:13,520 --> 00:28:16,460
+is so important because
+positive definite gives
+
+482
+00:28:16,460 --> 00:28:18,600
+pictures like that.
+
+483
+00:28:18,600 --> 00:28:20,690
+But then, we have
+this question of,
+
+484
+00:28:20,690 --> 00:28:23,630
+are the eigenvalues
+sort of the same size?
+
+485
+00:28:23,630 --> 00:28:25,790
+Of course, if the
+eigenvalues are all equal,
+
+486
+00:28:25,790 --> 00:28:28,040
+what's my bowl like?
+
+487
+00:28:28,040 --> 00:28:32,170
+Suppose I have the identity.
+
+488
+00:28:32,170 --> 00:28:36,210
+So then x squared plus y
+squared is my function.
+
+489
+00:28:36,210 --> 00:28:38,930
+Then it's a perfectly
+circular bowl.
+
+490
+00:28:38,930 --> 00:28:40,160
+What will happen?
+
+491
+00:28:40,160 --> 00:28:42,320
+Can you imagine a
+perfectly circular--
+
+492
+00:28:42,320 --> 00:28:48,710
+like any bowl in the kitchen is
+probably, most likely circular.
+
+493
+00:28:48,710 --> 00:28:51,590
+And suppose I do
+gradient descent there.
+
+494
+00:28:51,590 --> 00:28:56,600
+I start at some point on
+this perfectly circular bowl.
+
+495
+00:28:56,600 --> 00:28:57,980
+I start down.
+
+496
+00:28:57,980 --> 00:28:59,690
+And where do I
+stop in that case?
+
+497
+00:29:02,960 --> 00:29:05,630
+Do I hit bottom?
+
+498
+00:29:05,630 --> 00:29:07,205
+I do, by symmetry.
+
+499
+00:29:11,520 --> 00:29:16,900
+So if I take x squared plus
+y squared as my function
+
+500
+00:29:16,900 --> 00:29:22,250
+and I start somewhere, I
+figure out the gradient.
+
+501
+00:29:22,250 --> 00:29:22,970
+Yeah.
+
+502
+00:29:22,970 --> 00:29:25,460
+The answer is I'll go
+right through the center.
+
+503
+00:29:25,460 --> 00:29:32,960
+So really positive eigenvalues,
+positive definite matrices
+
+504
+00:29:32,960 --> 00:29:34,370
+give us a bowl.
+
+505
+00:29:34,370 --> 00:29:39,470
+But if the eigenvalues
+are far apart,
+
+506
+00:29:39,470 --> 00:29:42,050
+that's when we have problems.
+
+507
+00:29:42,050 --> 00:29:44,810
+OK.
+
+508
+00:29:44,810 --> 00:29:51,840
+I'm going back to my
+job, which is this--
+
+509
+00:29:51,840 --> 00:29:56,730
+because this is so nice.
+
+510
+00:29:56,730 --> 00:29:57,540
+Right.
+
+511
+00:29:57,540 --> 00:30:01,970
+Could you-- well,
+the homework that's
+
+512
+00:30:01,970 --> 00:30:09,350
+maybe going out this minute
+for middle of next week
+
+513
+00:30:09,350 --> 00:30:11,540
+gives you some
+exercises with this.
+
+514
+00:30:11,540 --> 00:30:20,730
+Let me do a couple of things,
+a couple of exercises here.
+
+515
+00:30:20,730 --> 00:30:25,890
+For example, suppose I have a
+positive definite matrix, S,
+
+516
+00:30:25,890 --> 00:30:31,650
+and a positive definite matrix,
+T. If I add those matrices,
+
+517
+00:30:31,650 --> 00:30:33,600
+is the result positive definite?
+
+518
+00:30:33,600 --> 00:30:37,140
+So there is a perfect
+math question,
+
+519
+00:30:37,140 --> 00:30:39,208
+and we hope to answer it.
+
+520
+00:30:41,960 --> 00:30:44,660
+So S and T--
+
+521
+00:30:44,660 --> 00:30:48,470
+positive definite.
+
+522
+00:30:48,470 --> 00:30:50,180
+What about S plus T?
+
+523
+00:30:53,720 --> 00:30:56,470
+Is that matrix
+positive definite?
+
+524
+00:30:56,470 --> 00:30:58,130
+OK.
+
+525
+00:30:58,130 --> 00:31:00,320
+How do I answer such a question?
+
+526
+00:31:00,320 --> 00:31:03,920
+I look at my five tests
+and I think, can I use it?
+
+527
+00:31:03,920 --> 00:31:06,210
+Which one will be good?
+
+528
+00:31:06,210 --> 00:31:11,150
+And one that won't tell
+me much is the eigenvalues
+
+529
+00:31:11,150 --> 00:31:14,960
+because the
+eigenvalues of S plus T
+
+530
+00:31:14,960 --> 00:31:19,970
+are not immediately clear from
+the eigenvalues of S and T
+
+531
+00:31:19,970 --> 00:31:21,260
+separately.
+
+532
+00:31:21,260 --> 00:31:23,120
+I don't want to use that test.
+
+533
+00:31:23,120 --> 00:31:26,540
+This is my favorite test,
+so I'm going to use that.
+
+534
+00:31:26,540 --> 00:31:28,790
+What about the energy in--
+
+535
+00:31:28,790 --> 00:31:30,140
+so look at the energy.
+
+536
+00:31:33,590 --> 00:31:39,860
+So I look at x
+transpose, S plus T x.
+
+537
+00:31:39,860 --> 00:31:43,200
+And what's my question
+in my mind here?
+
+538
+00:31:43,200 --> 00:31:48,300
+Is that a positive number
+or not, for every x?
+
+539
+00:31:48,300 --> 00:31:50,340
+And how am I going to
+answer that question?
+
+540
+00:31:53,200 --> 00:31:56,320
+Just separate those
+into two pieces, right?
+
+541
+00:31:56,320 --> 00:31:58,270
+It's there in front of me.
+
+542
+00:31:58,270 --> 00:32:00,880
+It's this one plus this one.
+
+543
+00:32:04,630 --> 00:32:08,380
+And both of those are positive,
+so the answer is yes, it
+
+544
+00:32:08,380 --> 00:32:09,530
+is positive definite.
+
+545
+00:32:09,530 --> 00:32:10,030
+Yes.
+
+546
+00:32:15,110 --> 00:32:17,870
+You see how the
+energy was right.
+
+547
+00:32:17,870 --> 00:32:21,530
+I don't want to compute the
+pivots or any determinants.
+
+548
+00:32:21,530 --> 00:32:26,180
+That would be a nightmare trying
+to find the determinants for S
+
+549
+00:32:26,180 --> 00:32:32,690
+plus T. But this one
+just does it immediately.
+
+550
+00:32:32,690 --> 00:32:36,380
+What else would be a good
+example to start with?
+
+551
+00:32:36,380 --> 00:32:38,240
+What about S inverse?
+
+552
+00:32:38,240 --> 00:32:40,260
+Is that positive definite?
+
+553
+00:32:40,260 --> 00:32:44,660
+So let me ask S
+positive definite,
+
+554
+00:32:44,660 --> 00:32:47,310
+and I want to ask
+about its inverse.
+
+555
+00:32:47,310 --> 00:32:49,175
+So its inverse is
+a symmetric matrix.
+
+556
+00:32:51,770 --> 00:32:56,990
+And is it positive definite?
+
+557
+00:32:56,990 --> 00:33:00,170
+And the answer-- yes.
+
+558
+00:33:00,170 --> 00:33:01,790
+Yes.
+
+559
+00:33:01,790 --> 00:33:07,630
+I've got five tests, 20% chance
+at picking the right one.
+
+560
+00:33:07,630 --> 00:33:11,220
+Determinants is not good.
+
+561
+00:33:11,220 --> 00:33:13,520
+The first one is great.
+
+562
+00:33:13,520 --> 00:33:16,970
+The first one is the good
+one for this question
+
+563
+00:33:16,970 --> 00:33:18,650
+because the eigenvalues.
+
+564
+00:33:18,650 --> 00:33:21,200
+So the answer is yes.
+
+565
+00:33:21,200 --> 00:33:26,890
+Yes, this has-- eigenvalues.
+
+566
+00:33:26,890 --> 00:33:30,520
+So what are the
+eigenvalues of S inverse?
+
+567
+00:33:30,520 --> 00:33:32,810
+1 over lambda?
+
+568
+00:33:32,810 --> 00:33:37,946
+So-- yes, positive
+definite, positive definite.
+
+569
+00:33:45,400 --> 00:33:47,680
+Yep.
+
+570
+00:33:47,680 --> 00:33:51,070
+What about-- let me
+ask you just one more
+
+571
+00:33:51,070 --> 00:33:54,000
+question of the same sort.
+
+572
+00:33:54,000 --> 00:34:00,250
+Suppose I have a matrix, S,
+and suppose I multiply it
+
+573
+00:34:00,250 --> 00:34:03,440
+by another matrix.
+
+574
+00:34:03,440 --> 00:34:03,940
+Oh, well.
+
+575
+00:34:03,940 --> 00:34:05,510
+OK.
+
+576
+00:34:05,510 --> 00:34:12,860
+Suppose-- do I want
+to ask you this?
+
+577
+00:34:12,860 --> 00:34:19,060
+Suppose I asked you about
+S times another matrix,
+
+578
+00:34:19,060 --> 00:34:29,010
+M. Would that be
+positive definite or not?
+
+579
+00:34:29,010 --> 00:34:31,980
+Now I'm going to
+tell you the answer
+
+580
+00:34:31,980 --> 00:34:35,880
+is that the question wasn't
+any good because that matrix is
+
+581
+00:34:35,880 --> 00:34:39,000
+probably not symmetric,
+and I'm only dealing
+
+582
+00:34:39,000 --> 00:34:40,860
+with symmetric matrices.
+
+583
+00:34:40,860 --> 00:34:45,090
+Matrices have to be
+symmetric before I
+
+584
+00:34:45,090 --> 00:34:50,400
+know they have real eigenvalues
+and I can ask these questions.
+
+585
+00:34:50,400 --> 00:34:52,050
+So that's not good.
+
+586
+00:34:52,050 --> 00:34:55,664
+But I could-- oh, let's see.
+
+587
+00:34:58,830 --> 00:35:02,010
+Let me put it in
+an orthogonal guy.
+
+588
+00:35:02,010 --> 00:35:03,810
+Well, still that's
+not symmetric.
+
+589
+00:35:03,810 --> 00:35:06,470
+But if I put the--
+
+590
+00:35:06,470 --> 00:35:07,950
+it's transpose over there.
+
+591
+00:35:07,950 --> 00:35:10,530
+Then I made it symmetric.
+
+592
+00:35:10,530 --> 00:35:14,370
+Oh, dear, I may be getting
+myself in trouble here.
+
+593
+00:35:14,370 --> 00:35:17,490
+So I'm starting with
+a positive definite S.
+
+594
+00:35:17,490 --> 00:35:19,620
+I'm hitting it with
+an orthogonal matrix
+
+595
+00:35:19,620 --> 00:35:21,120
+and its transpose.
+
+596
+00:35:21,120 --> 00:35:25,080
+And my instinct carried
+me here because I know
+
+597
+00:35:25,080 --> 00:35:26,560
+that that's still symmetric.
+
+598
+00:35:26,560 --> 00:35:27,060
+Right?
+
+599
+00:35:27,060 --> 00:35:28,470
+Everybody sees that?
+
+600
+00:35:28,470 --> 00:35:32,430
+If I transpose this, Q
+transpose will come here,
+
+601
+00:35:32,430 --> 00:35:34,300
+S, Q will go there.
+
+602
+00:35:34,300 --> 00:35:37,390
+It'll be symmetric.
+
+603
+00:35:37,390 --> 00:35:41,880
+Now is that positive definite?
+
+604
+00:35:41,880 --> 00:35:42,960
+Ah, yes.
+
+605
+00:35:42,960 --> 00:35:46,335
+We can answer that.
+
+606
+00:35:46,335 --> 00:35:47,920
+Can we?
+
+607
+00:35:47,920 --> 00:35:49,760
+Is that positive definite?
+
+608
+00:35:49,760 --> 00:35:52,430
+So remember that this
+is an orthogonal matrix,
+
+609
+00:35:52,430 --> 00:35:55,930
+so also, if you wanted me to
+write it that way, I could.
+
+610
+00:35:59,150 --> 00:36:02,060
+And what about
+positive-definiteness
+
+611
+00:36:02,060 --> 00:36:02,970
+of that thing?
+
+612
+00:36:08,420 --> 00:36:10,100
+Answer, I think, is yes.
+
+613
+00:36:10,100 --> 00:36:12,090
+Do you agree?
+
+614
+00:36:12,090 --> 00:36:14,070
+It is positive definite?
+
+615
+00:36:14,070 --> 00:36:16,050
+Give me a reason, though.
+
+616
+00:36:16,050 --> 00:36:18,530
+Why is this positive definite?
+
+617
+00:36:21,190 --> 00:36:27,710
+So that word similar, this
+is a similar matrix to S?
+
+618
+00:36:27,710 --> 00:36:30,700
+Do you remember what similar
+means from last time?
+
+619
+00:36:30,700 --> 00:36:33,250
+It means that sum
+M and its inverse
+
+620
+00:36:33,250 --> 00:36:35,860
+are here, which they are.
+
+621
+00:36:35,860 --> 00:36:41,080
+And so what's the
+consequence of being similar?
+
+622
+00:36:41,080 --> 00:36:44,470
+What do I know about a
+matrix that's similar to S?
+
+623
+00:36:44,470 --> 00:36:44,977
+It has--
+
+624
+00:36:44,977 --> 00:36:46,060
+AUDIENCE: Same [INAUDIBLE]
+
+625
+00:36:46,060 --> 00:36:47,435
+GILBERT STRANG:
+Same eigenvalues.
+
+626
+00:36:47,435 --> 00:36:49,990
+And therefore, we're good.
+
+627
+00:36:49,990 --> 00:36:50,800
+Right?
+
+628
+00:36:50,800 --> 00:36:54,580
+Or I could go this way.
+
+629
+00:36:54,580 --> 00:36:57,400
+I like energy, so
+let me try that one.
+
+630
+00:36:57,400 --> 00:37:04,060
+x transpose, Q transpose, SQx--
+
+631
+00:37:04,060 --> 00:37:06,310
+that would be the energy.
+
+632
+00:37:06,310 --> 00:37:08,020
+And what am I trying to show?
+
+633
+00:37:08,020 --> 00:37:10,270
+I'm trying to show
+it's positive.
+
+634
+00:37:10,270 --> 00:37:16,180
+So, of course, as
+soon as I see that,
+
+635
+00:37:16,180 --> 00:37:20,500
+it's just waiting for me to--
+
+636
+00:37:20,500 --> 00:37:24,760
+let Qx be something
+called y, maybe.
+
+637
+00:37:24,760 --> 00:37:26,092
+And then what will this be?
+
+638
+00:37:26,092 --> 00:37:27,050
+AUDIENCE: y [INAUDIBLE]
+
+639
+00:37:27,050 --> 00:37:29,800
+GILBERT STRANG: y transpose.
+
+640
+00:37:29,800 --> 00:37:36,850
+So this energy would be the
+same as y transpose, Sy.
+
+641
+00:37:36,850 --> 00:37:39,400
+And what do I know about that?
+
+642
+00:37:39,400 --> 00:37:43,530
+It's positive because
+that's an energy in the y,
+
+643
+00:37:43,530 --> 00:37:45,390
+for the y vector.
+
+644
+00:37:45,390 --> 00:37:49,740
+So one way or another,
+we get the answer yes
+
+645
+00:37:49,740 --> 00:37:51,774
+to that question.
+
+646
+00:37:51,774 --> 00:37:53,659
+OK.
+
+647
+00:37:53,659 --> 00:37:54,159
+OK.
+
+648
+00:37:57,980 --> 00:38:06,350
+Let me introduce the
+idea of semidefinite.
+
+649
+00:38:06,350 --> 00:38:09,450
+Semidefinite is the borderline.
+
+650
+00:38:09,450 --> 00:38:10,820
+So what did we have?
+
+651
+00:38:10,820 --> 00:38:13,400
+We had 3, 4, 4.
+
+652
+00:38:13,400 --> 00:38:18,120
+And then when it was 5,
+you told me indefinite,
+
+653
+00:38:18,120 --> 00:38:19,960
+a negative eigenvalue.
+
+654
+00:38:19,960 --> 00:38:24,460
+When it was 6, you told me
+2 positive eigenvalues--
+
+655
+00:38:24,460 --> 00:38:25,510
+definite.
+
+656
+00:38:25,510 --> 00:38:28,510
+What's the borderline?
+
+657
+00:38:28,510 --> 00:38:29,880
+What's the borderline there?
+
+658
+00:38:32,680 --> 00:38:35,440
+It's not going to be an integer.
+
+659
+00:38:35,440 --> 00:38:36,410
+What do I mean?
+
+660
+00:38:36,410 --> 00:38:38,222
+What am I looking
+for, the borderline?
+
+661
+00:38:43,110 --> 00:38:44,220
+So tell me again?
+
+662
+00:38:44,220 --> 00:38:45,120
+AUDIENCE: 16 over--
+
+663
+00:38:45,120 --> 00:38:48,960
+GILBERT STRANG: 16/3,
+that sounds right.
+
+664
+00:38:48,960 --> 00:38:50,760
+Why is that the borderline?
+
+665
+00:38:50,760 --> 00:38:52,200
+AUDIENCE: [INAUDIBLE]
+
+666
+00:38:52,200 --> 00:38:54,540
+GILBERT STRANG: Because
+now the determinant is--
+
+667
+00:38:54,540 --> 00:38:55,280
+AUDIENCE: 0.
+
+668
+00:38:55,280 --> 00:38:56,030
+GILBERT STRANG: 0.
+
+669
+00:38:56,030 --> 00:38:56,760
+It's singular.
+
+670
+00:38:56,760 --> 00:38:59,550
+It has a 0 eigenvalue.
+
+671
+00:38:59,550 --> 00:39:00,870
+There's a 0 eigenvalue.
+
+672
+00:39:00,870 --> 00:39:03,270
+So that's what
+semidefinite means.
+
+673
+00:39:03,270 --> 00:39:05,730
+Lambdas are equal to 0.
+
+674
+00:39:05,730 --> 00:39:06,780
+Wait a minute.
+
+675
+00:39:06,780 --> 00:39:10,620
+That has a 0 eigenvalue
+because it's determinant is 0.
+
+676
+00:39:10,620 --> 00:39:15,120
+How do I know that the other
+eigenvalue is positive?
+
+677
+00:39:15,120 --> 00:39:17,730
+Could it be that the
+other ei-- so this
+
+678
+00:39:17,730 --> 00:39:23,380
+is the semidefinite
+case we hope.
+
+679
+00:39:23,380 --> 00:39:27,710
+But we'd better
+finish that reasoning.
+
+680
+00:39:27,710 --> 00:39:31,040
+How do I know that the other
+eigenvalue is positive?
+
+681
+00:39:31,040 --> 00:39:32,340
+AUDIENCE: Trace.
+
+682
+00:39:32,340 --> 00:39:35,330
+GILBERT STRANG: The
+trace, because adding
+
+683
+00:39:35,330 --> 00:39:38,900
+3 plus 16/3, whatever
+the heck that might give,
+
+684
+00:39:38,900 --> 00:39:41,480
+it certainly gives
+a positive number.
+
+685
+00:39:41,480 --> 00:39:44,650
+And that will be
+lambda 1 plus lambda 2.
+
+686
+00:39:44,650 --> 00:39:45,980
+That's the trace.
+
+687
+00:39:45,980 --> 00:39:48,200
+But lambda 2 is 0.
+
+688
+00:39:48,200 --> 00:39:50,210
+We know from this it's singular.
+
+689
+00:39:50,210 --> 00:39:51,830
+So we know lambda 2 is 0.
+
+690
+00:39:51,830 --> 00:39:55,870
+So lambda 1 must be 3 plus 5--
+
+691
+00:39:55,870 --> 00:39:57,910
+5 and 1/3.
+
+692
+00:39:57,910 --> 00:40:06,070
+The lambdas must be 8 and
+1/3, 3 plus 5 and 1/3, and 0.
+
+693
+00:40:06,070 --> 00:40:11,350
+So that's a positive
+semidefinite.
+
+694
+00:40:11,350 --> 00:40:14,050
+If you think of the
+positive definite matrices
+
+695
+00:40:14,050 --> 00:40:20,710
+as some clump in matrix space,
+then the positive semidefinite
+
+696
+00:40:20,710 --> 00:40:23,320
+definite ones are sort of
+the edge of that clump.
+
+697
+00:40:23,320 --> 00:40:25,390
+There the boundary of
+the clump, the ones
+
+698
+00:40:25,390 --> 00:40:31,210
+that are not quite inside
+but not outside either.
+
+699
+00:40:31,210 --> 00:40:37,600
+They're lying right on the edge
+of positive definite matrices.
+
+700
+00:40:37,600 --> 00:40:38,800
+Let me just take a--
+
+701
+00:40:41,420 --> 00:40:45,510
+so what about a
+matrix of all 1s?
+
+702
+00:40:49,200 --> 00:40:54,060
+What's the story on that
+one-- positive definite, all
+
+703
+00:40:54,060 --> 00:40:58,470
+the numbers are positive,
+or positive semidefinite,
+
+704
+00:40:58,470 --> 00:40:59,840
+or indefinite?
+
+705
+00:40:59,840 --> 00:41:02,070
+What do you think here?
+
+706
+00:41:02,070 --> 00:41:05,270
+1-1, all 1.
+
+707
+00:41:05,270 --> 00:41:06,150
+AUDIENCE: Semi--
+
+708
+00:41:06,150 --> 00:41:09,790
+GILBERT STRANG: Semidefinite
+sounds like a good guess.
+
+709
+00:41:09,790 --> 00:41:13,620
+Do you know what the eigenvalues
+of this matrix would be?
+
+710
+00:41:13,620 --> 00:41:16,110
+AUDIENCE: 0 [INAUDIBLE]
+
+711
+00:41:16,110 --> 00:41:20,280
+GILBERT STRANG: 3, 0, and
+0-- why did you say that?
+
+712
+00:41:20,280 --> 00:41:22,110
+AUDIENCE: Because 2 [INAUDIBLE]
+
+713
+00:41:22,110 --> 00:41:24,360
+GILBERT STRANG: Because we
+only have-- the rank is?
+
+714
+00:41:24,360 --> 00:41:24,867
+AUDIENCE: 1.
+
+715
+00:41:24,867 --> 00:41:26,700
+GILBERT STRANG: Yeah,
+we introduced that key
+
+716
+00:41:26,700 --> 00:41:29,190
+where the rank is 1.
+
+717
+00:41:29,190 --> 00:41:32,750
+So there's only one
+nonzero eigenvalue.
+
+718
+00:41:32,750 --> 00:41:37,320
+And then the trace tells
+me that number is 3.
+
+719
+00:41:37,320 --> 00:41:43,700
+So this is a positive
+semidefinite matrix.
+
+720
+00:41:43,700 --> 00:41:51,650
+So all these tests change
+a little for semidefinite.
+
+721
+00:41:51,650 --> 00:41:55,310
+The eigenvalue is
+greater or equal to 0.
+
+722
+00:41:55,310 --> 00:41:58,520
+The energy is greater
+or equal to 0.
+
+723
+00:41:58,520 --> 00:42:01,320
+The A transpose A-- but
+now I don't require--
+
+724
+00:42:01,320 --> 00:42:03,710
+oh, I didn't discuss this.
+
+725
+00:42:03,710 --> 00:42:07,010
+But semidefinite would
+allow dependent columns.
+
+726
+00:42:07,010 --> 00:42:10,430
+By the way, you've
+got to do this for me.
+
+727
+00:42:10,430 --> 00:42:14,000
+Write that matrix as A
+transpose times A just
+
+728
+00:42:14,000 --> 00:42:19,275
+to see that it's
+semidefinite because--
+
+729
+00:42:22,720 --> 00:42:29,090
+so write that as A
+transpose A. Yeah.
+
+730
+00:42:29,090 --> 00:42:32,840
+If it's a rank 1 matrix, you
+know what it must look like.
+
+731
+00:42:37,280 --> 00:42:41,460
+A transpose A, how many terms
+am I going to have in this?
+
+732
+00:42:41,460 --> 00:42:45,590
+And now I'm thinking back to the
+very beginning of this course
+
+733
+00:42:45,590 --> 00:42:49,350
+if I pulled off the pieces.
+
+734
+00:42:49,350 --> 00:42:55,740
+In general, this is lambda 1
+times the first eigenvector,
+
+735
+00:42:55,740 --> 00:42:58,140
+times the first
+eigenvector transposed.
+
+736
+00:42:58,140 --> 00:43:00,690
+AUDIENCE: Would it just
+be a vector of three 1s?
+
+737
+00:43:00,690 --> 00:43:03,350
+GILBERT STRANG: Yeah, it would
+just be a vector of three 1s.
+
+738
+00:43:03,350 --> 00:43:03,850
+Yeah.
+
+739
+00:43:03,850 --> 00:43:10,380
+So this would be
+the usual picture.
+
+740
+00:43:10,380 --> 00:43:15,810
+This is the same as the
+Q lambda, Q transpose.
+
+741
+00:43:15,810 --> 00:43:20,220
+This is the big fact for
+any symmetric matrix.
+
+742
+00:43:20,220 --> 00:43:27,390
+And this is symmetric,
+but its rank is only 1,
+
+743
+00:43:27,390 --> 00:43:33,570
+so that lambda 2 is
+0 for that matrix.
+
+744
+00:43:33,570 --> 00:43:35,820
+Lambda 3 is 0 for that matrix.
+
+745
+00:43:35,820 --> 00:43:40,200
+And the one eigenvector
+is the vector 1-1-1.
+
+746
+00:43:40,200 --> 00:43:45,090
+And the eigen-- so this
+would be 3 times 1-1-1.
+
+747
+00:43:45,090 --> 00:43:48,250
+Oh, I have to do--
+
+748
+00:43:48,250 --> 00:43:49,270
+yeah.
+
+749
+00:43:49,270 --> 00:43:54,130
+So I was going to do 3
+times 1-1-1, times 1-1-1.
+
+750
+00:43:57,450 --> 00:44:00,950
+But that gives me 3-3-3.
+
+751
+00:44:00,950 --> 00:44:02,405
+That's not right.
+
+752
+00:44:02,405 --> 00:44:03,850
+AUDIENCE: Normalize them.
+
+753
+00:44:03,850 --> 00:44:05,558
+GILBERT STRANG: I have
+to normalize them.
+
+754
+00:44:05,558 --> 00:44:06,210
+That's right.
+
+755
+00:44:06,210 --> 00:44:06,710
+Yeah.
+
+756
+00:44:06,710 --> 00:44:09,510
+So that's a vector whose
+length is the square root of 3.
+
+757
+00:44:09,510 --> 00:44:13,800
+So I have to divide by
+that, and divide by it.
+
+758
+00:44:13,800 --> 00:44:16,500
+And then the 3 cancels
+the square root of 3s,
+
+759
+00:44:16,500 --> 00:44:20,110
+and I'm just left
+with 1-1-1, 1-1-1.
+
+760
+00:44:20,110 --> 00:44:20,610
+Yeah.
+
+761
+00:44:20,610 --> 00:44:23,040
+AUDIENCE: [INAUDIBLE]
+
+762
+00:44:23,040 --> 00:44:25,810
+GILBERT STRANG: So
+there is a matrix--
+
+763
+00:44:25,810 --> 00:44:29,260
+one of our building-block
+type matrices because it only
+
+764
+00:44:29,260 --> 00:44:32,910
+has one nonzero eigenvalue.
+
+765
+00:44:32,910 --> 00:44:36,780
+Its rank is 1, so it could
+not be positive definite.
+
+766
+00:44:36,780 --> 00:44:39,310
+It's singular.
+
+767
+00:44:39,310 --> 00:44:44,110
+But it is positive semidefinite
+because that eigenvalue
+
+768
+00:44:44,110 --> 00:44:46,380
+is positive.
+
+769
+00:44:46,380 --> 00:44:48,360
+OK.
+
+770
+00:44:48,360 --> 00:44:54,090
+So you've got the idea of
+positive definite matrices.
+
+771
+00:44:54,090 --> 00:44:57,780
+Again, any one of
+those five tests
+
+772
+00:44:57,780 --> 00:45:01,260
+is enough to show that
+it's positive definite.
+
+773
+00:45:01,260 --> 00:45:05,580
+And so what's my goal next week?
+
+774
+00:45:05,580 --> 00:45:08,970
+It's the singular value
+decomposition and all
+
+775
+00:45:08,970 --> 00:45:11,520
+that that leads us to.
+
+776
+00:45:11,520 --> 00:45:17,880
+We're there now,
+ready for the SVD.
+
+777
+00:45:17,880 --> 00:45:18,480
+OK.
+
+778
+00:45:18,480 --> 00:45:20,700
+Have a good weekend,
+and see you--
+
+779
+00:45:20,700 --> 00:45:22,680
+oh, I see you on
+Tuesday, I guess.
+
+780
+00:45:22,680 --> 00:45:27,440
+Right-- not Monday
+but Tuesday next week.

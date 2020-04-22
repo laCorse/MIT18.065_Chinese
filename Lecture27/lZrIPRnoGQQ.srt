@@ -1,0 +1,3559 @@
+1
+00:00:01,550 --> 00:00:03,920
+The following content is
+provided under a Creative
+
+2
+00:00:03,920 --> 00:00:05,310
+Commons license.
+
+3
+00:00:05,310 --> 00:00:07,520
+Your support will help
+MIT OpenCourseWare
+
+4
+00:00:07,520 --> 00:00:11,610
+continue to offer high-quality
+educational resources for free.
+
+5
+00:00:11,610 --> 00:00:14,180
+To make a donation or to
+view additional materials
+
+6
+00:00:14,180 --> 00:00:18,140
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:18,140 --> 00:00:19,026
+at ocw.mit.edu.
+
+8
+00:00:22,870 --> 00:00:25,590
+GILBERT STRANG: OK, here we go.
+
+9
+00:00:25,590 --> 00:00:29,250
+All set, and two
+topics for today--
+
+10
+00:00:29,250 --> 00:00:34,800
+one is to go back to
+Professor Sra's lecture.
+
+11
+00:00:34,800 --> 00:00:37,410
+That was last Friday.
+
+12
+00:00:37,410 --> 00:00:41,110
+And he promised a
+theorem and proof.
+
+13
+00:00:41,110 --> 00:00:45,180
+And this morning,
+he sent it to me.
+
+14
+00:00:45,180 --> 00:00:51,660
+So it's proving the convergence
+of stochastic gradient descent.
+
+15
+00:00:51,660 --> 00:00:54,240
+And really, what's
+important, maybe,
+
+16
+00:00:54,240 --> 00:00:58,590
+and useful is not so much
+the details of the proof,
+
+17
+00:00:58,590 --> 00:01:03,700
+which I'm just learning,
+but the assumptions--
+
+18
+00:01:03,700 --> 00:01:05,580
+what's the logic
+here, what do you
+
+19
+00:01:05,580 --> 00:01:10,740
+have to assume about
+the gradient and about
+
+20
+00:01:10,740 --> 00:01:14,970
+the algorithm to get the answer?
+
+21
+00:01:14,970 --> 00:01:22,920
+But now I actually look back
+at the video of his lecture.
+
+22
+00:01:22,920 --> 00:01:25,860
+And it was excellent.
+
+23
+00:01:25,860 --> 00:01:29,970
+And as I looked at it, there
+were a couple of things
+
+24
+00:01:29,970 --> 00:01:33,420
+later in the lecture
+that I thought
+
+25
+00:01:33,420 --> 00:01:35,340
+would make good projects.
+
+26
+00:01:35,340 --> 00:01:37,590
+So I don't know if
+anybody is still
+
+27
+00:01:37,590 --> 00:01:40,920
+open to what to do on a project.
+
+28
+00:01:40,920 --> 00:01:44,220
+But here are my two ideas.
+
+29
+00:01:44,220 --> 00:01:47,280
+And if you've already
+finished your project,
+
+30
+00:01:47,280 --> 00:01:53,640
+well, you get an A-plus by
+considering one of these.
+
+31
+00:01:53,640 --> 00:01:56,010
+So you remember-- and
+this will remind you
+
+32
+00:01:56,010 --> 00:01:59,170
+of the lecture, which
+is a good thing.
+
+33
+00:01:59,170 --> 00:02:03,630
+So do you remember that
+question 1 was whether,
+
+34
+00:02:03,630 --> 00:02:10,289
+in the stochastic part, after
+you've sampled one or some mini
+
+35
+00:02:10,289 --> 00:02:16,170
+batch-- but let's just say
+one of the lost functions,
+
+36
+00:02:16,170 --> 00:02:17,800
+coming from one sample--
+
+37
+00:02:17,800 --> 00:02:22,860
+you remember, the whole point
+is that if we do all zillion
+
+38
+00:02:22,860 --> 00:02:27,400
+samples at every iteration,
+we're really, really slow.
+
+39
+00:02:27,400 --> 00:02:31,170
+So the stochastic idea
+is to randomly pick
+
+40
+00:02:31,170 --> 00:02:35,900
+one or a mini batch
+of the samples
+
+41
+00:02:35,900 --> 00:02:41,790
+and just reduce their loss,
+just deal with the loss--
+
+42
+00:02:41,790 --> 00:02:43,440
+say, the square loss.
+
+43
+00:02:43,440 --> 00:02:46,980
+Or later we'll see
+cross-entropy loss.
+
+44
+00:02:46,980 --> 00:02:54,240
+But whatever the cost
+is, just do a few or one.
+
+45
+00:02:54,240 --> 00:02:57,490
+And then the question was,
+after you've done that one,
+
+46
+00:02:57,490 --> 00:03:01,350
+do you put it back
+in the pot every time
+
+47
+00:03:01,350 --> 00:03:04,380
+you sample over the
+whole collection?
+
+48
+00:03:04,380 --> 00:03:06,810
+But that's expensive.
+
+49
+00:03:06,810 --> 00:03:15,060
+Or do you just make a list of
+random order of all the samples
+
+50
+00:03:15,060 --> 00:03:17,290
+and go through them?
+
+51
+00:03:17,290 --> 00:03:20,350
+Which is then without
+replacement, which
+
+52
+00:03:20,350 --> 00:03:22,840
+is a sort of semi-illegal.
+
+53
+00:03:22,840 --> 00:03:31,780
+That is, the logic
+in the randomization
+
+54
+00:03:31,780 --> 00:03:34,360
+asks you to replace every time.
+
+55
+00:03:34,360 --> 00:03:36,620
+But nobody does it.
+
+56
+00:03:36,620 --> 00:03:38,020
+It costs a lot--
+
+57
+00:03:38,020 --> 00:03:39,670
+probably not worth it.
+
+58
+00:03:39,670 --> 00:03:43,870
+So the project would be,
+suppose you take 1,000--
+
+59
+00:03:43,870 --> 00:03:46,290
+or, say, just 100.
+
+60
+00:03:46,290 --> 00:03:54,305
+100 random numbers--
+say you use MATLAB, just
+
+61
+00:03:54,305 --> 00:03:56,240
+the command "rand."
+
+62
+00:03:56,240 --> 00:04:00,540
+So you get numbers whose
+average is a half from rand.
+
+63
+00:04:00,540 --> 00:04:02,750
+They're between 0 and 1.
+
+64
+00:04:02,750 --> 00:04:03,250
+OK.
+
+65
+00:04:03,250 --> 00:04:06,320
+So we know what the average is.
+
+66
+00:04:06,320 --> 00:04:08,880
+So let's compute it two ways.
+
+67
+00:04:08,880 --> 00:04:13,130
+One is by not replacing.
+
+68
+00:04:13,130 --> 00:04:16,800
+And that's the interesting one.
+
+69
+00:04:16,800 --> 00:04:19,700
+So take 100 samples.
+
+70
+00:04:19,700 --> 00:04:22,280
+Well, I guess we know
+that, after we've
+
+71
+00:04:22,280 --> 00:04:25,790
+got through the full
+100, we're going to get
+
+72
+00:04:25,790 --> 00:04:27,740
+exactly the right answer.
+
+73
+00:04:27,740 --> 00:04:34,460
+But anyway, my question would
+be, how much difference do you
+
+74
+00:04:34,460 --> 00:04:40,220
+see in the eventual approach--
+so the law of large numbers,
+
+75
+00:04:40,220 --> 00:04:43,160
+I guess, would tell
+us we get a average
+
+76
+00:04:43,160 --> 00:04:50,820
+of a half for these numbers
+with uniform distribution
+
+77
+00:04:50,820 --> 00:04:51,930
+between 0 and 1.
+
+78
+00:04:51,930 --> 00:04:54,000
+Should I be writing
+anything here?
+
+79
+00:04:54,000 --> 00:04:55,540
+Maybe I should.
+
+80
+00:04:55,540 --> 00:04:56,370
+OK.
+
+81
+00:04:56,370 --> 00:04:58,740
+So this is project 1.
+
+82
+00:05:02,930 --> 00:05:13,110
+You pick numbers ak,
+which is from rand--
+
+83
+00:05:13,110 --> 00:05:22,470
+so uniformly on 0,1.
+
+84
+00:05:22,470 --> 00:05:25,350
+And then my question is,
+what about convergence
+
+85
+00:05:25,350 --> 00:05:29,310
+to the final--
+
+86
+00:05:29,310 --> 00:05:32,080
+the average is a half.
+
+87
+00:05:32,080 --> 00:05:35,100
+So this may be too
+simple an example.
+
+88
+00:05:35,100 --> 00:05:39,330
+But could we see what
+happens for the convergence
+
+89
+00:05:39,330 --> 00:05:46,590
+of the average as you either
+do replacements or don't
+
+90
+00:05:46,590 --> 00:05:48,030
+do replacements?
+
+91
+00:05:48,030 --> 00:05:53,010
+And in fact, I would like
+to see a figure that looks
+
+92
+00:05:53,010 --> 00:05:54,405
+like those in his lecture.
+
+93
+00:05:54,405 --> 00:05:55,880
+Do you remember?
+
+94
+00:05:55,880 --> 00:05:58,470
+He started it somewhere--
+
+95
+00:05:58,470 --> 00:06:03,095
+start-- and then
+here's the finish.
+
+96
+00:06:05,730 --> 00:06:08,500
+But you remember, the
+stochastic gradient descent
+
+97
+00:06:08,500 --> 00:06:11,620
+was kind of pretty
+effective at the beginning.
+
+98
+00:06:11,620 --> 00:06:14,410
+Well, the beginning,
+those might be 100
+
+99
+00:06:14,410 --> 00:06:20,960
+iterations each-- one epoch,
+one run through the full number.
+
+100
+00:06:20,960 --> 00:06:23,830
+But then when it got
+to here, got closer,
+
+101
+00:06:23,830 --> 00:06:27,180
+it started oscillating.
+
+102
+00:06:27,180 --> 00:06:30,930
+You remember, he identified
+the region of confusion
+
+103
+00:06:30,930 --> 00:06:33,790
+around the thing.
+
+104
+00:06:33,790 --> 00:06:38,010
+Well, my suggestion
+is just, I think
+
+105
+00:06:38,010 --> 00:06:40,920
+those videos should be
+accessible to you on--
+
+106
+00:06:40,920 --> 00:06:43,140
+are they on Stellar?
+
+107
+00:06:43,140 --> 00:06:43,710
+Yeah.
+
+108
+00:06:43,710 --> 00:06:54,270
+So I'd love to see that
+behavior and some good examples
+
+109
+00:06:54,270 --> 00:06:56,510
+of that behavior and
+some pictures to you.
+
+110
+00:06:56,510 --> 00:06:59,730
+So that would be one
+idea with and with--
+
+111
+00:06:59,730 --> 00:07:03,840
+oh, yeah, that's also idea 2.
+
+112
+00:07:03,840 --> 00:07:07,830
+Idea 2 is the good
+start and then
+
+113
+00:07:07,830 --> 00:07:12,560
+the bad finish for a
+stochastic gradient descent.
+
+114
+00:07:12,560 --> 00:07:17,970
+And of course,
+even without this,
+
+115
+00:07:17,970 --> 00:07:25,170
+the magic words in computations
+is "early stopping."
+
+116
+00:07:25,170 --> 00:07:29,360
+We don't over-fit.
+
+117
+00:07:35,330 --> 00:07:38,810
+So we wanted to
+stop early, anyway.
+
+118
+00:07:38,810 --> 00:07:44,850
+And early stopping
+just is a good idea
+
+119
+00:07:44,850 --> 00:07:51,230
+if that's what the
+approach to the x
+
+120
+00:07:51,230 --> 00:07:53,400
+star that you're looking for.
+
+121
+00:07:53,400 --> 00:07:57,170
+This would be the
+place where the--
+
+122
+00:07:57,170 --> 00:08:05,040
+that's x star where
+grad f at x star is 0.
+
+123
+00:08:05,040 --> 00:08:07,280
+That's the minimum point.
+
+124
+00:08:07,280 --> 00:08:14,900
+That's ARG MIN-- exactly
+what we're looking for.
+
+125
+00:08:14,900 --> 00:08:17,450
+And we don't find it very well.
+
+126
+00:08:17,450 --> 00:08:20,090
+But we get close to it fast.
+
+127
+00:08:20,090 --> 00:08:21,800
+OK.
+
+128
+00:08:21,800 --> 00:08:25,520
+Two ideas on projects--
+
+129
+00:08:25,520 --> 00:08:31,630
+so maybe I'll go to the
+main topic of today--
+
+130
+00:08:31,630 --> 00:08:35,299
+the topic I promised--
+
+131
+00:08:35,299 --> 00:08:39,100
+the idea of back propagation.
+
+132
+00:08:39,100 --> 00:08:48,600
+This is all to compute grad f--
+
+133
+00:08:48,600 --> 00:08:50,130
+the gradient.
+
+134
+00:08:50,130 --> 00:09:02,460
+All the derivatives-- this
+is the df dx1 to df dxm,
+
+135
+00:09:02,460 --> 00:09:14,730
+maybe, I'll say, where I have
+m features for the sample.
+
+136
+00:09:14,730 --> 00:09:15,690
+OK.
+
+137
+00:09:15,690 --> 00:09:17,645
+So that's back propagation.
+
+138
+00:09:17,645 --> 00:09:25,050
+And that's the thing whose
+discovery, or rediscovery,
+
+139
+00:09:25,050 --> 00:09:29,270
+put neural nets on the map.
+
+140
+00:09:29,270 --> 00:09:32,510
+That's the key calculation, of
+course, to find the gradient.
+
+141
+00:09:32,510 --> 00:09:34,610
+In the steepest
+descent algorithm,
+
+142
+00:09:34,610 --> 00:09:38,030
+every step needs a gradient.
+
+143
+00:09:38,030 --> 00:09:45,620
+And if you can't compute it
+quickly, you're in bad shape.
+
+144
+00:09:45,620 --> 00:09:48,200
+But you can compute
+it quickly by
+
+145
+00:09:48,200 --> 00:09:54,140
+this automatic differentiation
+in reverse mode, which
+
+146
+00:09:54,140 --> 00:09:56,780
+is otherwise known--
+
+147
+00:09:56,780 --> 00:10:09,090
+I don't think the people--
+maybe Hinton was the leader
+
+148
+00:10:09,090 --> 00:10:12,620
+in developing deep neural net--
+
+149
+00:10:12,620 --> 00:10:13,340
+deep learning.
+
+150
+00:10:16,200 --> 00:10:18,200
+So I give him big
+credit for that--
+
+151
+00:10:18,200 --> 00:10:22,040
+that back propagation would
+work and would give him
+
+152
+00:10:22,040 --> 00:10:23,810
+fast gradients.
+
+153
+00:10:23,810 --> 00:10:30,650
+But it actually had been studied
+before under the name AD--
+
+154
+00:10:30,650 --> 00:10:32,280
+Automatic Differentiation.
+
+155
+00:10:32,280 --> 00:10:35,840
+So may I just tell
+you that idea?
+
+156
+00:10:35,840 --> 00:10:39,590
+Some of you may know
+it, may know about it,
+
+157
+00:10:39,590 --> 00:10:47,040
+may know more than I, and
+might know a good website
+
+158
+00:10:47,040 --> 00:10:49,720
+to see this description.
+
+159
+00:10:49,720 --> 00:10:56,300
+There will be, of course,
+a section of the notes,
+
+160
+00:10:56,300 --> 00:10:57,630
+you already have it.
+
+161
+00:10:57,630 --> 00:11:02,770
+This is section 7.2.
+
+162
+00:11:02,770 --> 00:11:06,630
+So this is the chapter
+on deep learning.
+
+163
+00:11:06,630 --> 00:11:11,040
+And the first section was
+about the structure of F of x.
+
+164
+00:11:11,040 --> 00:11:13,710
+And you remember the key
+point about the structure
+
+165
+00:11:13,710 --> 00:11:19,920
+of F of x is that I start with
+x and apply some function, F1
+
+166
+00:11:19,920 --> 00:11:21,090
+of x.
+
+167
+00:11:21,090 --> 00:11:24,550
+And to that, I apply
+some function, F2 of x.
+
+168
+00:11:24,550 --> 00:11:26,970
+And to that, I
+apply some function
+
+169
+00:11:26,970 --> 00:11:30,930
+of F3 of F2 of F1 of x.
+
+170
+00:11:30,930 --> 00:11:35,320
+And that's the thing
+whose derivative I need.
+
+171
+00:11:35,320 --> 00:11:38,110
+So I'll just take
+ordinary derivative--
+
+172
+00:11:38,110 --> 00:11:40,950
+well, partial
+derivatives, really.
+
+173
+00:11:40,950 --> 00:11:42,890
+Yeah, I better say
+partial derivatives.
+
+174
+00:11:42,890 --> 00:11:45,910
+So suppose x is a pair, xy.
+
+175
+00:11:48,690 --> 00:11:57,880
+Example-- so here, let
+me show you my example.
+
+176
+00:11:57,880 --> 00:12:02,610
+So suppose F of x is--
+
+177
+00:12:02,610 --> 00:12:04,650
+let me take a simple example--
+
+178
+00:12:04,650 --> 00:12:06,720
+x cubed times x plus 2y.
+
+179
+00:12:10,230 --> 00:12:11,980
+OK.
+
+180
+00:12:11,980 --> 00:12:18,010
+So I want to think of that
+function the way anybody would,
+
+181
+00:12:18,010 --> 00:12:20,740
+as the product of two functions.
+
+182
+00:12:20,740 --> 00:12:26,170
+So there is a product rule
+to get into the derivative.
+
+183
+00:12:26,170 --> 00:12:30,290
+And then we need the
+derivatives of each piece.
+
+184
+00:12:30,290 --> 00:12:36,880
+So there's a power rule and
+a linear combination rule.
+
+185
+00:12:36,880 --> 00:12:40,360
+So it's got a few of
+the rules that we use.
+
+186
+00:12:40,360 --> 00:12:45,160
+And the point is to think
+about the computation
+
+187
+00:12:45,160 --> 00:12:51,400
+of F of x and the
+computation of dF dx
+
+188
+00:12:51,400 --> 00:12:54,970
+and the computation of dF dy.
+
+189
+00:12:54,970 --> 00:12:57,370
+Those are the
+derivatives that we need.
+
+190
+00:12:57,370 --> 00:13:01,110
+This is the function
+we need and how
+
+191
+00:13:01,110 --> 00:13:03,640
+to do those
+computations quickly.
+
+192
+00:13:03,640 --> 00:13:04,810
+OK.
+
+193
+00:13:04,810 --> 00:13:15,100
+And this is section 7.2, which
+benefited a lot from a blog.
+
+194
+00:13:15,100 --> 00:13:18,010
+I'm not a blog reader
+or a blog writer.
+
+195
+00:13:18,010 --> 00:13:21,325
+But somehow I found this blog.
+
+196
+00:13:27,250 --> 00:13:35,670
+It's Christopher
+Olah, is his name.
+
+197
+00:13:35,670 --> 00:13:38,490
+And he really
+writes clear things.
+
+198
+00:13:41,260 --> 00:13:43,890
+He works for one of
+the big companies
+
+199
+00:13:43,890 --> 00:13:47,850
+and does the deeper research.
+
+200
+00:13:47,850 --> 00:13:51,610
+But he's also a
+really good expositor.
+
+201
+00:13:51,610 --> 00:13:55,950
+And the website
+that he now uses is
+
+202
+00:13:55,950 --> 00:14:00,530
+called Distill dot something.
+
+203
+00:14:00,530 --> 00:14:04,620
+But I think maybe this
+blog was earlier than
+
+204
+00:14:04,620 --> 00:14:06,300
+before the start of Distill.
+
+205
+00:14:06,300 --> 00:14:08,790
+But it might be
+loaded onto Distill.
+
+206
+00:14:08,790 --> 00:14:14,190
+Anyway, that's where I got
+this simple description
+
+207
+00:14:14,190 --> 00:14:16,890
+of back propagation.
+
+208
+00:14:16,890 --> 00:14:21,160
+And let's just do
+calculus, first of all.
+
+209
+00:14:21,160 --> 00:14:24,553
+If I just have a function
+of maybe even one variable,
+
+210
+00:14:24,553 --> 00:14:25,470
+what's the derivative?
+
+211
+00:14:25,470 --> 00:14:29,610
+What is dF dx here,
+just to remember
+
+212
+00:14:29,610 --> 00:14:32,970
+what calculation we have to do?
+
+213
+00:14:32,970 --> 00:14:38,410
+So dF dx, this is
+with n equal one--
+
+214
+00:14:38,410 --> 00:14:40,110
+one variable.
+
+215
+00:14:40,110 --> 00:14:47,340
+So I use ordinary derivative
+and not partial derivative.
+
+216
+00:14:47,340 --> 00:14:53,160
+But that's what
+really has to be done.
+
+217
+00:14:53,160 --> 00:14:55,530
+But just, what's the
+derivative of that--
+
+218
+00:14:55,530 --> 00:14:58,560
+of a chain of functions?
+
+219
+00:14:58,560 --> 00:15:01,300
+Well, of course, the chain rule.
+
+220
+00:15:01,300 --> 00:15:04,110
+So what does the chain rule say?
+
+221
+00:15:04,110 --> 00:15:05,690
+I differentiate dF.
+
+222
+00:15:10,550 --> 00:15:12,670
+I don't know.
+
+223
+00:15:12,670 --> 00:15:15,950
+What do I put that it's
+differentiated with respect to?
+
+224
+00:15:19,380 --> 00:15:21,630
+dF3, dF2-- is that
+what I should put?
+
+225
+00:15:21,630 --> 00:15:22,130
+OK.
+
+226
+00:15:26,210 --> 00:15:28,790
+And where do I evaluate
+that derivative?
+
+227
+00:15:31,700 --> 00:15:37,880
+So yeah, I don't
+evaluate it at x.
+
+228
+00:15:37,880 --> 00:15:39,860
+I'm differentiated to F2.
+
+229
+00:15:39,860 --> 00:15:45,500
+So do I evaluate it
+at F2 of F1 of x?
+
+230
+00:15:45,500 --> 00:15:54,390
+This is where the chain rule
+gets sort of a little chain-ey.
+
+231
+00:15:54,390 --> 00:15:54,890
+OK.
+
+232
+00:15:54,890 --> 00:15:57,260
+Then we know that dF2 dF1.
+
+233
+00:16:01,390 --> 00:16:05,960
+And again, that's now
+evaluated at F1 of x.
+
+234
+00:16:05,960 --> 00:16:14,470
+And then the final factor
+is dF1 dx evaluated at x.
+
+235
+00:16:14,470 --> 00:16:17,780
+That's somehow
+what we have to do.
+
+236
+00:16:17,780 --> 00:16:22,010
+And that's just for an
+ordinary one-variable function.
+
+237
+00:16:22,010 --> 00:16:24,890
+And I have here a
+two-variable function.
+
+238
+00:16:24,890 --> 00:16:27,485
+And deep learning has a
+million-variable function.
+
+239
+00:16:31,150 --> 00:16:33,550
+So I think we won't
+go to a million.
+
+240
+00:16:33,550 --> 00:16:35,570
+But two, we could manage.
+
+241
+00:16:35,570 --> 00:16:42,070
+So let's compute the
+function, first of all.
+
+242
+00:16:42,070 --> 00:16:58,760
+Compute F. So I'm
+given x equals, say, 2,
+
+243
+00:16:58,760 --> 00:17:01,490
+and y equals, say, 3.
+
+244
+00:17:04,530 --> 00:17:09,869
+And I'm going to create
+a computational graph.
+
+245
+00:17:13,650 --> 00:17:27,480
+So I'm actually going to
+draw the computational graph
+
+246
+00:17:27,480 --> 00:17:37,140
+to compute for F. And then it'll
+be a variation of that graph
+
+247
+00:17:37,140 --> 00:17:40,000
+to find the derivatives.
+
+248
+00:17:40,000 --> 00:17:42,360
+So let's just start with
+the graph, first of all,
+
+249
+00:17:42,360 --> 00:17:46,600
+for the function, because
+we're going to need that.
+
+250
+00:17:46,600 --> 00:17:49,870
+So again, it's x cubed plus--
+
+251
+00:17:49,870 --> 00:17:54,250
+so can I write that function
+again? x cubed times x plus 2y.
+
+252
+00:17:58,390 --> 00:18:06,561
+So I think the first step will
+be to find x plus x cubed--
+
+253
+00:18:06,561 --> 00:18:08,530
+that factor, which will be 8.
+
+254
+00:18:11,190 --> 00:18:16,110
+And we have to find the
+other factor, x plus 2y.
+
+255
+00:18:16,110 --> 00:18:19,410
+So then that uses y and x.
+
+256
+00:18:19,410 --> 00:18:23,610
+So it's a directed
+graph in going forward
+
+257
+00:18:23,610 --> 00:18:26,100
+with this computation.
+
+258
+00:18:26,100 --> 00:18:29,390
+So x plus 2y equals
+whatever it is--
+
+259
+00:18:29,390 --> 00:18:31,620
+2 and 6-- oh, 8 again.
+
+260
+00:18:31,620 --> 00:18:33,750
+Not brilliant.
+
+261
+00:18:33,750 --> 00:18:36,600
+What shall I change here?
+
+262
+00:18:36,600 --> 00:18:37,410
+Make it 3y?
+
+263
+00:18:42,200 --> 00:18:47,540
+3y, just to get a
+different number here.
+
+264
+00:18:47,540 --> 00:18:49,280
+So now x is 2.
+
+265
+00:18:49,280 --> 00:18:50,270
+y is 3.
+
+266
+00:18:50,270 --> 00:18:50,960
+I get 11.
+
+267
+00:18:50,960 --> 00:18:52,797
+That's a good number.
+
+268
+00:18:52,797 --> 00:18:53,297
+11.
+
+269
+00:18:57,130 --> 00:18:59,760
+OK.
+
+270
+00:18:59,760 --> 00:19:01,500
+So far, so good?
+
+271
+00:19:01,500 --> 00:19:05,480
+And now the next step
+on this graph will be,
+
+272
+00:19:05,480 --> 00:19:07,560
+I have a product of those.
+
+273
+00:19:07,560 --> 00:19:10,230
+So that will go to the product.
+
+274
+00:19:15,850 --> 00:19:18,835
+F equals 8 times 11--
+
+275
+00:19:18,835 --> 00:19:19,335
+88.
+
+276
+00:19:22,050 --> 00:19:22,600
+OK.
+
+277
+00:19:22,600 --> 00:19:28,810
+So we've got the answer,
+88, which, normally, I
+
+278
+00:19:28,810 --> 00:19:31,480
+wouldn't take that
+much of a book
+
+279
+00:19:31,480 --> 00:19:41,710
+to compute F. I would have said,
+2 cubed times 2 plus 3 times 3.
+
+280
+00:19:41,710 --> 00:19:47,170
+And I'd have simplified
+that to 8 times 11.
+
+281
+00:19:47,170 --> 00:19:50,530
+And I would have got 88.
+
+282
+00:19:50,530 --> 00:19:54,190
+So if we were just writing
+normally, that would do it.
+
+283
+00:19:54,190 --> 00:19:59,110
+But this is the picture of
+the computational graph.
+
+284
+00:19:59,110 --> 00:20:00,040
+OK.
+
+285
+00:20:00,040 --> 00:20:00,550
+Good.
+
+286
+00:20:00,550 --> 00:20:01,050
+Good.
+
+287
+00:20:01,050 --> 00:20:02,440
+Good.
+
+288
+00:20:02,440 --> 00:20:05,200
+Now it's the derivatives--
+
+289
+00:20:05,200 --> 00:20:08,650
+two derivatives to
+find-- dF dx and dF dy.
+
+290
+00:20:08,650 --> 00:20:12,810
+Suppose we go forward first.
+
+291
+00:20:12,810 --> 00:20:15,360
+My point is going to
+be-- or the great point
+
+292
+00:20:15,360 --> 00:20:17,520
+is that backward is better.
+
+293
+00:20:17,520 --> 00:20:19,770
+Reverse mode is better.
+
+294
+00:20:19,770 --> 00:20:22,650
+But we don't know what that
+means until we've gone forward.
+
+295
+00:20:22,650 --> 00:20:24,443
+So let me go forward.
+
+296
+00:20:24,443 --> 00:20:25,735
+So now I'm going to go forward.
+
+297
+00:20:38,940 --> 00:20:41,590
+Let's do dF dx.
+
+298
+00:20:41,590 --> 00:20:44,170
+Everybody is up for dF
+dx-- the partial derivative
+
+299
+00:20:44,170 --> 00:20:46,300
+with respect to x?
+
+300
+00:20:46,300 --> 00:20:54,980
+So here we have x
+equal 2 and y equal 3.
+
+301
+00:21:01,168 --> 00:21:04,030
+OK.
+
+302
+00:21:04,030 --> 00:21:11,750
+And then I take the
+derivative of that step.
+
+303
+00:21:11,750 --> 00:21:15,040
+The first step was x 2x cubed.
+
+304
+00:21:15,040 --> 00:21:16,330
+So I need the derivative.
+
+305
+00:21:16,330 --> 00:21:23,710
+The whole point of AD is
+that every computation
+
+306
+00:21:23,710 --> 00:21:30,400
+of a derivative breaks down like
+this into very simple pieces.
+
+307
+00:21:30,400 --> 00:21:34,710
+And the derivatives
+of those simple pieces
+
+308
+00:21:34,710 --> 00:21:36,660
+are also simple pieces.
+
+309
+00:21:36,660 --> 00:21:44,190
+So the whole point is
+to replace appropriately
+
+310
+00:21:44,190 --> 00:21:50,020
+those intermediate
+steps with derivatives,
+
+311
+00:21:50,020 --> 00:21:52,920
+so as to compute
+the x derivative.
+
+312
+00:21:52,920 --> 00:22:00,070
+So I have to use the fact
+that the derivative of x
+
+313
+00:22:00,070 --> 00:22:02,040
+cubed, with respect to x--
+
+314
+00:22:02,040 --> 00:22:04,650
+oh, I better do partial
+derivative-- partial
+
+315
+00:22:04,650 --> 00:22:09,950
+derivatives of x cube, with
+respect to x, is 3x squared.
+
+316
+00:22:09,950 --> 00:22:14,340
+I'll put maybe a formula
+and then a number.
+
+317
+00:22:14,340 --> 00:22:21,860
+So that gives 3 times 4--
+
+318
+00:22:21,860 --> 00:22:22,360
+12.
+
+319
+00:22:25,910 --> 00:22:31,750
+And the derivative of x
+cubed, with respect to y,
+
+320
+00:22:31,750 --> 00:22:34,385
+gives 0, clearly.
+
+321
+00:22:34,385 --> 00:22:35,780
+So that's 0.
+
+322
+00:22:40,160 --> 00:22:44,350
+So I'm doing the x derivative.
+
+323
+00:22:44,350 --> 00:22:51,170
+So the derivative of y,
+with respect to x, is--
+
+324
+00:22:51,170 --> 00:22:54,250
+you get to tell me.
+
+325
+00:22:54,250 --> 00:22:58,560
+If I'm computing partial
+derivatives, it is 0.
+
+326
+00:22:58,560 --> 00:22:59,955
+It is 0.
+
+327
+00:22:59,955 --> 00:23:03,030
+y and x are independent.
+
+328
+00:23:03,030 --> 00:23:06,810
+And this is the
+reason, in my view,
+
+329
+00:23:06,810 --> 00:23:10,080
+that the forward
+method is wasteful,
+
+330
+00:23:10,080 --> 00:23:15,630
+because I'm going to have to do
+another whole graph for the y
+
+331
+00:23:15,630 --> 00:23:16,990
+derivative.
+
+332
+00:23:16,990 --> 00:23:21,630
+In other words, tracking
+the x derivatives,
+
+333
+00:23:21,630 --> 00:23:25,650
+a whole lot of stuff
+never got off the ground.
+
+334
+00:23:25,650 --> 00:23:28,140
+So we never should
+have looked at it.
+
+335
+00:23:28,140 --> 00:23:41,812
+So anyway, I have
+this x plus 3y, maybe.
+
+336
+00:23:41,812 --> 00:23:43,270
+I don't know whether
+to erase that.
+
+337
+00:23:43,270 --> 00:23:45,970
+I think I will,
+just because I don't
+
+338
+00:23:45,970 --> 00:23:49,010
+know what to do with it there.
+
+339
+00:23:49,010 --> 00:23:49,510
+Yeah.
+
+340
+00:23:49,510 --> 00:23:56,130
+So now let me take the
+ones that I really need,
+
+341
+00:23:56,130 --> 00:24:08,400
+is the derivative, with respect
+to x, of x plus 3y, which is 1.
+
+342
+00:24:08,400 --> 00:24:14,520
+And so that gives me the
+answer 1 for any x actually.
+
+343
+00:24:14,520 --> 00:24:17,040
+OK.
+
+344
+00:24:17,040 --> 00:24:18,250
+And now what?
+
+345
+00:24:20,820 --> 00:24:23,440
+Oh, yeah, I don't need these.
+
+346
+00:24:23,440 --> 00:24:25,410
+This is a waste of time.
+
+347
+00:24:25,410 --> 00:24:26,330
+Isn't it?
+
+348
+00:24:29,090 --> 00:24:33,120
+Is it only x derivatives I want?
+
+349
+00:24:33,120 --> 00:24:36,640
+Anyway, let's just keep going.
+
+350
+00:24:36,640 --> 00:24:40,170
+You can see, this takes
+a little organization.
+
+351
+00:24:40,170 --> 00:24:42,750
+And I'm not practiced with it.
+
+352
+00:24:42,750 --> 00:24:44,170
+So what am I going to do?
+
+353
+00:24:44,170 --> 00:24:47,700
+I'm looking for the
+x derivative of--
+
+354
+00:24:47,700 --> 00:24:50,160
+I've got to use our
+product rule now.
+
+355
+00:24:50,160 --> 00:24:54,750
+I found the x derivative
+of that factor was 12.
+
+356
+00:24:54,750 --> 00:24:58,600
+The x derivative of
+this factor is 1.
+
+357
+00:24:58,600 --> 00:25:03,950
+And now the x derivative
+of the product--
+
+358
+00:25:03,950 --> 00:25:10,590
+so now I'm going to do,
+somehow, a product rule--
+
+359
+00:25:10,590 --> 00:25:15,440
+the x derivative
+of this product.
+
+360
+00:25:15,440 --> 00:25:20,460
+I should have given
+these two terms a name.
+
+361
+00:25:20,460 --> 00:25:25,910
+Let me call that first term x
+cubed, and the second term x
+
+362
+00:25:25,910 --> 00:25:26,810
+plus 3y--
+
+363
+00:25:26,810 --> 00:25:27,870
+call it s.
+
+364
+00:25:27,870 --> 00:25:32,090
+So I'll call the
+two terms c and s.
+
+365
+00:25:38,930 --> 00:25:41,210
+So that's dc ds.
+
+366
+00:25:41,210 --> 00:25:43,850
+This is dc dx.
+
+367
+00:25:43,850 --> 00:25:46,820
+This is dc dx.
+
+368
+00:25:46,820 --> 00:25:56,390
+And this one is ds dx and dc dy.
+
+369
+00:25:56,390 --> 00:25:57,620
+Do I need to know that?
+
+370
+00:25:57,620 --> 00:26:02,690
+I'm sorry, this computational
+graph has thrown me.
+
+371
+00:26:02,690 --> 00:26:07,080
+But now I want to
+use the product rule.
+
+372
+00:26:07,080 --> 00:26:09,860
+And I'm taking x derivatives.
+
+373
+00:26:09,860 --> 00:26:13,580
+So I should have
+computed c and s.
+
+374
+00:26:13,580 --> 00:26:16,580
+Yes, I see I need those
+in the product rule.
+
+375
+00:26:16,580 --> 00:26:30,037
+So I should have computed c
+as being 8 and s as being 5.
+
+376
+00:26:30,037 --> 00:26:30,620
+Is that right?
+
+377
+00:26:30,620 --> 00:26:35,940
+2 plus 3-- so 11.
+
+378
+00:26:35,940 --> 00:26:37,800
+Yeah, I needed the 8.
+
+379
+00:26:37,800 --> 00:26:43,040
+Oh, is that-- what's up?
+
+380
+00:26:43,040 --> 00:26:45,440
+I've just been
+running along here
+
+381
+00:26:45,440 --> 00:26:49,730
+without getting myself
+in the whole picture.
+
+382
+00:26:49,730 --> 00:26:51,440
+Yeah, 8 and 11 is right.
+
+383
+00:26:51,440 --> 00:26:53,990
+But now I'm looking
+for the derivatives.
+
+384
+00:26:53,990 --> 00:26:55,760
+So I don't multiply those.
+
+385
+00:26:55,760 --> 00:26:57,250
+That's not the product rule.
+
+386
+00:27:00,190 --> 00:27:01,810
+So the product rule is what?
+
+387
+00:27:07,190 --> 00:27:13,120
+So this product rule, I have
+to do this combination of--
+
+388
+00:27:13,120 --> 00:27:14,810
+this is now the product rule--
+
+389
+00:27:20,050 --> 00:27:25,240
+for the derivative of c times s.
+
+390
+00:27:25,240 --> 00:27:30,640
+So I want c ds dx plus s dc dx.
+
+391
+00:27:30,640 --> 00:27:32,940
+I think I'm on track now.
+
+392
+00:27:32,940 --> 00:27:36,640
+And now I want to
+put it in numbers.
+
+393
+00:27:36,640 --> 00:27:40,900
+So c is 8.
+
+394
+00:27:40,900 --> 00:27:45,370
+ds dx-- have we computed ds dx?
+
+395
+00:27:45,370 --> 00:27:48,680
+Yes, ds dx is 1.
+
+396
+00:27:48,680 --> 00:27:53,590
+And now s itself
+is computed as 11.
+
+397
+00:27:53,590 --> 00:27:58,840
+And dc dx, we computed as 12.
+
+398
+00:27:58,840 --> 00:28:00,250
+I don't dare look.
+
+399
+00:28:06,470 --> 00:28:08,120
+I don't think I'm going to get--
+
+400
+00:28:08,120 --> 00:28:09,830
+oh, no, I don't
+know the answer yet.
+
+401
+00:28:09,830 --> 00:28:12,020
+Sorry, I'm not trying to get 88.
+
+402
+00:28:14,740 --> 00:28:16,575
+You guys are not helping.
+
+403
+00:28:16,575 --> 00:28:18,700
+[LAUGHS]
+
+404
+00:28:18,700 --> 00:28:20,210
+You see I'm in trouble.
+
+405
+00:28:20,210 --> 00:28:24,880
+But what I imagine here is,
+that's 8 and that's 132.
+
+406
+00:28:24,880 --> 00:28:28,000
+So I'm getting 140.
+
+407
+00:28:28,000 --> 00:28:29,830
+Is there any
+possibility that that's
+
+408
+00:28:29,830 --> 00:28:34,330
+the right answer for dF dx?
+
+409
+00:28:34,330 --> 00:28:36,660
+This is dF dx I computed.
+
+410
+00:28:40,170 --> 00:28:44,920
+By watching me struggle
+here, you're seeing the idea.
+
+411
+00:28:47,970 --> 00:28:52,170
+Every step, I take the
+derivative of each step.
+
+412
+00:28:52,170 --> 00:28:55,050
+So it was a power step, x cubed.
+
+413
+00:28:55,050 --> 00:28:57,000
+So I had a 3x squared.
+
+414
+00:28:57,000 --> 00:29:00,480
+And a sum step, so I had a 1.
+
+415
+00:29:00,480 --> 00:29:04,900
+Then the next step
+was a multiplication.
+
+416
+00:29:04,900 --> 00:29:08,730
+So I needed the
+product rule for that.
+
+417
+00:29:08,730 --> 00:29:11,040
+I have these separate numbers.
+
+418
+00:29:11,040 --> 00:29:12,570
+So I put them in.
+
+419
+00:29:12,570 --> 00:29:18,140
+And so it's the
+computational graph finished.
+
+420
+00:29:18,140 --> 00:29:21,710
+We only needed two levels.
+
+421
+00:29:21,710 --> 00:29:23,840
+And we got 8 and 132--
+
+422
+00:29:23,840 --> 00:29:25,180
+140.
+
+423
+00:29:25,180 --> 00:29:26,540
+OK.
+
+424
+00:29:26,540 --> 00:29:29,120
+But we didn't get dF dy yet.
+
+425
+00:29:34,230 --> 00:29:37,190
+And for that, I'd need
+to redo this again.
+
+426
+00:29:40,160 --> 00:29:43,330
+And I don't want to do that.
+
+427
+00:29:43,330 --> 00:29:48,160
+I would rather do the reverse
+mode and do them both at once.
+
+428
+00:29:48,160 --> 00:29:50,090
+That's the point of
+the reverse mode.
+
+429
+00:29:50,090 --> 00:29:51,230
+It's very efficient.
+
+430
+00:29:51,230 --> 00:29:55,140
+It's very efficient, actually.
+
+431
+00:29:55,140 --> 00:29:59,490
+Computing the
+gradient after you've
+
+432
+00:29:59,490 --> 00:30:03,270
+done the work for the function,
+computing first derivatives--
+
+433
+00:30:03,270 --> 00:30:05,970
+you could compute
+n first derivatives
+
+434
+00:30:05,970 --> 00:30:10,800
+with about four or five
+times the cost, not n times.
+
+435
+00:30:10,800 --> 00:30:12,330
+That's amazing to me.
+
+436
+00:30:12,330 --> 00:30:17,490
+That is amazing that I can
+compute the gradient very
+
+437
+00:30:17,490 --> 00:30:23,290
+efficiently by the back prop.
+
+438
+00:30:23,290 --> 00:30:25,730
+So I have to show you
+the backwards way.
+
+439
+00:30:29,300 --> 00:30:31,250
+Yeah.
+
+440
+00:30:31,250 --> 00:30:35,090
+I'm just going to follow all
+the paths backwards so that I
+
+441
+00:30:35,090 --> 00:30:38,960
+get both dF dx and dF dy.
+
+442
+00:30:38,960 --> 00:30:43,280
+You see, the idea is to take
+the derivative of each step--
+
+443
+00:30:43,280 --> 00:30:45,020
+each small step.
+
+444
+00:30:45,020 --> 00:30:48,080
+That's really what
+we do in calculus.
+
+445
+00:30:48,080 --> 00:30:51,050
+If you think about the
+start of a calculus course,
+
+446
+00:30:51,050 --> 00:30:53,600
+what derivatives do
+we actually know?
+
+447
+00:30:53,600 --> 00:31:00,020
+Do we actually use F at
+x plus delta x minus F?
+
+448
+00:31:00,020 --> 00:31:02,150
+What derivatives
+do we grind out?
+
+449
+00:31:05,960 --> 00:31:10,440
+We do the derivatives
+of x to the n.
+
+450
+00:31:10,440 --> 00:31:14,080
+Every calculus book starts
+with x squared and finds
+
+451
+00:31:14,080 --> 00:31:15,930
+the derivative of x to the n.
+
+452
+00:31:15,930 --> 00:31:18,480
+Then you do sine x and cos x.
+
+453
+00:31:21,150 --> 00:31:22,590
+Then what others?
+
+454
+00:31:22,590 --> 00:31:25,390
+Are there any more?
+
+455
+00:31:25,390 --> 00:31:28,450
+e to the x-- good, e to the x.
+
+456
+00:31:28,450 --> 00:31:31,600
+And it's the inverse
+function log.
+
+457
+00:31:31,600 --> 00:31:35,920
+In freshman calculus,
+you always write ln, just
+
+458
+00:31:35,920 --> 00:31:37,640
+to be out of date.
+
+459
+00:31:37,640 --> 00:31:38,330
+OK.
+
+460
+00:31:38,330 --> 00:31:39,920
+And now that may be the list.
+
+461
+00:31:39,920 --> 00:31:40,420
+Is it?
+
+462
+00:31:40,420 --> 00:31:43,460
+And then the chain rule.
+
+463
+00:31:43,460 --> 00:31:50,040
+Are there others that you
+actually do a computation of?
+
+464
+00:31:50,040 --> 00:31:53,820
+Actually, e to the x is
+defined by the property
+
+465
+00:31:53,820 --> 00:31:57,170
+that its derivative
+is e to the x.
+
+466
+00:31:57,170 --> 00:32:00,270
+And then you discover
+what log x has to be.
+
+467
+00:32:00,270 --> 00:32:04,500
+And sine x-- how do you
+do sine of x plus delta x?
+
+468
+00:32:04,500 --> 00:32:07,260
+Well, compare minus sine of x.
+
+469
+00:32:07,260 --> 00:32:12,030
+How do you find the hard
+way, once-and-for-all way?
+
+470
+00:32:12,030 --> 00:32:17,970
+You draw a little unit circle
+and mess with some angles.
+
+471
+00:32:17,970 --> 00:32:21,480
+And you discover that the
+derivative of the sine
+
+472
+00:32:21,480 --> 00:32:24,140
+is the cosine.
+
+473
+00:32:24,140 --> 00:32:30,180
+That's if you've defined
+the sine as a ratio of sides
+
+474
+00:32:30,180 --> 00:32:31,350
+in a right triangle.
+
+475
+00:32:31,350 --> 00:32:34,050
+Of course, you could define
+it as an infinite series.
+
+476
+00:32:34,050 --> 00:32:37,600
+And then you would be
+back to just using that.
+
+477
+00:32:37,600 --> 00:32:38,100
+OK.
+
+478
+00:32:40,680 --> 00:32:44,160
+So calculus does exactly
+what we're doing here--
+
+479
+00:32:44,160 --> 00:32:48,030
+finds all derivatives
+by the chain rule
+
+480
+00:32:48,030 --> 00:32:56,030
+applied to a few ones that
+it has worked out in detail.
+
+481
+00:32:56,030 --> 00:33:02,060
+But tangent of x, we would
+use the quotient rule.
+
+482
+00:33:02,060 --> 00:33:06,970
+Secant of x, we would use the
+quotient rule, 1 over cosine.
+
+483
+00:33:06,970 --> 00:33:09,370
+And the products, we
+use the product rule.
+
+484
+00:33:09,370 --> 00:33:17,010
+So really, calculus tends
+to seem fairly simple
+
+485
+00:33:17,010 --> 00:33:22,750
+when you look back to see
+what, actually, you did.
+
+486
+00:33:22,750 --> 00:33:26,520
+And then integration-- what
+is integral calculus about?
+
+487
+00:33:26,520 --> 00:33:29,240
+More or less
+guessing the answer.
+
+488
+00:33:29,240 --> 00:33:34,230
+You have to integrate f of x dx.
+
+489
+00:33:34,230 --> 00:33:38,130
+So really, what you have
+to do is sort of think, OK,
+
+490
+00:33:38,130 --> 00:33:40,290
+what had this derivative?
+
+491
+00:33:40,290 --> 00:33:42,550
+What function had
+that derivative?
+
+492
+00:33:42,550 --> 00:33:46,230
+And mess around and get it.
+
+493
+00:33:46,230 --> 00:33:54,210
+So really, it's a
+freshman course, I guess.
+
+494
+00:33:54,210 --> 00:33:54,960
+OK.
+
+495
+00:33:54,960 --> 00:33:57,740
+So where am I?
+
+496
+00:33:57,740 --> 00:33:58,400
+Backward.
+
+497
+00:33:58,400 --> 00:33:59,410
+Right.
+
+498
+00:33:59,410 --> 00:34:01,690
+That's the thing still to do.
+
+499
+00:34:01,690 --> 00:34:04,330
+How does the
+backward system work?
+
+500
+00:34:04,330 --> 00:34:07,280
+OK, I'll try my best.
+
+501
+00:34:07,280 --> 00:34:07,780
+OK.
+
+502
+00:34:07,780 --> 00:34:10,679
+So here is the big goal.
+
+503
+00:34:10,679 --> 00:34:14,750
+Back-- so reverse mode AD.
+
+504
+00:34:21,040 --> 00:34:21,750
+Right.
+
+505
+00:34:21,750 --> 00:34:25,489
+And let me make
+myself a little note.
+
+506
+00:34:25,489 --> 00:34:30,710
+The little note is to give
+you another example where
+
+507
+00:34:30,710 --> 00:34:34,219
+the order that you
+do the computations
+
+508
+00:34:34,219 --> 00:34:37,190
+makes a big difference.
+
+509
+00:34:37,190 --> 00:34:39,699
+And that's not
+obvious that it will.
+
+510
+00:34:39,699 --> 00:34:41,770
+There are many things
+in math that you
+
+511
+00:34:41,770 --> 00:34:44,050
+could do in either order.
+
+512
+00:34:44,050 --> 00:34:48,730
+And it seems like, logically,
+you've done the same things.
+
+513
+00:34:48,730 --> 00:34:53,980
+So another, and
+simpler, example which
+
+514
+00:34:53,980 --> 00:34:58,660
+shows how one way could be
+way faster than another way
+
+515
+00:34:58,660 --> 00:35:04,870
+is when I'm multiplying
+three matrices.
+
+516
+00:35:04,870 --> 00:35:06,790
+So I'm multiplying
+three matrices--
+
+517
+00:35:06,790 --> 00:35:08,740
+A times B times C.
+
+518
+00:35:08,740 --> 00:35:14,110
+And the question is, do I do BC
+first and then multiply by A?
+
+519
+00:35:14,110 --> 00:35:20,230
+Or do I do AB first and
+then multiply that by C?
+
+520
+00:35:20,230 --> 00:35:22,840
+And of course, I
+kept them in order--
+
+521
+00:35:22,840 --> 00:35:24,370
+in the order ABC.
+
+522
+00:35:24,370 --> 00:35:31,790
+But the order of computations
+can be different.
+
+523
+00:35:31,790 --> 00:35:33,530
+You get the right
+answer both ways.
+
+524
+00:35:33,530 --> 00:35:36,710
+But those can be completely,
+completely different.
+
+525
+00:35:36,710 --> 00:35:40,720
+One can be 1,000 times
+faster than the other.
+
+526
+00:35:40,720 --> 00:35:42,950
+So that's just to show--
+
+527
+00:35:42,950 --> 00:35:45,990
+actually, it kind
+of connects to this.
+
+528
+00:35:45,990 --> 00:35:49,630
+And there is also another--
+
+529
+00:35:49,630 --> 00:35:53,120
+so I'll do that, too.
+
+530
+00:35:53,120 --> 00:36:01,580
+So this is example 2, where
+this is meant to be example 1.
+
+531
+00:36:01,580 --> 00:36:09,860
+And example 3 leads to something
+called the adjoint method
+
+532
+00:36:09,860 --> 00:36:17,530
+in differential equations
+or in optimization--
+
+533
+00:36:17,530 --> 00:36:23,880
+in computing optimum
+and maximizing it.
+
+534
+00:36:23,880 --> 00:36:24,380
+Yeah.
+
+535
+00:36:28,010 --> 00:36:32,450
+Really, the underlying
+reason it gives us speed-up
+
+536
+00:36:32,450 --> 00:36:38,030
+is, it makes the right choice
+in a product of three things.
+
+537
+00:36:38,030 --> 00:36:39,170
+Yeah.
+
+538
+00:36:39,170 --> 00:36:43,110
+So it'll be enough to do
+example 1 and example 2.
+
+539
+00:36:43,110 --> 00:36:48,540
+OK, let me go with example 1.
+
+540
+00:36:48,540 --> 00:36:50,520
+This is now back propagation.
+
+541
+00:36:50,520 --> 00:36:52,220
+Finally, we got to it.
+
+542
+00:36:52,220 --> 00:36:52,720
+OK.
+
+543
+00:36:59,330 --> 00:37:03,230
+Well, I look at my
+notes is how I do it.
+
+544
+00:37:07,170 --> 00:37:10,410
+So the notes-- this
+is section 7.2--
+
+545
+00:37:10,410 --> 00:37:12,720
+does these computational graphs.
+
+546
+00:37:12,720 --> 00:37:15,450
+And then here is reverse mode.
+
+547
+00:37:18,120 --> 00:37:20,840
+So it starts over
+here with the--
+
+548
+00:37:20,840 --> 00:37:22,810
+so I'm going to
+use the chain rule.
+
+549
+00:37:22,810 --> 00:37:26,040
+So dF dF is 1.
+
+550
+00:37:26,040 --> 00:37:28,410
+And then I'm going backwards.
+
+551
+00:37:31,500 --> 00:37:38,970
+And of course, I have
+to use the right rule.
+
+552
+00:37:38,970 --> 00:37:41,250
+So I have to use
+the product rule.
+
+553
+00:37:41,250 --> 00:37:43,920
+And then soon I'll
+have to use these power
+
+554
+00:37:43,920 --> 00:37:45,150
+rule and linear rules.
+
+555
+00:37:45,150 --> 00:37:47,830
+So of course, no change there.
+
+556
+00:37:47,830 --> 00:37:52,220
+The change is that
+by going backwards--
+
+557
+00:37:52,220 --> 00:37:55,330
+oh, I don't know if I
+completed that sentence,
+
+558
+00:37:55,330 --> 00:37:59,650
+that I could find 100
+partial derivatives,
+
+559
+00:37:59,650 --> 00:38:02,800
+if the function depended
+on 100 variables,
+
+560
+00:38:02,800 --> 00:38:07,870
+in about five times the
+cost of one variable--
+
+561
+00:38:07,870 --> 00:38:10,060
+three to five times
+the cost of one.
+
+562
+00:38:10,060 --> 00:38:16,480
+So you would expect 100 chain
+rules would cost 100 times.
+
+563
+00:38:16,480 --> 00:38:22,240
+But you see, we're reusing
+the pieces in the chain
+
+564
+00:38:22,240 --> 00:38:26,530
+and just having a larger--
+
+565
+00:38:26,530 --> 00:38:28,190
+our chain is wider.
+
+566
+00:38:28,190 --> 00:38:29,400
+But it's not longer.
+
+567
+00:38:29,400 --> 00:38:30,630
+And it's not repeated.
+
+568
+00:38:30,630 --> 00:38:36,400
+Anyway, so here I'm going
+to use whatever it is--
+
+569
+00:38:36,400 --> 00:38:43,080
+dF dc and dF ds.
+
+570
+00:38:43,080 --> 00:38:44,710
+And I'm remembering that--
+
+571
+00:38:47,980 --> 00:38:49,360
+yeah, OK.
+
+572
+00:38:49,360 --> 00:38:54,880
+So dF dc is s, and dF ds is c.
+
+573
+00:38:54,880 --> 00:39:01,090
+That was because F
+started out as c times s.
+
+574
+00:39:01,090 --> 00:39:02,650
+It was the product.
+
+575
+00:39:02,650 --> 00:39:03,220
+OK.
+
+576
+00:39:03,220 --> 00:39:06,900
+Then we've got to
+evaluate those.
+
+577
+00:39:06,900 --> 00:39:10,270
+And I'll look again to see
+that I'm hopefully writing down
+
+578
+00:39:10,270 --> 00:39:11,395
+some of the correct things.
+
+579
+00:39:14,740 --> 00:39:16,250
+OK.
+
+580
+00:39:16,250 --> 00:39:21,350
+So now what I've written
+down next is dF dc is 5.
+
+581
+00:39:21,350 --> 00:39:24,770
+Or no, 5 on that example.
+
+582
+00:39:24,770 --> 00:39:30,960
+What is it here? dF dc is--
+
+583
+00:39:30,960 --> 00:39:35,490
+c is x cubed.
+
+584
+00:39:35,490 --> 00:39:40,410
+So dF-- oh, sorry, dF dc--
+
+585
+00:39:40,410 --> 00:39:42,120
+yeah, I want s.
+
+586
+00:39:42,120 --> 00:39:43,400
+I'm looking for s here.
+
+587
+00:39:43,400 --> 00:39:44,502
+Yeah.
+
+588
+00:39:44,502 --> 00:39:45,474
+I'm looking for s.
+
+589
+00:39:50,830 --> 00:39:53,210
+So I'm looking for s.
+
+590
+00:39:53,210 --> 00:39:58,460
+And that's x plus 3y.
+
+591
+00:39:58,460 --> 00:39:59,638
+Am I doing this well?
+
+592
+00:40:04,030 --> 00:40:08,210
+I want, in the end, to get
+the derivatives with respect
+
+593
+00:40:08,210 --> 00:40:10,880
+to x and y-- the whole gradient.
+
+594
+00:40:10,880 --> 00:40:11,380
+OK.
+
+595
+00:40:11,380 --> 00:40:13,580
+I think we started right.
+
+596
+00:40:13,580 --> 00:40:16,650
+The first derivatives
+is to write c and s.
+
+597
+00:40:16,650 --> 00:40:20,190
+And then let me leave
+these boxes open,
+
+598
+00:40:20,190 --> 00:40:21,360
+just to get the picture.
+
+599
+00:40:24,660 --> 00:40:43,220
+Then I'll need dc dx,
+dc dy, ds dx, and ds dy.
+
+600
+00:40:43,220 --> 00:40:44,140
+I think that's right.
+
+601
+00:40:47,300 --> 00:40:49,400
+Here, I had a
+product of c and s.
+
+602
+00:40:49,400 --> 00:40:52,700
+So I had two derivatives.
+
+603
+00:40:52,700 --> 00:40:57,710
+Here I have c and s,
+each to differentiate.
+
+604
+00:40:57,710 --> 00:41:01,760
+So have an x and a y derivative
+of x and a y derivative.
+
+605
+00:41:01,760 --> 00:41:05,330
+And now it's just a matter
+of putting in those numbers
+
+606
+00:41:05,330 --> 00:41:07,640
+and following the
+chain backwards.
+
+607
+00:41:13,630 --> 00:41:15,730
+Maybe I'm not going to
+put those numbers in,
+
+608
+00:41:15,730 --> 00:41:19,510
+because if I didn't
+reach 140, you wouldn't
+
+609
+00:41:19,510 --> 00:41:21,830
+believe in back propagation.
+
+610
+00:41:21,830 --> 00:41:25,285
+And that would be
+an unhappy outcome.
+
+611
+00:41:28,250 --> 00:41:31,520
+So I'll leave you to
+put them in maybe.
+
+612
+00:41:31,520 --> 00:41:35,840
+Or the notes have a separate
+example that you can see.
+
+613
+00:41:35,840 --> 00:41:37,760
+But do you see the point--
+
+614
+00:41:37,760 --> 00:41:47,305
+that in the end, I'm
+going to find dF dx and dF
+
+615
+00:41:47,305 --> 00:41:53,650
+dy from the chain--
+
+616
+00:41:53,650 --> 00:41:59,200
+from one chain and not
+from a separate chain for x
+
+617
+00:41:59,200 --> 00:42:02,470
+and a separate chain for y.
+
+618
+00:42:02,470 --> 00:42:06,070
+To me, that's the
+point of reverse mode.
+
+619
+00:42:06,070 --> 00:42:09,400
+It's a little bit of magic.
+
+620
+00:42:09,400 --> 00:42:12,190
+But you see the steps--
+
+621
+00:42:12,190 --> 00:42:13,330
+the ingredient.
+
+622
+00:42:13,330 --> 00:42:17,470
+And some of you have seen
+this before and maybe
+
+623
+00:42:17,470 --> 00:42:19,700
+know a better exposition.
+
+624
+00:42:19,700 --> 00:42:24,100
+I found this blog by
+Christopher Olah clear.
+
+625
+00:42:24,100 --> 00:42:26,110
+And these very simple
+things, you'll see,
+
+626
+00:42:26,110 --> 00:42:28,420
+are clear in the notes.
+
+627
+00:42:28,420 --> 00:42:36,730
+But maybe another blog brings
+out other points to make here.
+
+628
+00:42:36,730 --> 00:42:41,660
+It's not obvious, maybe, that
+I could have 100 variables
+
+629
+00:42:41,660 --> 00:42:48,570
+and do the calculation in
+four or five times the cost--
+
+630
+00:42:48,570 --> 00:42:52,740
+four or five times
+being instead of 100.
+
+631
+00:42:52,740 --> 00:42:53,740
+Yeah.
+
+632
+00:42:53,740 --> 00:42:55,450
+But it's possible.
+
+633
+00:42:55,450 --> 00:42:56,850
+OK.
+
+634
+00:42:56,850 --> 00:43:00,262
+So could I close
+today with this one?
+
+635
+00:43:05,920 --> 00:43:07,370
+How could those be different?
+
+636
+00:43:07,370 --> 00:43:12,940
+You're computing the same
+numbers, the same AIJ, BJKs,
+
+637
+00:43:12,940 --> 00:43:17,470
+CKLs, and doing these sums.
+
+638
+00:43:17,470 --> 00:43:19,390
+But it certainly is different.
+
+639
+00:43:19,390 --> 00:43:21,370
+So let's just do that.
+
+640
+00:43:21,370 --> 00:43:21,903
+OK.
+
+641
+00:43:21,903 --> 00:43:22,570
+I'll do it here.
+
+642
+00:43:28,480 --> 00:43:31,980
+And then at the
+right time-- and I
+
+643
+00:43:31,980 --> 00:43:36,030
+guess it'll be after Professor
+Rao on Friday and Monday,
+
+644
+00:43:36,030 --> 00:43:42,950
+I'll come back to
+Professor Sra's short proof
+
+645
+00:43:42,950 --> 00:43:48,470
+of the convergence of
+stochastic gradient descent.
+
+646
+00:43:48,470 --> 00:43:52,560
+The whole point is to show you
+what assumptions do you need.
+
+647
+00:43:52,560 --> 00:43:56,660
+You need some assumptions on
+the gradient, some assumptions
+
+648
+00:43:56,660 --> 00:43:58,190
+on the step size.
+
+649
+00:43:58,190 --> 00:44:02,810
+And for a good proof, all
+the assumptions fit together,
+
+650
+00:44:02,810 --> 00:44:06,270
+and, dong, out comes
+the conclusion.
+
+651
+00:44:06,270 --> 00:44:10,010
+And the conclusion would
+be how fast it converges--
+
+652
+00:44:10,010 --> 00:44:11,600
+stochastic gradient descent.
+
+653
+00:44:11,600 --> 00:44:18,230
+So there's some expected
+things, because it's stochastic.
+
+654
+00:44:18,230 --> 00:44:25,060
+We expect some assumptions
+about the mean and the variance
+
+655
+00:44:25,060 --> 00:44:28,390
+to go into the proof.
+
+656
+00:44:28,390 --> 00:44:29,620
+So you'll see that.
+
+657
+00:44:29,620 --> 00:44:33,960
+But maybe it's too
+much for today.
+
+658
+00:44:33,960 --> 00:44:36,690
+So I'll come back to that.
+
+659
+00:44:36,690 --> 00:44:45,130
+I might even put it on Stellar
+and just close with this.
+
+660
+00:44:45,130 --> 00:44:56,320
+So suppose A is m by n, B
+is n by p, and C is p by q.
+
+661
+00:44:56,320 --> 00:44:57,930
+OK.
+
+662
+00:44:57,930 --> 00:45:04,480
+How many steps does it take
+to find A times B times C--
+
+663
+00:45:04,480 --> 00:45:06,970
+the product of those
+three matrices?
+
+664
+00:45:06,970 --> 00:45:14,140
+Well, if I go this way,
+I have to do BC first.
+
+665
+00:45:14,140 --> 00:45:18,160
+So BC costs-- how
+many operations
+
+666
+00:45:18,160 --> 00:45:20,125
+to multiply that times that?
+
+667
+00:45:24,010 --> 00:45:25,610
+npq-- nice formula.
+
+668
+00:45:25,610 --> 00:45:26,110
+npq.
+
+669
+00:45:28,670 --> 00:45:30,540
+Why is that?
+
+670
+00:45:30,540 --> 00:45:36,280
+Well, I could say that
+the answer is n by q.
+
+671
+00:45:36,280 --> 00:45:41,960
+And every number in there
+was an inner product
+
+672
+00:45:41,960 --> 00:45:45,310
+of a row and column of length p.
+
+673
+00:45:45,310 --> 00:45:50,350
+So I have nq inner products.
+
+674
+00:45:50,350 --> 00:45:52,280
+And each one costs p--
+
+675
+00:45:54,940 --> 00:45:58,450
+multiply, adds.
+
+676
+00:45:58,450 --> 00:46:04,280
+So now I have BC,
+which will be--
+
+677
+00:46:04,280 --> 00:46:06,270
+so now I have m by n.
+
+678
+00:46:06,270 --> 00:46:14,000
+Then I have m by n,
+which is the A times
+
+679
+00:46:14,000 --> 00:46:17,360
+B by C, which is now n by q.
+
+680
+00:46:17,360 --> 00:46:18,110
+That's BC.
+
+681
+00:46:18,110 --> 00:46:20,480
+This is A, BC.
+
+682
+00:46:20,480 --> 00:46:23,450
+And this one costs--
+
+683
+00:46:23,450 --> 00:46:25,310
+what's the cost here?
+
+684
+00:46:25,310 --> 00:46:28,340
+m by n, m by q--
+
+685
+00:46:28,340 --> 00:46:30,035
+by the same rule, it'll be mnq.
+
+686
+00:46:32,954 --> 00:46:34,450
+Good.
+
+687
+00:46:34,450 --> 00:46:36,640
+That's the first way--
+
+688
+00:46:36,640 --> 00:46:38,590
+A times BC.
+
+689
+00:46:38,590 --> 00:46:44,530
+Now, the second way is AB
+times C. Let me write in again,
+
+690
+00:46:44,530 --> 00:46:47,455
+m by n, n by p, p by q.
+
+691
+00:46:51,700 --> 00:46:53,890
+So now I'm doing this first--
+
+692
+00:46:53,890 --> 00:46:56,680
+so AB costs.
+
+693
+00:46:56,680 --> 00:46:58,870
+Tell me again now,
+what's the rule
+
+694
+00:46:58,870 --> 00:47:03,130
+for the cost of a
+matrix multiplication?
+
+695
+00:47:03,130 --> 00:47:04,295
+mnp.
+
+696
+00:47:04,295 --> 00:47:04,795
+mnp.
+
+697
+00:47:08,380 --> 00:47:16,410
+And then I multiply m by p--
+
+698
+00:47:16,410 --> 00:47:18,930
+that's AB-- times p by q.
+
+699
+00:47:18,930 --> 00:47:20,580
+That's C.
+
+700
+00:47:20,580 --> 00:47:22,650
+So I have mpq.
+
+701
+00:47:27,220 --> 00:47:32,320
+So I have that together
+with that, or that
+
+702
+00:47:32,320 --> 00:47:35,130
+together with that.
+
+703
+00:47:35,130 --> 00:47:41,490
+That sum-- those
+two or these two.
+
+704
+00:47:41,490 --> 00:47:43,450
+And they're different.
+
+705
+00:47:43,450 --> 00:47:48,340
+And let's just recognize
+the most important example.
+
+706
+00:47:48,340 --> 00:47:50,770
+Suppose C is a column vector--
+
+707
+00:47:50,770 --> 00:47:52,540
+C for column vector.
+
+708
+00:47:52,540 --> 00:47:54,280
+So q is 1.
+
+709
+00:47:54,280 --> 00:47:56,050
+There's only one column.
+
+710
+00:47:56,050 --> 00:48:00,170
+So if q is 1, this way did np--
+
+711
+00:48:00,170 --> 00:48:02,020
+let's just specialize to that.
+
+712
+00:48:06,130 --> 00:48:16,340
+So specialize to C
+equal a column vector,
+
+713
+00:48:16,340 --> 00:48:19,170
+which means that q is 1.
+
+714
+00:48:19,170 --> 00:48:20,980
+I only have one column.
+
+715
+00:48:20,980 --> 00:48:30,820
+So then A times BC
+is versus AB times C.
+
+716
+00:48:30,820 --> 00:48:33,580
+So let's just figure
+that out when q is 1.
+
+717
+00:48:33,580 --> 00:48:37,840
+So npq is just np.
+
+718
+00:48:37,840 --> 00:48:48,595
+And mnq is just mn,
+where AB is m and p.
+
+719
+00:48:48,595 --> 00:48:51,190
+Oh, that's a bad one.
+
+720
+00:48:51,190 --> 00:48:52,210
+Disaster already.
+
+721
+00:48:55,750 --> 00:48:58,660
+Those are potentially
+two big matrices,
+
+722
+00:48:58,660 --> 00:49:01,160
+multiplying a column vector.
+
+723
+00:49:01,160 --> 00:49:03,340
+So here I've done a
+matrix multiplication.
+
+724
+00:49:03,340 --> 00:49:04,990
+I never should have done that.
+
+725
+00:49:04,990 --> 00:49:07,750
+This is a matrix vector.
+
+726
+00:49:07,750 --> 00:49:09,250
+It gives me a vector.
+
+727
+00:49:09,250 --> 00:49:11,530
+And then this is
+a matrix vector.
+
+728
+00:49:11,530 --> 00:49:14,320
+So I get nice numbers here.
+
+729
+00:49:14,320 --> 00:49:17,380
+But I get a terrible
+number for AB.
+
+730
+00:49:17,380 --> 00:49:21,700
+And then I multiply that
+by C. So that's mpq.
+
+731
+00:49:25,680 --> 00:49:26,180
+mpq.
+
+732
+00:49:29,390 --> 00:49:31,760
+So mp is factoring out.
+
+733
+00:49:31,760 --> 00:49:42,340
+So if I write it as n times
+m plus p versus this one
+
+734
+00:49:42,340 --> 00:49:50,190
+is m that's factoring
+out times m--
+
+735
+00:49:50,190 --> 00:49:51,570
+no.
+
+736
+00:49:51,570 --> 00:49:53,240
+Yeah.
+
+737
+00:49:53,240 --> 00:49:54,160
+What's up here?
+
+738
+00:49:56,920 --> 00:49:57,650
+Yeah.
+
+739
+00:49:57,650 --> 00:49:58,760
+Sorry.
+
+740
+00:49:58,760 --> 00:49:59,570
+What am I doing?
+
+741
+00:50:05,190 --> 00:50:06,320
+Yeah.
+
+742
+00:50:06,320 --> 00:50:09,540
+Is it p that factors
+out from this one?
+
+743
+00:50:09,540 --> 00:50:11,520
+OK.
+
+744
+00:50:11,520 --> 00:50:15,820
+p times m plus n, I guess.
+
+745
+00:50:15,820 --> 00:50:16,320
+Sorry.
+
+746
+00:50:19,140 --> 00:50:24,938
+Anyway, the difference is--
+
+747
+00:50:24,938 --> 00:50:29,240
+AUDIENCE: I think it's
+mp times p plus q.
+
+748
+00:50:29,240 --> 00:50:30,480
+[INAUDIBLE]
+
+749
+00:50:30,480 --> 00:50:34,080
+GILBERT STRANG: Shall I go
+over it again or write--?
+
+750
+00:50:34,080 --> 00:50:36,120
+Let me do just this
+thinking again.
+
+751
+00:50:36,120 --> 00:50:39,810
+If q is 1, if I go
+this way, was that
+
+752
+00:50:39,810 --> 00:50:42,960
+my final total when q was 1?
+
+753
+00:50:42,960 --> 00:50:45,420
+And that's this?
+
+754
+00:50:45,420 --> 00:50:46,440
+No.
+
+755
+00:50:46,440 --> 00:50:49,740
+m factors out times n plus p.
+
+756
+00:50:49,740 --> 00:50:52,800
+Let's just get that right.
+
+757
+00:50:52,800 --> 00:50:54,690
+Oh, no, n factors out.
+
+758
+00:50:54,690 --> 00:50:58,070
+Sorry, n factors
+out times m plus p.
+
+759
+00:50:58,070 --> 00:51:03,635
+And this way was
+all these things.
+
+760
+00:51:03,635 --> 00:51:07,520
+AUDIENCE: Both the m
+and the p factor out.
+
+761
+00:51:07,520 --> 00:51:10,340
+GILBERT STRANG: Both the
+m and the p factor out.
+
+762
+00:51:10,340 --> 00:51:11,790
+OK.
+
+763
+00:51:11,790 --> 00:51:12,290
+Thanks.
+
+764
+00:51:16,700 --> 00:51:22,100
+Times n plus q.
+
+765
+00:51:22,100 --> 00:51:24,120
+n plus q was 1.
+
+766
+00:51:24,120 --> 00:51:24,620
+OK.
+
+767
+00:51:29,220 --> 00:51:32,520
+The whole point is, we've got
+this horrible multiplication
+
+768
+00:51:32,520 --> 00:51:36,300
+of three big numbers.
+
+769
+00:51:36,300 --> 00:51:38,840
+And this only had
+two big numbers.
+
+770
+00:51:38,840 --> 00:51:42,990
+So this is orders of
+magnitude faster than that.
+
+771
+00:51:42,990 --> 00:51:45,480
+And of course, you would
+have done the calculation.
+
+772
+00:51:45,480 --> 00:51:48,720
+That way, you would have
+multiplied the column vector
+
+773
+00:51:48,720 --> 00:51:52,140
+by a matrix to get
+another column vector.
+
+774
+00:51:52,140 --> 00:51:54,090
+And you would have
+multiplied that by a matrix
+
+775
+00:51:54,090 --> 00:51:57,390
+to get another column
+vector, where here,
+
+776
+00:51:57,390 --> 00:52:02,100
+you crazily multiplied two big
+matrices together and then got
+
+777
+00:52:02,100 --> 00:52:02,940
+a column vector.
+
+778
+00:52:02,940 --> 00:52:07,020
+So there is a bad move.
+
+779
+00:52:07,020 --> 00:52:08,440
+OK, thanks.
+
+780
+00:52:08,440 --> 00:52:11,670
+Oh, I'm past the
+time on this ABC.
+
+781
+00:52:11,670 --> 00:52:16,230
+It's just to show that on a
+very familiar calculation,
+
+782
+00:52:16,230 --> 00:52:18,510
+you have to do it
+in the right order.
+
+783
+00:52:18,510 --> 00:52:21,840
+And back propagation
+is the right order
+
+784
+00:52:21,840 --> 00:52:24,130
+for partial derivatives.
+
+785
+00:52:24,130 --> 00:52:24,630
+OK.
+
+786
+00:52:24,630 --> 00:52:25,260
+Thank you.
+
+787
+00:52:25,260 --> 00:52:29,370
+And so bring laptops Friday.
+
+788
+00:52:29,370 --> 00:52:35,490
+And look forward
+to Professor Rao.
+
+789
+00:52:35,490 --> 00:52:37,880
+Give him a good welcome.
